@@ -1,0 +1,144 @@
+/* =========================================================
+   BASE — reset, typography, and page-wide layout helpers.
+   Colors/fonts come from theme.css (loaded before this file).
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+
+p { font-size: var(--text-body); }
+
+/* ---- Page container ---- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---- Section spacing ---- */
+.section {
+  padding: clamp(48px, 8vw, 96px) 0;
+}
+
+.alt-bg {
+  background-color: var(--color-surface-alt);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--color-text-muted);
+  max-width: 640px;
+  margin: 0 auto 40px auto;
+}
+
+.section-eyebrow {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--text-small);
+  color: var(--color-terracotta);
+  margin-bottom: 8px;
+}
+
+/* ---- Responsive grid helper ----
+   Cards auto-fit into as many columns as fit the container,
+   reflowing smoothly across phone/tablet/laptop with no
+   hand-written breakpoints needed. --grid-min sets the
+   smallest a card is allowed to shrink to before wrapping. */
+.auto-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 260px), 1fr));
+}
+
+/* ---- Playful hand-drawn section divider ----
+   Echoes the hand-painted wall border visible in the real
+   Vintage Room photos -- ties "rustic" and "playful" together
+   instead of using generic decoration. */
+.hand-divider {
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin: 0 auto;
+}
+
+.hand-divider svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---- Scroll-reveal ----
+   Elements start slightly faded/offset, then settle into
+   place as they enter the viewport (see js/main.js). Users
+   with reduced-motion preferences just see content directly. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--transition-medium), transform var(--transition-medium);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Utility ---- */
+.text-center { text-align: center; }
+.mt-lg { margin-top: clamp(32px, 6vw, 56px); }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /landing.html
+
+Sitemap: https://aangangokarma.example.com/sitemap.xml

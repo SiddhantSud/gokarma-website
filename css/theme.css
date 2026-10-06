@@ -1,0 +1,66 @@
+/* =========================================================
+   THEME — the ONE file to edit to re-theme the whole site.
+
+   Every color and font used anywhere on the site is defined
+   here as a CSS variable. Change a value here and it updates
+   everywhere it's used, on every page.
+
+   No real brand palette has been chosen yet — these are a
+   placeholder earthy/rustic palette (pulled from the actual
+   property photos: terracotta ceilings, forest greens, warm
+   sand) plus one "pop" accent color for playful highlights,
+   as requested. Swap the hex values below once a real palette
+   is ready; nothing else in the codebase needs to change.
+========================================================= */
+
+:root {
+  /* ---- Brand colors ---- */
+  --color-terracotta: #c1592b;       /* primary brand color */
+  --color-terracotta-dark: #9c4520;  /* hover/active state of primary */
+  --color-forest: #3f5d42;           /* secondary brand color */
+  --color-forest-dark: #2e4531;
+
+  /* ---- The "dash and pop" playful accent ----
+     Used sparingly: small highlights, badges, hover accents.
+     Not a background color, not a body-text color. */
+  --color-pop: #ffb13c;
+  --color-pop-dark: #e8991f;
+
+  /* ---- Neutrals ---- */
+  --color-bg: #fbf6ee;               /* page background */
+  --color-surface: #fffcf7;          /* card/section background */
+  --color-surface-alt: #f1e6d3;      /* alternating section background */
+  --color-text: #2b2118;             /* body text */
+  --color-text-muted: #6b5d4f;       /* secondary/quiet text */
+  --color-border: #e4d7c2;
+
+  /* ---- Feedback ---- */
+  --color-white: #ffffff;
+
+  /* ---- Typography ----
+     Display font (headings): a serif with warmth/character.
+     Body font: a clean, friendly sans-serif. */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Poppins', Arial, sans-serif;
+
+  /* ---- Fluid type scale (clamp: min, preferred, max) ----
+     Scales smoothly between phone and desktop instead of
+     jumping at fixed breakpoints. */
+  --text-hero: clamp(2.2rem, 5vw + 1rem, 4rem);
+  --text-h1: clamp(1.9rem, 3vw + 1rem, 2.75rem);
+  --text-h2: clamp(1.5rem, 2vw + 1rem, 2.1rem);
+  --text-h3: clamp(1.15rem, 1vw + 1rem, 1.4rem);
+  --text-body: clamp(1rem, 0.3vw + 0.9rem, 1.1rem);
+  --text-small: 0.9rem;
+
+  /* ---- Layout ---- */
+  --max-width: 1150px;
+  --radius: 14px;
+  --radius-small: 8px;
+  --shadow-card: 0 4px 18px rgba(43, 33, 24, 0.08);
+  --shadow-card-hover: 0 10px 28px rgba(43, 33, 24, 0.14);
+
+  /* ---- Motion ---- */
+  --transition-fast: 0.18s ease;
+  --transition-medium: 0.35s ease;
+}

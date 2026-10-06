@@ -10,7 +10,7 @@ ask every question — pick whichever fit the conversation naturally.
 **Origin story**
 1. How did the two of you decide to open a hostel with a cafe attached?
 2. What were you both doing before this? What made you switch to hostel/cafe life?
-3. Is there a story behind the name "Wanderer's Nest"? (or whatever you land on)
+3. Is there a story behind the name "Aangan by Gokarma Living"?
 4. What was the hardest part of getting started?
 
 **The day-to-day**
@@ -35,7 +35,7 @@ ask every question — pick whichever fit the conversation naturally.
 
 Keep this short and casual — 3-4 questions is usually enough for a good quote.
 
-1. What brought you to [hostel name] / this cafe?
+1. What brought you to Aangan / this cafe?
 2. What was your favorite part of staying here (or visiting the cafe)?
 3. Was there a moment that surprised you, in a good way?
 4. How would you describe the vibe/atmosphere in a few words?

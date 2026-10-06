@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aangan by Gokarma Living — Book Your Hilltop Hostel Stay</title>
+  <meta name="description" content="A backpacker hostel & cafe on Kudle hilltop, Gokarna. Message us on WhatsApp to book.">
+  <meta name="robots" content="noindex, follow">
+  <!--
+    Standalone single-page version for social media ad links.
+    Not part of the main site navigation, and marked noindex so
+    it doesn't compete with the full site in search results --
+    this page is a landing page, not a page meant to rank.
+    Self-contained on purpose: no shared header/footer partials,
+    so it loads fast and works as a simple ad destination.
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner" style="justify-content:center;">
+      <a href="index.html" class="logo">🏡 Aangan by Gokarma Living</a>
+    </div>
+  </header>
+
+  <section class="hero" style="background-image: url('images/property/property-4-1600w.jpg');">
+    <div class="hero-overlay">
+      <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
+      <h1>Your Nest on Kudle Hilltop</h1>
+      <p>A backpacker hostel &amp; cafe tucked into the forest above Kudle Beach — dorms, a private room, and a cafe guests keep raving about.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/917892803231?text=Hi!%20I'd%20like%20to%20book%20a%20stay%20at%20Aangan%20by%20Gokarma%20Living." class="btn btn-primary btn-large" target="_blank" rel="noopener">💬 Book on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container">
+      <div class="auto-grid" style="--grid-min: 200px;">
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">⭐</span>
+          <h3>4.9/5 on Google</h3>
+          <p>321 reviews</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">🏖️</span>
+          <h3>8-10 min walk</h3>
+          <p>to Kudle Beach</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">💰</span>
+          <h3>&#8377;850/night</h3>
+          <p>dorm beds starting from</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">Rooms</h2>
+      <div id="roomsTeaser" class="auto-grid" style="--grid-min: 260px;"></div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container" style="max-width:600px;">
+      <p style="font-size:1.2rem; font-family:var(--font-display);">
+        &ldquo;Kushal and Geet have gone from being great hosts to great friends. There's magic in this space.&rdquo;
+      </p>
+      <p class="section-subtitle" style="margin-top:12px;">— Shruthi, via Hostelworld</p>
+    </div>
+  </section>
+
+  <section class="section alt-bg text-center">
+    <div class="container">
+      <h2 class="section-title">Ready to Book?</h2>
+      <a href="https://wa.me/917892803231?text=Hi!%20I'd%20like%20to%20book%20a%20stay%20at%20Aangan%20by%20Gokarma%20Living." class="btn btn-primary btn-large" target="_blank" rel="noopener">💬 Message us on WhatsApp</a>
+      <p class="contact-phone">Or call/WhatsApp <a href="tel:+917892803231">+91 78928 03231</a></p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner" style="justify-content:center;">
+      <p>&copy; <span id="year"></span> Aangan by Gokarma Living.</p>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/data/rooms-data.js"></script>
+  <script src="js/rooms.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+  </script>
+</body>
+</html>

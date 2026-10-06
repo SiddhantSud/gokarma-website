@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Replace https://aangangokarma.example.com with the real domain
+  once one is registered, then update the <loc> values below (and
+  the canonical/og:url tags in each page's <head>) to match.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aangangokarma.example.com/index.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/rooms.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/story.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/gallery.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/guide.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/guide-backpacking-gokarna-on-a-budget.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/guide-solo-travel-in-gokarna.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/guide-offbeat-adventures-in-gokarna.html</loc></url>
+  <url><loc>https://aangangokarma.example.com/contact.html</loc></url>
+</urlset>
