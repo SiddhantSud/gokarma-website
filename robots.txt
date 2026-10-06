@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /landing.html
 
-Sitemap: https://aangangokarma.example.com/sitemap.xml
+Sitemap: https://siddhantsud.github.io/gokarma-website/sitemap.xml

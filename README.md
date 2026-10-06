@@ -93,10 +93,11 @@ or spaces) and replace every occurrence, including in `partials/header.html`,
 ## SEO notes
 
 - Every page has its own `<title>`, meta description, and canonical link.
-- `robots.txt` and `sitemap.xml` are set up with a placeholder domain
-  (`aangangokarma.example.com`) — once you have a real domain, find-and-replace
-  that placeholder everywhere (canonical links, Open Graph tags, the JSON-LD
-  blocks, `sitemap.xml`, and `robots.txt`).
+- `robots.txt`, `sitemap.xml`, and every page's canonical/Open Graph/JSON-LD
+  tags currently point at the GitHub Pages URL
+  (`https://siddhantsud.github.io/gokarma-website/`). If a custom domain is
+  set up later, find-and-replace that URL everywhere (canonical links, Open
+  Graph tags, the JSON-LD blocks, `sitemap.xml`, and `robots.txt`).
 - `landing.html` is deliberately excluded from the sitemap and marked
   `noindex` — it's meant for ad traffic, not search rankings, so it doesn't
   compete with the main pages.

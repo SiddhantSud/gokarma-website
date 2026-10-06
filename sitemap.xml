@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Replace https://aangangokarma.example.com with the real domain
-  once one is registered, then update the <loc> values below (and
-  the canonical/og:url tags in each page's <head>) to match.
+  URLs below point at the GitHub Pages URL. If a custom domain is
+  set up later, update these <loc> values and the canonical/og:url
+  tags in each page's <head> to match.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aangangokarma.example.com/index.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/rooms.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/story.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/gallery.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/guide.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/guide-backpacking-gokarna-on-a-budget.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/guide-solo-travel-in-gokarna.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/guide-offbeat-adventures-in-gokarna.html</loc></url>
-  <url><loc>https://aangangokarma.example.com/contact.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/index.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/rooms.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/story.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/gallery.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/guide.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/guide-backpacking-gokarna-on-a-budget.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/guide-solo-travel-in-gokarna.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/guide-offbeat-adventures-in-gokarna.html</loc></url>
+  <url><loc>https://siddhantsud.github.io/gokarma-website/contact.html</loc></url>
 </urlset>
