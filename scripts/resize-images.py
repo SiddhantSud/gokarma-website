@@ -19,7 +19,7 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 WIDTHS = [480, 900, 1600]
-SOURCE_DIRS = ["images/rooms", "images/property"]
+SOURCE_DIRS = ["images/rooms", "images/property", "images/food", "images/community", "images/scenery"]
 JPEG_QUALITY = 78
 
 ROOT = Path(__file__).resolve().parent.parent
