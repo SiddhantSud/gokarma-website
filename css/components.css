@@ -3,13 +3,27 @@
    header/nav, buttons, cards, hero, gallery/lightbox, footer.
 ========================================================= */
 
-/* ---- Header / Navigation ---- */
+/* ---- Header / Navigation ----
+   Starts transparent over the photo at the top of every page,
+   then solidifies into a soft blurred "glass" pill once the
+   page scrolls (see .is-scrolled, toggled by js/main.js). */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background: var(--color-surface);
-  box-shadow: 0 2px 10px rgba(43, 33, 24, 0.06);
+  left: 0;
+  right: 0;
   z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition-medium), border-color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.site-header.is-scrolled {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(43, 33, 24, 0.08);
 }
 
 .header-inner {
@@ -23,7 +37,14 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.3rem;
+  color: var(--color-white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition: color var(--transition-medium), text-shadow var(--transition-medium);
+}
+
+.site-header.is-scrolled .logo {
   color: var(--color-terracotta);
+  text-shadow: none;
 }
 
 .main-nav {
@@ -34,12 +55,23 @@
 
 .main-nav a {
   font-weight: 600;
+  color: var(--color-white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition: color var(--transition-fast), text-shadow var(--transition-medium);
+}
+
+.site-header.is-scrolled .main-nav a {
   color: var(--color-text);
-  transition: color var(--transition-fast);
+  text-shadow: none;
 }
 
 .main-nav a:hover,
 .main-nav a.is-active {
+  color: var(--color-pop);
+}
+
+.site-header.is-scrolled .main-nav a:hover,
+.site-header.is-scrolled .main-nav a.is-active {
   color: var(--color-terracotta);
 }
 
@@ -48,19 +80,30 @@
   color: var(--color-white) !important;
   padding: 8px 18px;
   border-radius: 30px;
+  text-shadow: none !important;
 }
 
 .nav-cta:hover {
   background-color: var(--color-terracotta-dark);
 }
 
-.menu-toggle {
+/* Composed with .btn-circle in the markup for the round bordered
+   look; specificity here is bumped (.site-header .menu-toggle)
+   so these color/shadow rules reliably win over .btn-circle's
+   plain `color: inherit`, regardless of each rule's position in
+   this file. */
+.site-header .menu-toggle {
   display: none;
-  font-size: 1.6rem;
-  background: none;
-  border: none;
+  font-size: 1.1rem;
   cursor: pointer;
+  color: var(--color-white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition: color var(--transition-medium);
+}
+
+.site-header.is-scrolled .menu-toggle {
   color: var(--color-text);
+  text-shadow: none;
 }
 
 /* ---- Buttons ---- */
@@ -142,6 +185,7 @@
   justify-content: center;
   text-align: center;
   position: relative;
+  padding-top: 90px; /* clearance for the fixed header overlaying the top of the photo */
 }
 
 .hero::before {
@@ -177,6 +221,118 @@
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* ---- Photo-backed sections ----
+   Every content section (besides the hero and the footer) sits
+   on a real photo instead of a flat color, with a duotone
+   overlay for consistent contrast and a rounded "panel" lifting
+   the actual content up over the image -- so paragraphs and
+   cards never sit directly on a busy photo. The background is
+   set lazily via data-bg (see js/utils.js's revealObserver),
+   not inline, so photos below the fold aren't all requested on
+   page load. */
+.section-photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-forest-dark); /* visible briefly before the lazy bg loads */
+  padding-top: clamp(56px, 9vw, 110px);
+}
+
+.section-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--overlay-from), var(--overlay-to));
+}
+
+.panel {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  padding: clamp(40px, 7vw, 80px) 0 clamp(56px, 8vw, 96px);
+}
+
+.panel.panel-alt {
+  background: var(--color-surface-alt);
+}
+
+/* ---- Marquee ----
+   A continuously-running ticker of short facts -- the one
+   "always moving" animation on the site, used sparingly (Home
+   and the ad-landing page only). Pure CSS, pauses for anyone
+   with reduced-motion set. */
+.marquee {
+  overflow: hidden;
+  background: var(--color-surface-alt);
+  padding: 16px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 48px;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-shrink: 0;
+}
+
+.marquee-group span {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--text-small);
+  color: var(--color-forest);
+  white-space: nowrap;
+}
+
+.marquee-group .dot {
+  color: var(--color-pop);
+  font-weight: 700;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ---- Circular icon button ----
+   A secondary interactive affordance alongside the regular
+   .btn set -- used for the mobile menu toggle and as an accent
+   next to a couple of key CTAs. */
+.btn-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  background: transparent;
+  color: inherit;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-circle:hover {
+  background: var(--color-terracotta);
+  color: var(--color-white);
+  border-color: var(--color-terracotta);
+  transform: rotate(45deg);
 }
 
 /* ---- Cards (rooms / guide articles share this shape) ---- */
@@ -444,7 +600,7 @@
     grid-template-columns: 1fr;
   }
 
-  .menu-toggle { display: block; }
+  .site-header .menu-toggle { display: block; }
 
   .main-nav {
     position: absolute;
@@ -461,4 +617,18 @@
   }
 
   .main-nav.open { display: flex; }
+
+  /* The open mobile dropdown always has a solid light
+     background (regardless of .is-scrolled), so its links need
+     dark text even when the header itself is still transparent
+     over a photo. */
+  .main-nav.open a {
+    color: var(--color-text);
+    text-shadow: none;
+  }
+
+  .main-nav.open a:hover,
+  .main-nav.open a.is-active {
+    color: var(--color-terracotta);
+  }
 }
