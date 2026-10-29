@@ -57,10 +57,26 @@
   --max-width: 1150px;
   --radius: 14px;
   --radius-small: 8px;
+  --radius-panel: 44px;              /* large radius for the photo-section "lift" panels */
   --shadow-card: 0 4px 18px rgba(43, 33, 24, 0.08);
   --shadow-card-hover: 0 10px 28px rgba(43, 33, 24, 0.14);
+
+  /* ---- Glass nav ----
+     Translucent header that solidifies into a soft blurred
+     pill once the page scrolls past the hero. */
+  --glass-bg: rgba(255, 252, 247, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: 14px;
+
+  /* ---- Photo-section duotone overlay ----
+     Every content section sits on a real photo background;
+     this gradient keeps it from looking like a raw snapshot
+     and keeps the "peek" of photo above each panel readable. */
+  --overlay-from: rgba(30, 22, 15, 0.58);
+  --overlay-to: rgba(46, 69, 49, 0.5);
 
   /* ---- Motion ---- */
   --transition-fast: 0.18s ease;
   --transition-medium: 0.35s ease;
+  --marquee-duration: 28s;
 }
