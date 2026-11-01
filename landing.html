@@ -24,7 +24,7 @@
 </head>
 <body>
 
-  <header class="site-header">
+  <header class="site-header" id="landingHeader">
     <div class="container header-inner" style="justify-content:center;">
       <a href="index.html" class="logo">🏡 Aangan by Gokarma Living</a>
     </div>
@@ -41,49 +41,78 @@
     </div>
   </section>
 
-  <section class="section text-center">
-    <div class="container">
-      <div class="auto-grid" style="--grid-min: 200px;">
-        <div class="card reveal">
-          <span class="icon" style="font-size:2rem;">⭐</span>
-          <h3>4.9/5 on Google</h3>
-          <p>321 reviews</p>
-        </div>
-        <div class="card reveal">
-          <span class="icon" style="font-size:2rem;">🏖️</span>
-          <h3>8-10 min walk</h3>
-          <p>to Kudle Beach</p>
-        </div>
-        <div class="card reveal">
-          <span class="icon" style="font-size:2rem;">💰</span>
-          <h3>&#8377;850/night</h3>
-          <p>dorm beds starting from</p>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>4.9&#9733; on Google &middot; 321 Reviews</span>
+        <span class="dot">&#9679;</span>
+        <span>Kudle Hilltop, Gokarna</span>
+        <span class="dot">&#9679;</span>
+        <span>Home-Cooked Food</span>
+        <span class="dot">&#9679;</span>
+      </div>
+      <div class="marquee-group">
+        <span>4.9&#9733; on Google &middot; 321 Reviews</span>
+        <span class="dot">&#9679;</span>
+        <span>Kudle Hilltop, Gokarna</span>
+        <span class="dot">&#9679;</span>
+        <span>Home-Cooked Food</span>
+        <span class="dot">&#9679;</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section-photo" data-bg="images/scenery/waterfall-900w.jpg">
+    <div class="panel text-center">
+      <div class="container">
+        <div class="auto-grid" style="--grid-min: 200px;">
+          <div class="card reveal">
+            <span class="icon" style="font-size:2rem;">⭐</span>
+            <h3>4.9/5 on Google</h3>
+            <p>321 reviews</p>
+          </div>
+          <div class="card reveal">
+            <span class="icon" style="font-size:2rem;">🏖️</span>
+            <h3>8-10 min walk</h3>
+            <p>to Kudle Beach</p>
+          </div>
+          <div class="card reveal">
+            <span class="icon" style="font-size:2rem;">💰</span>
+            <h3>&#8377;850/night</h3>
+            <p>dorm beds starting from</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section alt-bg">
-    <div class="container">
-      <h2 class="section-title">Rooms</h2>
-      <div id="roomsTeaser" class="auto-grid" style="--grid-min: 260px;"></div>
+  <section class="section-photo" data-bg="images/property/dorm-outside-2-1600w.jpg">
+    <div class="panel panel-alt">
+      <div class="container">
+        <h2 class="section-title">Rooms</h2>
+        <div id="roomsTeaser" class="auto-grid" style="--grid-min: 260px;"></div>
+      </div>
     </div>
   </section>
 
-  <section class="section text-center">
-    <div class="container" style="max-width:600px;">
-      <p style="font-size:1.2rem; font-family:var(--font-display);">
-        &ldquo;Kushal and Geet have gone from being great hosts to great friends. There's magic in this space.&rdquo;
-      </p>
-      <p class="section-subtitle" style="margin-top:12px;">— Shruthi, via Hostelworld</p>
+  <section class="section-photo" data-bg="images/community/chess-night-900w.jpg">
+    <div class="panel text-center">
+      <div class="container" style="max-width:600px;">
+        <p style="font-size:1.2rem; font-family:var(--font-display);">
+          &ldquo;Kushal and Geet have gone from being great hosts to great friends. There's magic in this space.&rdquo;
+        </p>
+        <p class="section-subtitle" style="margin-top:12px;">— Shruthi, via Hostelworld</p>
+      </div>
     </div>
   </section>
 
-  <section class="section alt-bg text-center">
-    <div class="container">
-      <h2 class="section-title">Ready to Book?</h2>
-      <a href="https://wa.me/917892803231?text=Hi!%20I'd%20like%20to%20book%20a%20stay%20at%20Aangan%20by%20Gokarma%20Living." class="btn btn-primary btn-large" target="_blank" rel="noopener">💬 Message us on WhatsApp</a>
-      <p class="contact-phone">Or call/WhatsApp <a href="tel:+917892803231">+91 78928 03231</a></p>
+  <section class="section-photo" data-bg="images/scenery/sunset-cliff-1600w.jpg">
+    <div class="panel panel-alt text-center">
+      <div class="container">
+        <h2 class="section-title">Ready to Book?</h2>
+        <a href="https://wa.me/917892803231?text=Hi!%20I'd%20like%20to%20book%20a%20stay%20at%20Aangan%20by%20Gokarma%20Living." class="btn btn-primary btn-large" target="_blank" rel="noopener">💬 Message us on WhatsApp</a>
+        <p class="contact-phone">Or call/WhatsApp <a href="tel:+917892803231">+91 78928 03231</a></p>
+      </div>
     </div>
   </section>
 
@@ -98,7 +127,15 @@
   <script src="js/rooms.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    document.querySelectorAll('.reveal, [data-bg]').forEach((el) => revealObserver.observe(el));
+
+    // This page has its own static header (no partials.js), so
+    // the glass-on-scroll toggle is wired up directly here
+    // instead of via main.js's partials:loaded listener.
+    const landingHeader = document.getElementById('landingHeader');
+    const updateLandingHeader = () => landingHeader.classList.toggle('is-scrolled', window.scrollY > 40);
+    updateLandingHeader();
+    window.addEventListener('scroll', updateLandingHeader, { passive: true });
   </script>
 </body>
 </html>

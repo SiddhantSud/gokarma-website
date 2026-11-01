@@ -32,19 +32,33 @@ function responsiveImg(photo, options = {}) {
   return `<img class="${className}" src="${fallbackSrc}" srcset="${srcset}" sizes="${sizes}" alt="${photo.alt}" loading="${loading}" decoding="async">`;
 }
 
-// ---- Shared scroll-reveal observer ----
+// ---- Shared scroll-reveal / lazy-background observer ----
 // Defined here (loaded first) so data-driven renderers
 // (rooms.js, gallery.js, guide.js) can observe elements they
 // create, and main.js can reuse the same observer for any
 // reveal elements already present in a page's static HTML.
+//
+// Does double duty: elements with class="reveal" fade/slide in
+// (see the CSS in base.css), and elements with a data-bg
+// attribute (the .section-photo backdrops) get that URL applied
+// as their background-image the first time they're seen -- a
+// real lazy-load for section photos below the fold, since CSS
+// background-image isn't natively lazy like <img loading=lazy>.
+// rootMargin starts both a little before the element is
+// actually on screen, so photos have time to load.
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+
+      if (el.dataset.bg) {
+        el.style.backgroundImage = `url('${el.dataset.bg}')`;
       }
+
+      el.classList.add('is-visible');
+      revealObserver.unobserve(el);
     });
   },
-  { threshold: 0.15 }
+  { threshold: 0.1, rootMargin: '150px 0px' }
 );

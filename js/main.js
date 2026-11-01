@@ -12,6 +12,7 @@ document.addEventListener('partials:loaded', () => {
   setupMobileMenu();
   highlightActiveNavLink();
   setFooterYear();
+  setupGlassNav();
 });
 
 function setupMobileMenu() {
@@ -47,9 +48,31 @@ function setFooterYear() {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 }
 
-// ---- Scroll-reveal ----
-// Elements with class="reveal" fade/slide into place the first
-// time they enter the viewport. revealObserver is defined in
-// utils.js (loaded first) so data-driven renderers can reuse it
-// for elements they create after this initial pass runs.
-document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+// ---- Glass nav ----
+// The header starts transparent over the page's first photo
+// section, then gets the .is-scrolled class (solid blurred
+// "glass" background, dark text) once the page scrolls past a
+// small threshold. Checked once on load too, in case the page
+// opens already scrolled (e.g. a same-page anchor link).
+function setupGlassNav() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  const SCROLL_THRESHOLD = 40;
+
+  function updateHeaderState() {
+    header.classList.toggle('is-scrolled', window.scrollY > SCROLL_THRESHOLD);
+  }
+
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+}
+
+// ---- Scroll-reveal + lazy section backgrounds ----
+// Elements with class="reveal" fade/slide into place, and
+// elements with a data-bg attribute (.section-photo backdrops)
+// get that photo lazily applied -- both the first time they
+// enter the viewport. revealObserver is defined in utils.js
+// (loaded first) so data-driven renderers can reuse it for
+// elements they create after this initial pass runs.
+document.querySelectorAll('.reveal, [data-bg]').forEach((el) => revealObserver.observe(el));
