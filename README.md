@@ -76,6 +76,9 @@ automatically appear on `rooms.html` and in the Home page teaser.
 1. Put the photo in `images/property/` or `images/rooms/`.
 2. Run `python scripts/resize-images.py` (regenerates the small/medium/large
    versions — safe to re-run any time, it skips photos it's already processed).
+   It also removes the GPS location that phones save inside photos, since the
+   full-size originals can be downloaded from the live site. Needs
+   `pip install Pillow piexif`.
 3. Add an entry to `js/data/gallery-data.js`.
 
 ### Add a Gokarna Guide article

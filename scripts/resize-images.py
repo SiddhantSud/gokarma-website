@@ -11,10 +11,15 @@ already have a variant suffix).
 Run again any time you add new photos to images/rooms or images/property --
 it only (re)generates variants for source files, and is safe to re-run.
 
+When it's done it also runs strip-photo-location.py, which removes GPS
+location data from the original photos (they're publicly downloadable
+from the live site). That step needs piexif: pip install piexif
+
 Usage:
     python scripts/resize-images.py
 """
 
+import runpy
 from pathlib import Path
 from PIL import Image, ImageOps
 
@@ -57,6 +62,9 @@ def main() -> None:
             if is_variant(path):
                 continue
             make_variants(path)
+
+    print("Removing GPS location data")
+    runpy.run_path(str(ROOT / "scripts" / "strip-photo-location.py"), run_name="__main__")
 
 
 if __name__ == "__main__":
