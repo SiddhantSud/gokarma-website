@@ -82,7 +82,8 @@ python -m http.server 8000
 ```
 
 Then open http://localhost:8000. Nothing else is needed. To change images you
-also need Pillow (`pip install Pillow`) for `scripts/resize-images.py`.
+also need Pillow and piexif (`pip install Pillow piexif`) for
+`scripts/resize-images.py`.
 
 There are no automated tests or linters. To check a change, open the affected
 pages in a browser, at phone width (~375px) as well as desktop, and look at
@@ -120,7 +121,8 @@ js/partials.js          Fetches header/footer, then fires a `partials:loaded` ev
 js/main.js              On partials:loaded: mobile menu, active nav link, footer year, glass nav
 
 images/<category>/      rooms, property, food, community, scenery (+ kushal-geetika.png)
-scripts/resize-images.py  Generates -480w/-900w/-1600w variants
+scripts/resize-images.py  Generates -480w/-900w/-1600w variants, then runs strip-photo-location.py
+scripts/strip-photo-location.py  Removes GPS data from every JPEG in images/ (lossless)
 content-questionnaire.md  Questions to gather real owner and guest content
 robots.txt, sitemap.xml   SEO
 ```
@@ -168,6 +170,12 @@ exception is guide article bodies, which are written directly into their
 - `scripts/resize-images.py` creates the variants for `images/rooms`,
   `property`, `food`, `community` and `scenery`. It skips any width at or above
   the original's width and skips existing variants, so it's safe to re-run.
+- GitHub Pages serves the full-size originals too, so they must not carry the
+  GPS location phones save in photos. `resize-images.py` finishes by running
+  `scripts/strip-photo-location.py`, which deletes only the GPS block without
+  re-encoding. All photos were cleaned on 2026-11-02 (PR #4). The old
+  GPS-tagged versions remain in git history; Siddhant decided that's fine, so
+  don't rewrite history for it.
 - Each data entry lists its own `widths`. **It must match the files that
   actually exist.** Smaller source photos only get `[480, 900]`. Check
   `images/` before writing an entry.
@@ -262,8 +270,9 @@ haven't chosen a real brand palette yet.
 ## 8. SEO and the landing page
 
 - Every indexable page has a unique title, description, canonical and OG tags.
-  The Home page has `LodgingBusiness` JSON-LD and guide articles have `Article`
-  JSON-LD.
+  The Home page has `LodgingBusiness` JSON-LD (address, phone, rating, plus
+  `geo` coordinates 14.5364615, 74.3154106 and a `hasMap` link, both from the
+  Google Maps listing) and guide articles have `Article` JSON-LD.
 - `landing.html` is for **paid/social ad traffic**. It's `noindex, follow`,
   left out of `sitemap.xml`, disallowed in `robots.txt`, and not linked from
   the nav. It has its **own static header/footer** (no `partials.js` or
@@ -276,12 +285,22 @@ haven't chosen a real brand palette yet.
 
 ## 9. Git and deployment workflow
 
-- `master` is what's live. **Pushing or merging to `master` deploys
-  immediately** through GitHub Pages ("legacy" build from the branch root), so
-  treat a merge to `master` as a production release and get Siddhant's OK
-  first.
-- Work on a feature branch and open a PR into `master`. Past PRs: #1 (authentic
-  photos) and #2 (glass nav, photo backdrops, marquee). Both are merged.
+- `master` is what's live. **Merging into `master` deploys immediately**
+  through GitHub Pages ("legacy" build from the branch root, live about a
+  minute later), so treat a merge as a production release and get Siddhant's
+  OK first.
+- **`master` is protected**: changes go in only through a PR (no approvals
+  required), the rule applies to admins too, and force-pushes and branch
+  deletion are blocked. Direct `git push origin master` will be rejected.
+- Work on a feature branch, open a PR into `master`, and squash-merge it
+  (`gh pr merge <n> --squash --delete-branch`). Because merges are squashed,
+  start each new branch from the latest `origin/master`, not from an older
+  feature branch.
+- Merged PRs: #1 authentic photos, #2 glass nav/photo backdrops/marquee,
+  #3 StayFlexi booking form + this file, #4 photo GPS removal, #5 map
+  coordinates in JSON-LD.
+- Dependabot alerts and security updates are on; GitHub secret scanning and
+  push protection are on.
 - Ask before creating repos, pushing, merging or changing GitHub settings.
 - The `gh` CLI is installed and authenticated on Siddhant's machine.
 - Commit messages: imperative, descriptive subject lines (see `git log`).
@@ -291,11 +310,13 @@ haven't chosen a real brand palette yet.
 ## 10. Status and open items (as of 2026-11-02)
 
 - **Live**: the multi-page site with real photos, the glass-nav/photo-backdrop
-  redesign and SEO.
-- **In progress**: branch `stayflexi-booking` holds the StayFlexi booking form
-  (`book.html`, `js/booking.js`, `js/data/booking-config.js`, plus edits to
-  Home, Rooms, the landing page, the header, the CSS and the sitemap). It
-  hasn't been committed or pushed yet.
+  redesign, SEO, and the StayFlexi booking form.
+- **Planned (not started)**: a code review on 2026-11-02 recommended moving
+  the site to Astro for readability (shared layouts, build-time rendering,
+  built-in image optimisation), plus PhotoSwipe, Prettier and ESLint. That
+  would replace the "no build step" rule in §3, so it only happens once
+  Siddhant approves the build step. Review and action plan:
+  https://claude.ai/artifact/ACH3csd9DLBBawmaVD91Jp
 - **Waiting on the owners** (through Siddhant):
   - First-person voice copy for Our Story and other owner-voice sections (see
     `content-questionnaire.md`). The voice rewrite is paused until real
