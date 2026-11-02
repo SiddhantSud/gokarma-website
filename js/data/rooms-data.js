@@ -17,8 +17,6 @@ const ROOMS = [
       'AC & ceiling fan',
       'Personal locker & reading light',
     ],
-    whatsappText:
-      "Hi! I'd like to check availability for the 4-Bed Mixed Dorm at Aangan by Gokarma Living.",
   },
   {
     id: 'six-bed-dorm',
@@ -32,8 +30,6 @@ const ROOMS = [
       'AC & ceiling fan',
       'Personal locker & reading light',
     ],
-    whatsappText:
-      "Hi! I'd like to check availability for the 6-Bed Mixed Dorm at Aangan by Gokarma Living.",
   },
   {
     id: 'vintage-room',
@@ -47,7 +43,5 @@ const ROOMS = [
       'Hand-painted walls, ceiling fan',
       'Shared bathroom',
     ],
-    whatsappText:
-      "Hi! I'd like to check availability for the Vintage Room at Aangan by Gokarma Living.",
   },
 ];

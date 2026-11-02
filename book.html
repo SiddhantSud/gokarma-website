@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Stay | Aangan by Gokarma Living</title>
+  <meta name="description" content="Book a dorm bed or the private Vintage Room at Aangan by Gokarma Living, a backpacker hostel &amp; cafe on Kudle hilltop, Gokarna. Pick your dates to check availability.">
+  <link rel="canonical" href="https://siddhantsud.github.io/gokarma-website/book.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body data-page="book">
+  <!--
+    The page every "Book Now" / "Book This Room" button leads to.
+    The form itself is rendered by js/booking.js into the
+    data-booking-widget element; where it sends guests
+    (StayFlexi or WhatsApp) is set in js/data/booking-config.js.
+  -->
+
+  <div id="site-header"></div>
+
+  <section class="hero" style="background-image: url('images/scenery/cottage-row-1600w.jpg');">
+    <div class="hero-overlay">
+      <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
+      <h1>Book Your Stay</h1>
+      <p>Dorm beds start from around &#8377;850/night. Pick your dates to check availability.</p>
+      <div class="booking-glass" data-booking-widget></div>
+      <a href="rooms.html" class="explore-link">Compare the rooms first →</a>
+    </div>
+  </section>
+
+  <section class="section-photo" data-bg="images/scenery/sunset-cliff-1600w.jpg">
+    <div class="panel text-center">
+      <div class="container">
+        <span class="section-eyebrow">Good to Know</span>
+        <h2 class="section-title">Before You Book</h2>
+        <div class="auto-grid" style="--grid-min: 200px;">
+          <div class="card reveal">
+            <span class="icon" style="font-size:2rem;">⭐</span>
+            <h3>4.9/5 on Google</h3>
+            <p>321 reviews</p>
+          </div>
+          <div class="card reveal">
+            <span class="icon" style="font-size:2rem;">🏖️</span>
+            <h3>8-10 min walk</h3>
+            <p>to Kudle Beach</p>
+          </div>
+          <div class="card reveal">
+            <span class="icon" style="font-size:2rem;">🅿️</span>
+            <h3>Free parking</h3>
+            <p>and luggage storage</p>
+          </div>
+        </div>
+
+        <h3 class="mt-lg">Prefer to chat first?</h3>
+        <a href="https://wa.me/917892803231?text=Hi!%20I'd%20like%20to%20book%20a%20stay%20at%20Aangan%20by%20Gokarma%20Living." class="btn btn-outline" style="margin-top:12px;" target="_blank" rel="noopener">💬 Message us on WhatsApp</a>
+        <p class="contact-phone">Or call <a href="tel:+917892803231">+91 78928 03231</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/data/rooms-data.js"></script>
+  <script src="js/data/booking-config.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/partials.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
