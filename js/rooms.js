@@ -7,7 +7,6 @@
 
 function roomCardHtml(room) {
   const featureItems = room.features.map((f) => `<li>${f}</li>`).join('');
-  const whatsappUrl = `https://wa.me/917892803231?text=${encodeURIComponent(room.whatsappText)}`;
   const badgeHtml = room.badge ? `<div class="ribbon">${room.badge}</div>` : '';
   const cardClass = room.badge ? 'card featured' : 'card';
 
@@ -19,8 +18,8 @@ function roomCardHtml(room) {
       </div>
       <h3>${room.name}</h3>
       <ul>${featureItems}</ul>
-      <a href="${whatsappUrl}" class="btn ${room.badge ? 'btn-primary' : 'btn-outline'}" target="_blank" rel="noopener">
-        Check Availability
+      <a href="book.html?room=${room.id}" class="btn ${room.badge ? 'btn-primary' : 'btn-outline'}">
+        Book This Room
       </a>
     </div>
   `;

@@ -26,7 +26,7 @@ over a real connection and works normally.)
 
 ```
 index.html, rooms.html, story.html, gallery.html,        the actual pages
-contact.html, guide.html, guide-*.html
+contact.html, guide.html, guide-*.html, book.html
 
 landing.html                                              standalone page for social
                                                             media ad links (not linked
@@ -45,8 +45,12 @@ css/components.css                                         buttons, cards, nav, 
 js/data/rooms-data.js                                      room content
 js/data/gallery-data.js                                    gallery photos
 js/data/guide-data.js                                      guide article metadata
+js/data/booking-config.js                                  StayFlexi booking link &
+                                                            WhatsApp fallback number
 js/rooms.js, gallery.js, guide.js                          turn the data above into
                                                             the cards/grids you see
+js/booking.js                                              the "pick your dates"
+                                                            booking form
 js/partials.js                                             injects header/footer
 js/main.js                                                 mobile menu, footer year,
                                                             scroll animations
@@ -85,10 +89,34 @@ automatically appear on `rooms.html` and in the Home page teaser.
 2. Add an entry to `js/data/guide-data.js` so it shows up on `guide.html` and in the
    "Related Reads" links on other articles.
 
+### Turn on online booking (StayFlexi)
+Bookings are taken by a "pick your dates" form on the Home hero, `book.html`
+(where every "Book Now" button leads), and `landing.html`. Where that form sends
+guests is set in **one place**, `js/data/booking-config.js`:
+
+1. In the StayFlexi dashboard, go to **More Apps** (four-blocks icon, top right) →
+   **Property Configuration** → **Booking engine**, and copy the
+   **Booking Engine URL** (it includes your hotel ID, e.g.
+   `https://bookingengine.stayflexi.com/?hotel_id=12345`).
+2. Paste it into `stayflexiBookingUrl` in `js/data/booking-config.js`.
+
+That's it. The form now opens StayFlexi's booking page with the guest's dates
+already filled in. Guests pick a bed or room, see live rates, and pay there, and
+StayFlexi handles confirmation emails and keeps availability in sync with every
+other booking channel. The site itself never handles payments or guest details.
+
+While `stayflexiBookingUrl` is empty, the form falls back to WhatsApp: it opens a
+chat with the dates, guest count, and room already written into the message.
+
+Booking-page colors, partial payments, and add-ons are all set in that same
+StayFlexi **Booking engine** settings screen, not in this code. Turning on the
+option that links the booking page's logo back to your website gives guests an
+easy way back here.
+
 ### Update the WhatsApp number
 Search the project for `917892803231` (the WhatsApp booking number without the `+`
-or spaces) and replace every occurrence, including in `partials/header.html`,
-`partials/footer.html`, and each page's own booking buttons.
+or spaces) and replace every occurrence, including in `js/data/booking-config.js`,
+`partials/footer.html`, and each page's own WhatsApp buttons.
 
 ## SEO notes
 
