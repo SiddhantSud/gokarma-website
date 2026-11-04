@@ -1,148 +1,141 @@
 # Aangan by Gokarma Living — Website
 
-A multi-page website for the hostel: a full site (Home, Rooms, Our Story, a Gokarna
-Guide with several articles, Gallery, Contact) plus a standalone single-page version
-for use as a social media ad landing page. Built with plain **HTML, CSS, and
-JavaScript only** — no frameworks, no build tools/npm required to run it.
+The website for the hostel: Home, Rooms, Booking, Our Story, a Gokarna Guide
+with several articles, Gallery and Contact, plus a standalone page for social
+media ads (`landing.html`).
 
-## Previewing it locally
+Live at **https://siddhantsud.github.io/gokarma-website/**
 
-Because the header and footer are shared across every page via a small JavaScript
-include (see "How it's structured" below), **you need a local server to preview the
-site** — double-clicking `index.html` won't load the header/footer, since browsers
-block that kind of file loading for security reasons when there's no server involved.
+It's built with [Astro](https://astro.build), a widely used tool for building
+websites. Pages are written as HTML with a few small reusable pieces. When the
+site is published, Astro turns them into plain HTML, CSS and JavaScript, and
+makes small, fast versions of every photo.
 
-One command, from this folder:
+## Previewing it on your computer
+
+One-time setup: install [Node.js](https://nodejs.org) (version 22 or newer),
+then in this folder run:
 
 ```bash
-python -m http.server 8000
+npm install
 ```
 
-Then open `http://localhost:8000` in your browser. (This restriction only affects
-local previewing — once deployed to GitHub Pages, Netlify, etc., everything is served
-over a real connection and works normally.)
+Then, whenever you want to preview:
+
+```bash
+npm run dev
+```
+
+and open the address it prints (http://localhost:4321/gokarma-website/). The
+page reloads by itself every time you save a file.
+
+To check that the whole site builds without errors, as it will when published:
+
+```bash
+npm run build
+```
+
+## Publishing changes
+
+Changes go live by merging a pull request into `master` on GitHub. A GitHub
+Action (`.github/workflows/deploy.yml`) then builds the site and publishes it,
+usually in 2–3 minutes. You can follow it on the repo's **Actions** tab.
+
+Every pull request is also built as a check. If the build fails, nothing is
+published and the current site stays up.
 
 ## How it's structured
 
 ```
-index.html, rooms.html, story.html, gallery.html,        the actual pages
-contact.html, guide.html, guide-*.html, book.html
+src/pages/                 one file per page; the file name is the page's
+                             address (rooms.astro → rooms.html)
+src/layouts/BaseLayout.astro   the frame around every page: <head>, SEO tags,
+                             header, footer
+src/layouts/ArticleLayout.astro  the frame for Gokarna Guide articles
+src/components/            reusable pieces: header, footer, room card,
+                             gallery, booking form, photo sections, ...
 
-landing.html                                              standalone page for social
-                                                            media ad links (not linked
-                                                            from the main site nav)
+src/config/site.ts         facts shown on several pages: Google rating and
+                             review count, starting price, phone/WhatsApp,
+                             address, map
+src/config/booking.ts      the StayFlexi booking link
 
-partials/header.html, partials/footer.html                nav & footer — edited in
-                                                            ONE place, injected into
-                                                            every page by js/partials.js
+src/data/rooms.ts          room content
+src/data/gallery.ts        gallery photos
+src/data/guide.ts          guide article cards
 
-css/theme.css                                              ALL colors & fonts —
-                                                            edit this to re-theme
-                                                            the whole site
-css/base.css                                               layout/typography basics
-css/components.css                                         buttons, cards, nav, etc.
+src/styles/theme.css       ALL colors & fonts — edit this to re-theme the
+                             whole site
+src/styles/base.css        layout/typography basics
+src/styles/components.css  buttons, cards, nav, etc.
 
-js/data/rooms-data.js                                      room content
-js/data/gallery-data.js                                    gallery photos
-js/data/guide-data.js                                      guide article metadata
-js/data/booking-config.js                                  StayFlexi booking link &
-                                                            WhatsApp fallback number
-js/rooms.js, gallery.js, guide.js                          turn the data above into
-                                                            the cards/grids you see
-js/booking.js                                              the "pick your dates"
-                                                            booking form
-js/partials.js                                             injects header/footer
-js/main.js                                                 mobile menu, footer year,
-                                                            scroll animations
+src/assets/images/         the photos used on the site (originals; Astro
+                             makes the resized versions)
+photo-library/             real photos that aren't on the site yet
 
-images/rooms/, images/property/                            source photos, plus
-                                                            auto-generated -480w/
-                                                            -900w/-1600w versions for
-                                                            fast loading on phones
-
-scripts/resize-images.py                                   regenerates those resized
-                                                            versions (needs Pillow:
-                                                            pip install Pillow)
+public/                    files copied as-is: robots.txt, sitemap.xml
 ```
 
 ## Common edits
 
+### Change the rating, review count, price or phone number
+Open `src/config/site.ts` and change the value. Every page that shows it
+updates on the next publish.
+
 ### Change the color palette
-Open `css/theme.css`. Every color and font used anywhere on the site is a variable
-at the top of that file, with comments. Change a value there and it updates
-everywhere at once — no other file needs to change.
+Open `src/styles/theme.css`. Every color and font used anywhere on the site is
+a variable at the top of that file, with comments.
 
 ### Add or edit a room
-Open `js/data/rooms-data.js` and add/edit an object in the `ROOMS` array. It will
-automatically appear on `rooms.html` and in the Home page teaser.
+Edit the `ROOMS` list in `src/data/rooms.ts`. It appears on the Rooms page,
+the Home page, the landing page and in the booking form.
 
 ### Add a gallery photo
-1. Put the photo in `images/property/` or `images/rooms/`.
-2. Run `python scripts/resize-images.py` (regenerates the small/medium/large
-   versions — safe to re-run any time, it skips photos it's already processed).
-   It also removes the GPS location that phones save inside photos, since the
-   full-size originals can be downloaded from the live site. Needs
-   `pip install Pillow piexif`.
-3. Add an entry to `js/data/gallery-data.js`.
+1. Put the photo in a folder under `src/assets/images/` (for example
+   `src/assets/images/food/`).
+2. Add an entry to `src/data/gallery.ts` with its path, without the file
+   extension (for example `food/masala-dosa`) and a short description of
+   what's in the photo.
+
+That's it. Astro makes the phone-sized and desktop-sized versions when the
+site is built, and those copies never contain the camera's location (GPS)
+data.
 
 ### Add a Gokarna Guide article
-1. Copy one of the existing `guide-*.html` files as a starting point and write the
-   new article's content directly in the HTML (kept as real text, not
-   auto-generated, so search engines can read it immediately).
-2. Add an entry to `js/data/guide-data.js` so it shows up on `guide.html` and in the
-   "Related Reads" links on other articles.
+1. Copy one of the `src/pages/guide-*.astro` files, rename it, and write the
+   new article's text inside it.
+2. Add an entry to `src/data/guide.ts` so it shows up on the Guide page and in
+   "Related Reads".
+3. Add its address to `public/sitemap.xml`.
 
-### Turn on online booking (StayFlexi)
-Bookings are taken by a "pick your dates" form on the Home hero, `book.html`
-(where every "Book Now" button leads), and `landing.html`. Where that form sends
-guests is set in **one place**, `js/data/booking-config.js`:
+### Online booking (StayFlexi)
+The "pick your dates" form on the Home page, `book.html` and `landing.html`
+sends guests to StayFlexi's booking page with their dates filled in. Guests
+pick a bed or room, see live rates and pay there, and StayFlexi handles
+confirmation emails and keeps availability in sync with every other booking
+channel. The site itself never handles payments or guest details.
 
-1. In the StayFlexi dashboard, go to **More Apps** (four-blocks icon, top right) →
-   **Property Configuration** → **Booking engine**, and copy the
-   **Booking Engine URL** (it includes your hotel ID, e.g.
-   `https://bookingengine.stayflexi.com/?hotel_id=12345`).
-2. Paste it into `stayflexiBookingUrl` in `js/data/booking-config.js`.
+The booking link is set in `src/config/booking.ts`. It comes from the
+StayFlexi dashboard: **More Apps** (four-blocks icon, top right) →
+**Property Configuration** → **Booking engine** → **Booking Engine URL**.
+If it's ever left empty, the form switches to WhatsApp instead and opens a
+chat with the dates, guest count and room already written into the message.
 
-That's it. The form now opens StayFlexi's booking page with the guest's dates
-already filled in. Guests pick a bed or room, see live rates, and pay there, and
-StayFlexi handles confirmation emails and keeps availability in sync with every
-other booking channel. The site itself never handles payments or guest details.
-
-While `stayflexiBookingUrl` is empty, the form falls back to WhatsApp: it opens a
-chat with the dates, guest count, and room already written into the message.
-
-Booking-page colors, partial payments, and add-ons are all set in that same
-StayFlexi **Booking engine** settings screen, not in this code. Turning on the
-option that links the booking page's logo back to your website gives guests an
-easy way back here.
-
-### Update the WhatsApp number
-Search the project for `917892803231` (the WhatsApp booking number without the `+`
-or spaces) and replace every occurrence, including in `js/data/booking-config.js`,
-`partials/footer.html`, and each page's own WhatsApp buttons.
+Booking-page colors, partial payments and add-ons are all set in that same
+StayFlexi **Booking engine** settings screen, not in this code.
 
 ## SEO notes
 
-- Every page has its own `<title>`, meta description, and canonical link.
-- `robots.txt`, `sitemap.xml`, and every page's canonical/Open Graph/JSON-LD
-  tags currently point at the GitHub Pages URL
-  (`https://siddhantsud.github.io/gokarma-website/`). If a custom domain is
-  set up later, find-and-replace that URL everywhere (canonical links, Open
-  Graph tags, the JSON-LD blocks, `sitemap.xml`, and `robots.txt`).
-- `landing.html` is deliberately excluded from the sitemap and marked
-  `noindex` — it's meant for ad traffic, not search rankings, so it doesn't
-  compete with the main pages.
+- Every page has its own title, description, canonical link and link-preview
+  (Open Graph) tags, all set through `BaseLayout.astro`.
+- Page addresses are the same as before the move to Astro (`rooms.html`,
+  `guide-solo-travel-in-gokarna.html`, ...), so existing links keep working.
+- `landing.html` is deliberately hidden from search (noindex, left out of the
+  sitemap, disallowed in `robots.txt`). It's meant for ad traffic, not search
+  rankings.
 - The Home page includes `LodgingBusiness` structured data (address, phone,
-  rating) and each guide article includes `Article` structured data — this
-  helps Google understand the content, and can unlock richer search result
-  listings.
-
-## Publishing it online (free options)
-
-- **GitHub Pages**: create a GitHub repo, upload these files, then enable Pages in
-  the repo settings.
-- **Netlify / Vercel**: drag and drop this folder onto netlify.com/drop for an
-  instant live link.
-
-Either option serves the site over a real connection, so the header/footer
-include works automatically — no server setup needed on your end beyond that.
+  rating, map location) and each guide article includes `Article` structured
+  data.
+- If a custom domain is set up later, change `site` and `base` in
+  `astro.config.mjs` and the addresses in `public/robots.txt` and
+  `public/sitemap.xml`.

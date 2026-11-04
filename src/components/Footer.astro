@@ -1,0 +1,19 @@
+---
+// ============================================================
+// The site-wide footer. It stays a solid color on purpose
+// (owner direction), unlike the photo-backed sections above it.
+// ============================================================
+import { SITE, whatsappLink } from '../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year">{year}</span> {SITE.name}. All rights reserved.</p>
+    <div class="socials">
+      <a href={SITE.instagramUrl} target="_blank" rel="noopener">Instagram</a>
+      <a href={whatsappLink()} target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</footer>

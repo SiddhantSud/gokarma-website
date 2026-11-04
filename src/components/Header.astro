@@ -1,0 +1,37 @@
+---
+// ============================================================
+// The site-wide header and navigation. `page` marks which nav
+// link gets the "current page" highlight.
+// The glass-on-scroll effect and the mobile menu button are
+// wired up in src/scripts/site.ts.
+// ============================================================
+interface Props {
+  page?: string;
+}
+
+const { page } = Astro.props;
+
+const links = [
+  { href: 'index.html', page: 'home', label: 'Home' },
+  { href: 'rooms.html', page: 'rooms', label: 'Rooms' },
+  { href: 'story.html', page: 'story', label: 'Our Story' },
+  { href: 'guide.html', page: 'guide', label: 'Gokarna Guide' },
+  { href: 'gallery.html', page: 'gallery', label: 'Gallery' },
+  { href: 'contact.html', page: 'contact', label: 'Contact' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">🏡 Aangan</a>
+
+    <button class="menu-toggle btn-circle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+    <nav class="main-nav" id="mainNav">
+      {links.map((link) => (
+        <a href={link.href} class:list={{ 'is-active': link.page === page }}>{link.label}</a>
+      ))}
+      <a href="book.html" class="nav-cta">Book Now</a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import Photo from '../components/Photo.astro';
+import Marquee from '../components/Marquee.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import RoomCard from '../components/RoomCard.astro';
+import GuideCard from '../components/GuideCard.astro';
+import Gallery from '../components/Gallery.astro';
+import { SITE } from '../config/site';
+import { ROOMS } from '../data/rooms';
+import { GUIDE_POSTS } from '../data/guide';
+import { photoUrl } from '../lib/images';
+
+const heroBg = await photoUrl('property/property-4');
+const ratingLine = `${SITE.rating}★ on Google · ${SITE.reviewCount} Reviews`;
+
+// Business details Google reads (schema.org LodgingBusiness).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: SITE.name,
+  image: new URL(heroBg, Astro.site).href,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.locality,
+    addressRegion: SITE.address.region,
+    postalCode: SITE.address.postalCode,
+    addressCountry: SITE.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.geo.latitude,
+    longitude: SITE.geo.longitude,
+  },
+  hasMap: SITE.mapUrl,
+  telephone: '+91-78928-03231',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: SITE.rating,
+    bestRating: '5',
+    ratingCount: String(SITE.reviewCount),
+  },
+};
+---
+
+<BaseLayout
+  title="Aangan by Gokarma Living | Backpacker Hostel & Cafe in Gokarna"
+  description="A backpacker hostel & cafe on Kudle hilltop, Gokarna — dorms and private rooms, home-style South Indian food, and the offbeat basecamp for backpacking, solo travel, and exploring Gokarna beyond the beaches."
+  path="index.html"
+  page="home"
+  jsonLd={jsonLd}
+>
+  <!-- ============ HERO ============ -->
+  <section id="home" class="hero" style={`background-image: url('${heroBg}');`}>
+    <div class="hero-overlay">
+      <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
+      <h1>Your Nest on Kudle Hilltop</h1>
+      <p>A backpacker hostel &amp; cafe tucked into the forest above Kudle Beach — the offbeat basecamp for exploring Gokarna.</p>
+      <BookingWidget class="booking-glass" />
+      <a href="rooms.html" class="explore-link">See the rooms first →</a>
+    </div>
+  </section>
+
+  <!-- ============ TRUST MARQUEE ============ -->
+  <Marquee items={[ratingLine, 'Kudle Hilltop, Gokarna', 'Home-Cooked Food', 'Loved by Solo Travellers']} />
+
+  <!-- ============ ABOUT TEASER ============ -->
+  <PhotoSection bg="scenery/cottage-row">
+    <div class="container about-grid">
+      <div class="about-text reveal">
+        <span class="section-eyebrow">About Aangan</span>
+        <h2>A Hilltop Basecamp for Backpackers</h2>
+        <p>
+          Aangan by Gokarma Living is a laid-back hostel and cafe set on Kudle hilltop,
+          minutes from Kudle Beach and Gokarna's old town. It's built for travelers who
+          want to slow down, meet people, and eat well without spending much — with
+          resident cats, an occasional goat at the gate, and home-style food guests keep
+          talking about.
+        </p>
+        <ul class="about-list">
+          <li>✔ Free Wi-Fi in common areas</li>
+          <li>✔ Garden with badminton &amp; board games</li>
+          <li>✔ Home-style cafe: breakfast, snacks &amp; South Indian classics</li>
+          <li>✔ Free parking &amp; luggage storage</li>
+        </ul>
+        <a href="story.html" class="explore-link">Meet Kushal &amp; Geetika, our hosts →</a>
+      </div>
+      <div class="about-image photo-box tall reveal">
+        <Photo
+          src="scenery/verandah"
+          alt="A quiet moment on the verandah, looking out at the trees"
+          sizes="(max-width: 800px) 100vw, 500px"
+        />
+      </div>
+    </div>
+  </PhotoSection>
+
+  <!-- ============ AMENITIES ============ -->
+  <PhotoSection bg="community/catan-night" panel="alt">
+    <div class="container">
+      <span class="section-eyebrow">What's Included</span>
+      <h2 class="section-title">Amenities</h2>
+      <div class="amenities-grid">
+        <div class="amenity reveal"><span class="icon">📶</span><p>Free Wi-Fi (common areas)</p></div>
+        <div class="amenity reveal"><span class="icon">🍳</span><p>Breakfast &amp; Snack Bar</p></div>
+        <div class="amenity reveal"><span class="icon">💻</span><p>Coworking Space</p></div>
+        <div class="amenity reveal"><span class="icon">📚</span><p>Book Exchange</p></div>
+        <div class="amenity reveal"><span class="icon">🎲</span><p>Board Games</p></div>
+        <div class="amenity reveal"><span class="icon">🏸</span><p>Badminton</p></div>
+        <div class="amenity reveal"><span class="icon">🅿️</span><p>Free Parking</p></div>
+        <div class="amenity reveal"><span class="icon">🎒</span><p>Luggage Storage</p></div>
+      </div>
+    </div>
+  </PhotoSection>
+
+  <!-- ============ ROOMS TEASER ============ -->
+  <PhotoSection bg="property/dorm-outside-1">
+    <div class="container">
+      <span class="section-eyebrow">Where You'll Sleep</span>
+      <h2 class="section-title">Rooms</h2>
+      <p class="section-subtitle">Dorm beds start from around ₹{SITE.dormPriceFrom}/night — pick your dates to check exact rates.</p>
+      <div class="auto-grid" style="--grid-min: 280px;">
+        {ROOMS.slice(0, 3).map((room) => <RoomCard room={room} />)}
+      </div>
+      <p class="text-center mt-lg"><a href="rooms.html" class="explore-link">See all rooms &amp; full details →</a></p>
+    </div>
+  </PhotoSection>
+
+  <!-- ============ GOKARNA GUIDE TEASER ============ -->
+  <PhotoSection bg="scenery/waterfall" panel="alt">
+    <div class="container">
+      <span class="section-eyebrow">The Gokarna Guide</span>
+      <h2 class="section-title">Plan Your Trip</h2>
+      <p class="section-subtitle">Real, practical guides for backpacking, solo travel, and finding Gokarna's offbeat side.</p>
+      <div class="auto-grid" style="--grid-min: 260px;">
+        {GUIDE_POSTS.map((post) => <GuideCard post={post} />)}
+      </div>
+    </div>
+  </PhotoSection>
+
+  <!-- ============ GALLERY TEASER ============ -->
+  <PhotoSection bg="scenery/river-pool">
+    <div class="container">
+      <span class="section-eyebrow">A Glimpse</span>
+      <h2 class="section-title">Gallery</h2>
+      <Gallery limit={4} teaser gridMin="200px" />
+      <p class="text-center mt-lg"><a href="gallery.html" class="explore-link">View the full gallery →</a></p>
+    </div>
+  </PhotoSection>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <PhotoSection bg="community/game-night" panel="alt">
+    <div class="container">
+      <span class="section-eyebrow">{ratingLine}</span>
+      <h2 class="section-title">What Guests Say</h2>
+      <div class="auto-grid" style="--grid-min: 260px;">
+        <div class="card reveal">
+          <p>&ldquo;Warm hosts who make you feel like you belong the moment you walk in.&rdquo;</p>
+          <p class="section-subtitle" style="margin:12px 0 0;">— Pravin, via Booking.com</p>
+        </div>
+        <div class="card reveal">
+          <p>&ldquo;Kushal and Geet have gone from being great hosts to great friends. There's magic in this space.&rdquo;</p>
+          <p class="section-subtitle" style="margin:12px 0 0;">— Shruthi, via Hostelworld</p>
+        </div>
+        <div class="card reveal">
+          <p>&ldquo;Super chill place with zero formalities, just good energy all around.&rdquo;</p>
+          <p class="section-subtitle" style="margin:12px 0 0;">— Jyothsna, via Google Reviews</p>
+        </div>
+      </div>
+    </div>
+  </PhotoSection>
+
+  <!-- ============ LOCATION TEASER + FINAL CTA ============ -->
+  <PhotoSection bg="scenery/sunset-cliff" panelClass="text-center">
+    <div class="container">
+      <span class="section-eyebrow">Kudle Beach Road, Gokarna</span>
+      <h2 class="section-title">Ready to Stay?</h2>
+      <p class="section-subtitle">~8-10 minutes' walk from Kudle Beach. Pick your dates and we'll take it from there.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="book.html" class="btn btn-primary btn-large">Book Your Stay</a>
+        <a href="contact.html" class="explore-link">Get directions &amp; contact info →</a>
+      </div>
+    </div>
+  </PhotoSection>
+</BaseLayout>

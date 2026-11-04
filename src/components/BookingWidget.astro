@@ -1,0 +1,129 @@
+---
+// ============================================================
+// The "pick your dates" booking form. Drop it anywhere:
+//   <BookingWidget />
+//
+// Where it sends the guest is set in src/config/booking.ts:
+//
+//   StayFlexi URL filled in → StayFlexi's booking page, already
+//   set to the chosen dates. The guest picks a bed or room, sees
+//   live rates and pays there, and StayFlexi keeps availability
+//   in sync with every other channel the hostel sells on.
+//
+//   StayFlexi URL empty → WhatsApp, with the dates, guest count
+//   and room written into the message, ready to send.
+//
+// Only the dates are passed to StayFlexi on purpose: if a guest
+// count is passed too, StayFlexi drops its cheapest matching
+// room into the cart automatically, which would quietly pick a
+// room for the guest instead of letting them choose.
+// ============================================================
+import { BOOKING } from '../config/booking';
+import { ROOMS } from '../data/rooms';
+import { isValidBookingUrl } from '../lib/booking';
+
+interface Props {
+  class?: string;
+  style?: string;
+}
+
+const { class: className, style } = Astro.props;
+const sendsToStayflexi = isValidBookingUrl(BOOKING.stayflexiBookingUrl);
+const guestCounts = Array.from({ length: BOOKING.maxGuests }, (_, i) => i + 1);
+
+const nextStepNote = sendsToStayflexi
+  ? 'Next, pick your bed or room, see live rates and confirm on our secure booking page (powered by StayFlexi).'
+  : "This opens WhatsApp with your dates filled in. Just hit send and we'll confirm availability and rates.";
+---
+
+<div class={className} style={style}>
+  <form class="booking-form" data-booking-form>
+    <label class="booking-field">
+      <span>Check-in</span>
+      <input type="date" name="checkin" required />
+    </label>
+    <label class="booking-field">
+      <span>Check-out</span>
+      <input type="date" name="checkout" required />
+    </label>
+
+    {
+      !sendsToStayflexi && (
+        <>
+          <label class="booking-field">
+            <span>Guests</span>
+            <select name="guests">
+              {guestCounts.map((count) => <option value={count}>{count}</option>)}
+            </select>
+          </label>
+          <label class="booking-field">
+            <span>Room</span>
+            <select name="room">
+              <option value="">Not sure yet</option>
+              {ROOMS.map((room) => <option value={room.id}>{room.name}</option>)}
+            </select>
+          </label>
+        </>
+      )
+    }
+
+    <button type="submit" class="btn btn-primary">Check Availability</button>
+    <p class="booking-note">{nextStepNote}</p>
+  </form>
+</div>
+
+<script>
+  import { BOOKING } from '../config/booking';
+  import { SITE } from '../config/site';
+  import {
+    addDays,
+    buildStayflexiUrl,
+    buildWhatsappBookingUrl,
+    isValidBookingUrl,
+    toDateValue,
+  } from '../lib/booking';
+
+  // book.html?room=vintage-room (from a room card's "Book This
+  // Room" button) preselects that room in the WhatsApp fallback.
+  const preselectedRoom = new URLSearchParams(window.location.search).get('room');
+
+  document.querySelectorAll<HTMLFormElement>('[data-booking-form]').forEach((form) => {
+    const checkin = form.elements.namedItem('checkin') as HTMLInputElement;
+    const checkout = form.elements.namedItem('checkout') as HTMLInputElement;
+    const roomSelect = form.elements.namedItem('room') as HTMLSelectElement | null;
+
+    // Default to tonight → tomorrow. Set here, in the guest's
+    // browser, because the page was built on an earlier day.
+    const today = toDateValue(new Date());
+    checkin.value = checkin.min = today;
+    checkout.value = checkout.min = addDays(today, 1);
+
+    if (roomSelect && preselectedRoom) roomSelect.value = preselectedRoom;
+
+    // Moving check-in forward pushes check-out along with it, so
+    // the form can never hold a zero- or negative-night stay.
+    checkin.addEventListener('change', () => {
+      if (!checkin.value) return;
+      const earliestCheckout = addDays(checkin.value, 1);
+      checkout.min = earliestCheckout;
+      if (!checkout.value || checkout.value < earliestCheckout) {
+        checkout.value = earliestCheckout;
+      }
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const dates = { checkin: checkin.value, checkout: checkout.value };
+
+      if (isValidBookingUrl(BOOKING.stayflexiBookingUrl)) {
+        window.location.href = buildStayflexiUrl(BOOKING.stayflexiBookingUrl, dates);
+        return;
+      }
+
+      const guests = (form.elements.namedItem('guests') as HTMLSelectElement).value;
+      const roomName = roomSelect?.value ? roomSelect.selectedOptions[0].text : '';
+      const url = buildWhatsappBookingUrl(SITE.whatsappNumber, { ...dates, guests, roomName });
+      window.open(url, '_blank', 'noopener');
+    });
+  });
+</script>

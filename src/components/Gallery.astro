@@ -1,0 +1,73 @@
+---
+// ============================================================
+// A grid of gallery photos from src/data/gallery.ts.
+//
+//   <Gallery />                 every photo, tap to open full screen
+//   <Gallery limit={4} teaser /> first 4 photos, no full-screen view
+//                                (the Home page strip)
+//
+// The full-screen viewer is PhotoSwipe (photoswipe.com): swipe
+// on phones, arrow keys and Esc on desktop. Each photo links to
+// a 1600px copy, which is also what loads without JavaScript.
+// ============================================================
+import { getImage } from 'astro:assets';
+import Photo from './Photo.astro';
+import { GALLERY_PHOTOS } from '../data/gallery';
+import { photo } from '../lib/images';
+
+interface Props {
+  limit?: number;
+  teaser?: boolean;
+  gridMin?: string;
+}
+
+const { limit, teaser = false, gridMin = '220px' } = Astro.props;
+const photos = GALLERY_PHOTOS.slice(0, limit);
+
+const items = await Promise.all(
+  photos.map(async (item) => {
+    const large = await getImage({ src: await photo(item.image), width: 1600, format: 'webp' });
+    return { ...item, large };
+  })
+);
+---
+
+{
+  teaser ? (
+    <div class="auto-grid" style={`--grid-min: ${gridMin};`}>
+      {items.map((item) => (
+        <div class="photo-box gallery-box reveal">
+          <Photo src={item.image} alt={item.alt} sizes="(max-width: 700px) 50vw, 320px" />
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="auto-grid" id="galleryGrid" style={`--grid-min: ${gridMin};`}>
+      {items.map((item) => (
+        <a
+          class="photo-box gallery-box reveal"
+          href={item.large.src}
+          data-pswp-width={item.large.attributes.width}
+          data-pswp-height={item.large.attributes.height}
+          aria-label={`View larger: ${item.alt}`}
+        >
+          <Photo src={item.image} alt={item.alt} sizes="(max-width: 700px) 50vw, 320px" />
+        </a>
+      ))}
+    </div>
+  )
+}
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  if (document.getElementById('galleryGrid')) {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#galleryGrid',
+      children: 'a',
+      pswpModule: () => import('photoswipe'),
+    });
+    lightbox.init();
+  }
+</script>
