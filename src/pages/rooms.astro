@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import Photo from '../components/Photo.astro';
+import RoomCard from '../components/RoomCard.astro';
+import { SITE } from '../config/site';
+import { ROOMS } from '../data/rooms';
+
+// Extra photos of each room, shown under the room cards.
+const roomPhotos = [
+  {
+    name: '4-Bed Mixed Dorm',
+    photos: [
+      { src: 'rooms/4-bed-dorm-2', alt: '4-bed dorm, alternate view' },
+      { src: 'rooms/4-bed-dorm-3', alt: '4-bed dorm, alternate view' },
+      { src: 'rooms/4-bed-dorm-bathroom', alt: '4-bed dorm attached bathroom' },
+    ],
+  },
+  {
+    name: '6-Bed Mixed Dorm',
+    photos: [
+      { src: 'rooms/6-bed-dorm-3', alt: '6-bed dorm, alternate view' },
+      { src: 'rooms/6-bed-dorm-7', alt: '6-bed dorm, alternate view' },
+      { src: 'rooms/6-bed-dorm-bathroom-1', alt: '6-bed dorm attached bathroom' },
+    ],
+  },
+  {
+    name: 'Vintage Room (Private)',
+    photos: [
+      { src: 'rooms/vintage-room-2', alt: 'Vintage Room, alternate view' },
+      { src: 'rooms/vintage-room-outside-1', alt: 'Outside the Vintage Room' },
+      { src: 'rooms/vintage-room-bathroom-1', alt: 'Vintage Room shared bathroom' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Rooms & Rates | Aangan by Gokarma Living"
+  description="4-bed and 6-bed mixed dorms with attached bathrooms, plus a private Vintage Room with hand-painted walls — see the rooms and book your stay."
+  path="rooms.html"
+  page="rooms"
+  ogImage="rooms/4-bed-dorm-1"
+>
+  <PhotoSection bg="scenery/waterfall">
+    <div class="container text-center">
+      <span class="section-eyebrow">Where You'll Sleep</span>
+      <h1>Rooms &amp; Rates</h1>
+      <p class="section-subtitle">
+        Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Rates change with season and demand,
+        so pick your dates to check exact pricing and availability.
+      </p>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="community/catan-night" panel="alt">
+    <div class="container">
+      <div class="auto-grid" style="--grid-min: 280px;">
+        {ROOMS.map((room) => <RoomCard room={room} />)}
+      </div>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="property/dorm-outside-2">
+    <div class="container">
+      <h2 class="section-title">Room Photos</h2>
+      <p class="section-subtitle">A closer look at each room and its bathroom.</p>
+
+      {
+        roomPhotos.map((room, i) => (
+          <>
+            <h3 style="margin-bottom:16px;">{room.name}</h3>
+            <div
+              class="auto-grid mt-lg"
+              style={`--grid-min: 200px;${i < roomPhotos.length - 1 ? ' margin-bottom: 40px;' : ''}`}
+            >
+              {room.photos.map((p) => (
+                <div class="photo-box gallery-box">
+                  <Photo src={p.src} alt={p.alt} sizes="(max-width:700px) 50vw, 300px" />
+                </div>
+              ))}
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="scenery/sunset-cliff" panel="alt">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>Ready to book?</h3>
+        <p>Pick your dates and we'll take it from there.</p>
+        <a href="book.html" class="btn btn-primary">Book Your Stay</a>
+      </div>
+    </div>
+  </PhotoSection>
+</BaseLayout>

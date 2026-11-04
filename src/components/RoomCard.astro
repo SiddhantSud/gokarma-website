@@ -1,0 +1,26 @@
+---
+// One room card (photo, name, features, "Book This Room").
+// Rooms come from src/data/rooms.ts.
+import Photo from './Photo.astro';
+import type { Room } from '../data/rooms';
+
+interface Props {
+  room: Room;
+}
+
+const { room } = Astro.props;
+---
+
+<div class:list={['card', 'reveal', { featured: room.badge }]}>
+  {room.badge && <div class="ribbon">{room.badge}</div>}
+  <div class="photo-box small">
+    <Photo src={room.image} alt={room.alt} sizes="(max-width: 700px) 100vw, 340px" />
+  </div>
+  <h3>{room.name}</h3>
+  <ul>
+    {room.features.map((feature) => <li>{feature}</li>)}
+  </ul>
+  <a href={`book.html?room=${room.id}`} class:list={['btn', room.badge ? 'btn-primary' : 'btn-outline']}>
+    Book This Room
+  </a>
+</div>

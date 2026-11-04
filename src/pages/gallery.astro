@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import Gallery from '../components/Gallery.astro';
+---
+
+<BaseLayout
+  title="Gallery | Aangan by Gokarma Living"
+  description="Photos of Aangan by Gokarma Living — the dorms, the Vintage Room, the forest paths, and the hand-painted sign that started it all."
+  path="gallery.html"
+  page="gallery"
+  ogImage="community/game-night"
+>
+  <PhotoSection bg="food/thali-spread">
+    <div class="container text-center">
+      <span class="section-eyebrow">A Closer Look</span>
+      <h1>Gallery</h1>
+      <p class="section-subtitle">Click any photo to view it larger.</p>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="scenery/cottage-row" panel="alt">
+    <div class="container">
+      <Gallery />
+    </div>
+  </PhotoSection>
+</BaseLayout>

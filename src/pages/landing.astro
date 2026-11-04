@@ -1,0 +1,85 @@
+---
+// ============================================================
+// Standalone single-page version for social media ad links.
+// Not part of the main site navigation, and hidden from search
+// (noindex, left out of the sitemap, disallowed in robots.txt)
+// so it doesn't compete with the full site -- it's an ad
+// destination, not a page meant to rank.
+// ============================================================
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import Marquee from '../components/Marquee.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import RoomCard from '../components/RoomCard.astro';
+import { SITE } from '../config/site';
+import { ROOMS } from '../data/rooms';
+import { photoUrl } from '../lib/images';
+
+const heroBg = await photoUrl('property/property-4');
+---
+
+<BaseLayout
+  title="Aangan by Gokarma Living — Book Your Hilltop Hostel Stay"
+  description="A backpacker hostel & cafe on Kudle hilltop, Gokarna. Pick your dates to book your stay."
+  path="landing.html"
+  variant="landing"
+>
+  <section class="hero" style={`background-image: url('${heroBg}');`}>
+    <div class="hero-overlay">
+      <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
+      <h1>Your Nest on Kudle Hilltop</h1>
+      <p>A backpacker hostel &amp; cafe tucked into the forest above Kudle Beach — dorms, a private room, and a cafe guests keep raving about.</p>
+      <BookingWidget class="booking-glass" />
+    </div>
+  </section>
+
+  <Marquee items={[`${SITE.rating}★ on Google · ${SITE.reviewCount} Reviews`, 'Kudle Hilltop, Gokarna', 'Home-Cooked Food']} />
+
+  <PhotoSection bg="scenery/waterfall" panelClass="text-center">
+    <div class="container">
+      <div class="auto-grid" style="--grid-min: 200px;">
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">⭐</span>
+          <h3>{SITE.rating}/5 on Google</h3>
+          <p>{SITE.reviewCount} reviews</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">🏖️</span>
+          <h3>8-10 min walk</h3>
+          <p>to Kudle Beach</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">💰</span>
+          <h3>₹{SITE.dormPriceFrom}/night</h3>
+          <p>dorm beds starting from</p>
+        </div>
+      </div>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="property/dorm-outside-2" panel="alt">
+    <div class="container">
+      <h2 class="section-title">Rooms</h2>
+      <div class="auto-grid" style="--grid-min: 260px;">
+        {ROOMS.slice(0, 3).map((room) => <RoomCard room={room} />)}
+      </div>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="community/chess-night" panelClass="text-center">
+    <div class="container" style="max-width:600px;">
+      <p style="font-size:1.2rem; font-family:var(--font-display);">
+        &ldquo;Kushal and Geet have gone from being great hosts to great friends. There's magic in this space.&rdquo;
+      </p>
+      <p class="section-subtitle" style="margin-top:12px;">— Shruthi, via Hostelworld</p>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="scenery/sunset-cliff" panel="alt" panelClass="text-center">
+    <div class="container">
+      <h2 class="section-title">Ready to Book?</h2>
+      <BookingWidget style="max-width:720px; margin:0 auto;" />
+      <p class="contact-phone">Or call/WhatsApp <a href={`tel:${SITE.phoneLink}`}>{SITE.phoneDisplay}</a></p>
+    </div>
+  </PhotoSection>
+</BaseLayout>

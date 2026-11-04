@@ -1,0 +1,22 @@
+---
+// "Related reads" links under a guide article: every other
+// article in src/data/guide.ts.
+import { GUIDE_POSTS } from '../data/guide';
+
+interface Props {
+  /** The current article's file name, which is left out of the list. */
+  current: string;
+}
+
+const { current } = Astro.props;
+const others = GUIDE_POSTS.filter((post) => post.slug !== current);
+---
+
+<div class="related-reads">
+  <h2 class="section-title" style="text-align:left; margin-bottom:16px;">Related Reads</h2>
+  <ul>
+    {others.map((post) => (
+      <li><a class="explore-link" href={post.slug}>{post.title} →</a></li>
+    ))}
+  </ul>
+</div>

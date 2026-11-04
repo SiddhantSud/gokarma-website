@@ -1,0 +1,111 @@
+---
+// ============================================================
+// The shell every page is built from: <head> (title, SEO and
+// social-preview tags, fonts, styles), the header, the footer
+// and the shared page script. A page only supplies its own
+// content:
+//
+//   <BaseLayout title="..." description="..." path="rooms.html" page="rooms">
+//     ...sections...
+//   </BaseLayout>
+//
+// variant="landing" is for landing.html (the ad landing page):
+// a centered logo instead of the nav, a short footer, and
+// hidden from search engines.
+// ============================================================
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config/site';
+import { photoUrl } from '../lib/images';
+
+import '../styles/theme.css';
+import '../styles/base.css';
+import '../styles/components.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** This page's file name, e.g. "rooms.html" -- used for the canonical URL. */
+  path: string;
+  /** Which nav link to highlight: home, rooms, story, guide, gallery, contact. */
+  page?: string;
+  /** Photo for link previews on WhatsApp, Instagram, etc. */
+  ogImage?: string;
+  /** Structured data for Google (schema.org), written out as JSON-LD. */
+  jsonLd?: Record<string, unknown>;
+  variant?: 'site' | 'landing';
+}
+
+const {
+  title,
+  description,
+  path,
+  page,
+  ogImage = 'property/property-4',
+  jsonLd,
+  variant = 'site',
+} = Astro.props;
+
+const isLanding = variant === 'landing';
+const siteRoot = new URL(import.meta.env.BASE_URL.replace(/\/?$/, '/'), Astro.site);
+const pageUrl = new URL(path, siteRoot).href;
+const ogImageUrl = new URL(await photoUrl(ogImage), Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {isLanding ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={pageUrl} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={pageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body data-page={page}>
+    {
+      isLanding ? (
+        <header class="site-header">
+          <div class="container header-inner" style="justify-content:center;">
+            <a href="index.html" class="logo">🏡 {SITE.name}</a>
+          </div>
+        </header>
+      ) : (
+        <Header page={page} />
+      )
+    }
+
+    <slot />
+
+    {
+      isLanding ? (
+        <footer class="site-footer">
+          <div class="container footer-inner" style="justify-content:center;">
+            <p>&copy; <span id="year">{new Date().getFullYear()}</span> {SITE.name}.</p>
+          </div>
+        </footer>
+      ) : (
+        <Footer />
+      )
+    }
+
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import GuideCard from '../components/GuideCard.astro';
+import { GUIDE_POSTS } from '../data/guide';
+---
+
+<BaseLayout
+  title="Gokarna Travel Guide | Backpacking, Solo Travel & Offbeat Adventures"
+  description="A practical Gokarna travel guide for backpackers: budget tips, solo travel advice, and offbeat adventures beyond the main beaches."
+  path="guide.html"
+  page="guide"
+  ogImage="scenery/river-pool"
+>
+  <PhotoSection bg="scenery/river-pool">
+    <div class="container text-center">
+      <span class="section-eyebrow">The Gokarna Guide</span>
+      <h1>Backpacking, Solo Travel &amp; Offbeat Gokarna</h1>
+      <p class="section-subtitle">
+        Practical, honest guides for getting the most out of Gokarna — written for
+        travelers who'd rather trek to a quiet beach than fight for a sunbed on a
+        crowded one.
+      </p>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="scenery/waterfall" panel="alt">
+    <div class="container">
+      <div class="auto-grid" style="--grid-min: 280px;">
+        {GUIDE_POSTS.map((post) => <GuideCard post={post} />)}
+      </div>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="property/property-4" panelClass="text-center">
+    <div class="container">
+      <h2 class="section-title">Reading This on the Road?</h2>
+      <p class="section-subtitle">Aangan is on Kudle hilltop, right along the beach-trek route this guide covers.</p>
+      <a href="rooms.html" class="explore-link">Check rooms &amp; rates →</a>
+    </div>
+  </PhotoSection>
+</BaseLayout>

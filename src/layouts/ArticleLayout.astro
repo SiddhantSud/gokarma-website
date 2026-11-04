@@ -1,0 +1,69 @@
+---
+// ============================================================
+// Layout for a Gokarna Guide article: hero photo, title block,
+// the article text (whatever the page puts inside), then
+// "Related reads". Adds the Article structured data Google
+// reads. The article's card on guide.html comes from
+// src/data/guide.ts.
+// ============================================================
+import BaseLayout from './BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import Photo from '../components/Photo.astro';
+import RelatedReads from '../components/RelatedReads.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** File name, e.g. "guide-solo-travel-in-gokarna.html" */
+  path: string;
+  tag: string;
+  heading: string;
+  /** Short line under the heading. */
+  meta: string;
+  /** Headline for Google's Article data. */
+  headline: string;
+  datePublished: string;
+  heroImage: string;
+  heroAlt: string;
+  /** Backdrop photos for the article section and the "Related reads" section. */
+  bg: string;
+  relatedBg: string;
+}
+
+const { title, description, path, tag, heading, meta, headline, datePublished, heroImage, heroAlt, bg, relatedBg } =
+  Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  author: { '@type': 'Organization', name: SITE.name },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  datePublished,
+};
+---
+
+<BaseLayout title={title} description={description} path={path} page="guide" ogImage={heroImage} jsonLd={jsonLd}>
+  <PhotoSection bg={bg}>
+    <div class="container">
+      <div class="article-hero photo-box tall">
+        <Photo src={heroImage} alt={heroAlt} sizes="(max-width:800px) 100vw, 720px" loading="eager" />
+      </div>
+
+      <div class="article-body">
+        <span class="section-eyebrow">{tag}</span>
+        <h1>{heading}</h1>
+        <p class="article-meta">{meta}</p>
+
+        <slot />
+      </div>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg={relatedBg} panel="alt">
+    <div class="container">
+      <RelatedReads current={path} />
+    </div>
+  </PhotoSection>
+</BaseLayout>

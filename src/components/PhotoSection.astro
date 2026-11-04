@@ -1,0 +1,33 @@
+---
+// ============================================================
+// A content section sitting on a real photo backdrop, with the
+// rounded panel lifted over it (the site's main section style;
+// see .section-photo in components.css). The photo is only
+// loaded when the section scrolls near the screen.
+//
+//   <PhotoSection bg="scenery/cottage-row" panel="alt">
+//     ...section content...
+//   </PhotoSection>
+//
+// panel: "plain" (default) or "alt" for the alternate panel
+// color. panelClass adds extra classes to the panel (e.g.
+// "text-center").
+// ============================================================
+import { photoUrl } from '../lib/images';
+
+interface Props {
+  bg: string;
+  panel?: 'plain' | 'alt';
+  panelClass?: string;
+}
+
+const { bg, panel = 'plain', panelClass = '' } = Astro.props;
+const bgUrl = await photoUrl(bg);
+const classes = ['panel', panel === 'alt' && 'panel-alt', panelClass].filter(Boolean).join(' ');
+---
+
+<section class="section-photo" data-bg={bgUrl}>
+  <div class={classes}>
+    <slot />
+  </div>
+</section>

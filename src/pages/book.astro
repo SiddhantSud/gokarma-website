@@ -1,0 +1,62 @@
+---
+// The page every "Book Now" / "Book This Room" button leads to.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { SITE, whatsappLink } from '../config/site';
+import { photoUrl } from '../lib/images';
+
+const heroBg = await photoUrl('scenery/cottage-row');
+---
+
+<BaseLayout
+  title="Book Your Stay | Aangan by Gokarma Living"
+  description="Book a dorm bed or the private Vintage Room at Aangan by Gokarma Living, a backpacker hostel & cafe on Kudle hilltop, Gokarna. Pick your dates to check availability."
+  path="book.html"
+  page="book"
+  ogImage="scenery/cottage-row"
+>
+  <section class="hero" style={`background-image: url('${heroBg}');`}>
+    <div class="hero-overlay">
+      <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
+      <h1>Book Your Stay</h1>
+      <p>Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Pick your dates to check availability.</p>
+      <BookingWidget class="booking-glass" />
+      <a href="rooms.html" class="explore-link">Compare the rooms first →</a>
+    </div>
+  </section>
+
+  <PhotoSection bg="scenery/sunset-cliff" panelClass="text-center">
+    <div class="container">
+      <span class="section-eyebrow">Good to Know</span>
+      <h2 class="section-title">Before You Book</h2>
+      <div class="auto-grid" style="--grid-min: 200px;">
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">⭐</span>
+          <h3>{SITE.rating}/5 on Google</h3>
+          <p>{SITE.reviewCount} reviews</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">🏖️</span>
+          <h3>8-10 min walk</h3>
+          <p>to Kudle Beach</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon" style="font-size:2rem;">🅿️</span>
+          <h3>Free parking</h3>
+          <p>and luggage storage</p>
+        </div>
+      </div>
+
+      <h3 class="mt-lg">Prefer to chat first?</h3>
+      <a
+        href={whatsappLink("Hi! I'd like to book a stay at Aangan by Gokarma Living.")}
+        class="btn btn-outline"
+        style="margin-top:12px;"
+        target="_blank"
+        rel="noopener">💬 Message us on WhatsApp</a
+      >
+      <p class="contact-phone">Or call <a href={`tel:${SITE.phoneLink}`}>{SITE.phoneDisplay}</a></p>
+    </div>
+  </PhotoSection>
+</BaseLayout>

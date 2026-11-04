@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import { SITE, whatsappLink } from '../config/site';
+
+const { street, locality, region, postalCode } = SITE.address;
+---
+
+<BaseLayout
+  title="Contact & Location | Aangan by Gokarma Living"
+  description="Find Aangan by Gokarma Living on Kudle Beach Road, Gokarna, Karnataka. Message us on WhatsApp for rates, availability, and directions."
+  path="contact.html"
+  page="contact"
+  ogImage="property/sign-board"
+>
+  <PhotoSection bg="scenery/verandah">
+    <div class="container text-center">
+      <span class="section-eyebrow">We'd Love to Have You</span>
+      <h1>Contact &amp; Location</h1>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="property/sign-board" panel="alt">
+    <div class="container location-grid">
+      <div class="reveal">
+        <h2 class="section-title" style="text-align:left">Find Us</h2>
+        <p>📍 {street}, {locality}, {region} {postalCode}</p>
+        <p>🏖️ ~8-10 minute walk from Kudle Beach</p>
+        <p>🛕 ~4-5 minute walk from the Shiva caves</p>
+        <p>✈️ Nearest airport: Dabolim (Goa), ~136 km away</p>
+      </div>
+      <iframe
+        class="map-frame reveal"
+        src={SITE.mapEmbedUrl}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Aangan by Gokarma Living location map"></iframe>
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="community/game-night">
+    <div class="container contact-block" style="margin: 0 auto;">
+      <span class="section-eyebrow">Get In Touch</span>
+      <h2 class="section-title">Message Us</h2>
+      <p class="section-subtitle">
+        The fastest way to reach us is WhatsApp — message us for rates, availability, or
+        anything else about your stay.
+      </p>
+      <a
+        href={whatsappLink("Hi! I'd like to know more about staying at Aangan by Gokarma Living.")}
+        class="btn btn-primary btn-large"
+        target="_blank"
+        rel="noopener"
+      >
+        💬 Message us on WhatsApp
+      </a>
+      <p class="contact-phone">
+        Or call/WhatsApp us directly at <a href={`tel:${SITE.phoneLink}`}>{SITE.phoneDisplay}</a>
+      </p>
+    </div>
+  </PhotoSection>
+</BaseLayout>

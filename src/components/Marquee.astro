@@ -1,0 +1,26 @@
+---
+// The looping ticker of short phrases under the hero. The
+// phrases are written out twice on purpose: the second copy
+// slides in behind the first so the loop has no gap.
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+const groups = [0, 1];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {groups.map(() => (
+      <div class="marquee-group">
+        {items.map((item) => (
+          <>
+            <span>{item}</span>
+            <span class="dot">&#9679;</span>
+          </>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

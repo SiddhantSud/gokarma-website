@@ -1,0 +1,21 @@
+---
+// One Gokarna Guide article card. Articles come from
+// src/data/guide.ts.
+import Photo from './Photo.astro';
+import type { GuidePost } from '../data/guide';
+
+interface Props {
+  post: GuidePost;
+}
+
+const { post } = Astro.props;
+---
+
+<a href={post.slug} class="card guide-card reveal">
+  <div class="photo-box small">
+    <Photo src={post.image} alt={post.title} sizes="(max-width: 700px) 100vw, 340px" />
+  </div>
+  <span class="tag">{post.tag}</span>
+  <h3>{post.title}</h3>
+  <p>{post.excerpt}</p>
+</a>
