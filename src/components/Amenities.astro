@@ -1,0 +1,44 @@
+---
+// The minimal amenities grid: a line icon and a label for each,
+// from src/data/amenities.ts. Icons are from Lucide.
+import {
+  Bed,
+  Coffee,
+  Dices,
+  GlassWater,
+  IndianRupee,
+  PawPrint,
+  ShowerHead,
+  SquareParking,
+  WashingMachine,
+  Wifi,
+} from '@lucide/astro';
+import { AMENITIES, type AmenityIcon } from '../data/amenities';
+
+const ICONS: Record<AmenityIcon, typeof Bed> = {
+  bed: Bed,
+  wifi: Wifi,
+  laundry: WashingMachine,
+  cafe: Coffee,
+  shower: ShowerHead,
+  pets: PawPrint,
+  games: Dices,
+  upi: IndianRupee,
+  parking: SquareParking,
+  water: GlassWater,
+};
+---
+
+<ul class="amenity-list">
+  {AMENITIES.map((amenity) => {
+    const Icon = ICONS[amenity.icon];
+    return (
+      <li class="amenity-item reveal">
+        <span class="amenity-icon">
+          <Icon size={20} aria-hidden="true" />
+        </span>
+        {amenity.label}
+      </li>
+    );
+  })}
+</ul>

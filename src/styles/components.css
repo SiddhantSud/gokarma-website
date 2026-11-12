@@ -13,6 +13,10 @@
 @import './components/marquee.css';
 @import './components/icon-button.css';
 @import './components/cards.css';
+@import './components/swipe.css';
+@import './components/amenities.css';
+@import './components/nearby.css';
+@import './components/getting-here.css';
 @import './components/lightbox.css';
 @import './components/about-contact.css';
 @import './components/guide.css';

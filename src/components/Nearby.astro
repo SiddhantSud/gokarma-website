@@ -1,0 +1,29 @@
+---
+// "Everything's a walk away": the places guests can walk to,
+// from src/data/nearby.ts.
+import { Landmark, Mountain, Sunset, Umbrella } from '@lucide/astro';
+import { NEARBY, type NearbyPlace } from '../data/nearby';
+
+const ICONS: Record<NearbyPlace['icon'], typeof Sunset> = {
+  beach: Umbrella,
+  temple: Landmark,
+  sunset: Sunset,
+  cave: Mountain,
+};
+---
+
+<div class="nearby-grid">
+  {NEARBY.map((place) => {
+    const Icon = ICONS[place.icon];
+    return (
+      <div class="nearby-card reveal">
+        <span class="amenity-icon">
+          <Icon size={22} aria-hidden="true" />
+        </span>
+        <h3>{place.name}</h3>
+        <p>{place.description}</p>
+        <span class="nearby-walk">{place.walk ?? 'Walkable'}</span>
+      </div>
+    );
+  })}
+</div>

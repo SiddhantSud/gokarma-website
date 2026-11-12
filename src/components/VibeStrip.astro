@@ -1,0 +1,17 @@
+---
+// The swipeable strip of tall portrait photos under the Home
+// intro, one card per part of life at Aangan.
+// Cards come from src/data/vibe.ts.
+import Photo from './Photo.astro';
+import SwipeRow from './SwipeRow.astro';
+import { VIBE_CARDS } from '../data/vibe';
+---
+
+<SwipeRow label="Photos of life at Aangan">
+  {VIBE_CARDS.map((card) => (
+    <figure class="vibe-card">
+      <Photo src={card.image} alt={card.alt} sizes="(max-width: 700px) 70vw, 280px" />
+      <figcaption>{card.label}</figcaption>
+    </figure>
+  ))}
+</SwipeRow>

@@ -5,7 +5,7 @@
 /* ---- Hero (shared by Home + Landing, sized via modifier) ---- */
 .hero {
   min-height: 78vh;
-  background-color: #3a3a3a; /* shows briefly while the image loads */
+  background-color: var(--color-maroon-dark); /* shows briefly while the image loads */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -20,7 +20,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(30, 22, 15, 0.55), rgba(30, 22, 15, 0.55));
+  background: linear-gradient(var(--hero-overlay), var(--hero-overlay));
 }
 
 .hero-overlay {

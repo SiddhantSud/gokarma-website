@@ -1,0 +1,38 @@
+/* =========================================================
+   "Everything's a walk away" (Nearby.astro).
+========================================================= */
+
+.nearby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.nearby-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.nearby-card h3 {
+  margin: 6px 0 0;
+}
+
+.nearby-card p {
+  color: var(--color-text-muted);
+  flex-grow: 1;
+}
+
+.nearby-walk {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-maroon);
+  color: var(--color-white);
+  font-size: var(--text-small);
+  font-weight: 600;
+}

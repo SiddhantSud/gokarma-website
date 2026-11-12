@@ -45,13 +45,13 @@ This is a real small business, not a demo. The bar is **authenticity**:
 
 Facts that appear on several pages live in **`src/config/site.ts`**:
 
-| Fact                                       | Field                                         | Source / status                                                                                                                                      |
-| ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 4.9★ on Google, 321 reviews                | `rating`, `reviewCount`                       | Google listing at time of build; update by hand when it changes                                                                                      |
-| "Dorm beds from around ₹850/night"         | `dormPriceFrom`                               | **Possibly outdated.** StayFlexi showed ₹650 (6-bed) and ₹700 (4-bed) + tax on 2026-10-29. Waiting on Siddhant/owners to decide whether to change it |
-| Address "Kudle Beach Road, Gokarna 581326" | `address`                                     | Real listing                                                                                                                                         |
-| Map location 14.5364615, 74.3154106        | `geo`, `mapUrl`                               | Google Maps listing                                                                                                                                  |
-| WhatsApp / phone `+91 78928 03231`         | `phoneDisplay`, `phoneLink`, `whatsappNumber` | Real                                                                                                                                                 |
+| Fact                                             | Field                                         | Source / status                                                                                                                                      |
+| ------------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4.9★ on Google, 359 reviews (checked 2026-11-12) | `rating`, `reviewCount`                       | Google listing at time of build; update by hand when it changes                                                                                      |
+| "Dorm beds from around ₹850/night"               | `dormPriceFrom`                               | **Possibly outdated.** StayFlexi showed ₹650 (6-bed) and ₹700 (4-bed) + tax on 2026-10-29. Waiting on Siddhant/owners to decide whether to change it |
+| Address "Kudle Beach Road, Gokarna 581326"       | `address`                                     | Real listing                                                                                                                                         |
+| Map location 14.5364615, 74.3154106              | `geo`, `mapUrl`                               | Google Maps listing                                                                                                                                  |
+| WhatsApp / phone `+91 78928 03231`               | `phoneDisplay`, `phoneLink`, `whatsappNumber` | Real                                                                                                                                                 |
 
 ---
 
@@ -126,12 +126,19 @@ src/components/
   PhotoSection.astro           <section class="section-photo"> with a lazy photo backdrop + panel
   Photo.astro                  Responsive <picture> (WebP + JPEG, 480/900/1600w)
   RoomCard.astro, GuideCard.astro, RelatedReads.astro, Marquee.astro
-  Gallery.astro                Gallery grid + PhotoSwipe lightbox (teaser mode for Home)
+  Gallery.astro                Gallery grid + PhotoSwipe lightbox (teaser mode, currently unused on Home)
+  SwipeRow.astro               Horizontal scroll-snap row + prev/next buttons (src/scripts/swipe.ts)
+  VibeStrip.astro              Home: portrait photo strip (src/data/vibe.ts)
+  Nearby.astro                 Home: "Everything's a walk away" (src/data/nearby.ts)
+  Amenities.astro              Home: minimal icon list, Lucide icons via @lucide/astro (src/data/amenities.ts)
+  Reviews.astro                Home: guest quotes in a SwipeRow (src/data/reviews.ts)
+  GettingHere.astro            Home: how to reach us (src/data/getting-here.ts)
   BookingWidget.astro          The "pick your dates" form + its script
 
 src/config/site.ts           Facts shown on many pages (§2) + whatsappLink()
 src/config/booking.ts        StayFlexi URL, maxGuests
-src/data/rooms.ts, gallery.ts, guide.ts   Content lists (typed)
+src/data/*.ts                  Content lists (typed): rooms, gallery, guide, vibe, nearby,
+                               amenities, reviews, getting-here
 src/lib/images.ts            photo('rooms/4-bed-dorm-1') / photoUrl() lookups
 src/lib/booking.ts           Date helpers + StayFlexi/WhatsApp URL builders
 src/scripts/site.ts          Mobile menu, glass nav, footer year, reveal + lazy backgrounds
@@ -209,9 +216,12 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
 ### Theming
 
 **All colors and fonts are CSS variables in `src/styles/theme.css`.** Never
-hardcode a hex value elsewhere; add a token instead. The current palette is a
-**placeholder** taken from the property photos. The owners haven't chosen a
-real brand palette yet.
+hardcode a hex value elsewhere; add a token instead. On 2026-11-12 Siddhant
+asked for the dark brown to become a rich **red-oxide maroon**
+(`--color-maroon` #7a2a22: footer, overlays, icons; body text is a deep
+maroon-brown #3b1612) and the cream to have **a hint of yellow**
+(`--color-bg` #fdf5df). Terracotta stays the button colour. The owners
+still haven't chosen a full brand palette.
 
 ### Booking (StayFlexi)
 
@@ -309,8 +319,18 @@ real brand palette yet.
   - Phase 1 (security fixes) is done.
   - Phase 2 (move to Astro, PhotoSwipe, one site config) is done (PR #7).
   - Phase 3 (Prettier/ESLint/astro check in CI, inline styles moved into
-    CSS, components.css split, self-hosted fonts, CSP) is in the PR from
-    branch `phase-3-polish`.
+    CSS, components.css split, self-hosted fonts, CSP) is done (PR #8).
+- **Home redesign** (2026-11-12, branch `home-redesign`): nav reads Stay /
+  Our Story / Gokarna Guide / Gallery / Contact Us, and "Aangan" links home.
+  Home order is hero, vibe + photo strip, walkable places, amenities, guest
+  reviews, how to reach, rooms, guide, then CTA. The amenities and
+  how-to-reach styling follow revibehostel.com, which Siddhant gave as the
+  reference.
+  - Waiting on the owners: what to tell the auto driver and the auto fares
+    (`LAST_LEG` in `src/data/getting-here.ts`), walking times to Main
+    Beach/temple and the sunset spot (`src/data/nearby.ts`). These are
+    hidden or shown as "Walkable" until filled in. Also waiting on photos:
+    dogs, garden/trees, a work/Wi-Fi corner, art/murals.
 - **Waiting on the owners** (through Siddhant):
   - First-person voice copy for Our Story and other owner-voice sections (see
     `content-questionnaire.md`). The voice rewrite is paused until real

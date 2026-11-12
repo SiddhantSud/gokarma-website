@@ -20,6 +20,12 @@
   --color-forest: #3f5d42; /* secondary brand color */
   --color-forest-dark: #2e4531;
 
+  /* Red-oxide maroon, the colour of traditional red-oxide floors.
+     Used for the footer and the dark photo overlays, and it tints
+     the body text below. */
+  --color-maroon: #7a2a22;
+  --color-maroon-dark: #5c1f19;
+
   /* ---- The "dash and pop" playful accent ----
      Used sparingly: small highlights, badges, hover accents.
      Not a background color, not a body-text color. */
@@ -27,12 +33,13 @@
   --color-pop-dark: #e8991f;
 
   /* ---- Neutrals ---- */
-  --color-bg: #fbf6ee; /* page background */
-  --color-surface: #fffcf7; /* card/section background */
-  --color-surface-alt: #f1e6d3; /* alternating section background */
-  --color-text: #2b2118; /* body text */
-  --color-text-muted: #6b5d4f; /* secondary/quiet text */
-  --color-border: #e4d7c2;
+  /* Cream with a hint of yellow. */
+  --color-bg: #fdf5df; /* page background */
+  --color-surface: #fffae8; /* card/section background */
+  --color-surface-alt: #f7e9c4; /* alternating section background */
+  --color-text: #3b1612; /* body text: a deep maroon-brown */
+  --color-text-muted: #6e5148; /* secondary/quiet text */
+  --color-border: #ead9ad;
 
   /* ---- Feedback ---- */
   --color-white: #ffffff;
@@ -58,27 +65,27 @@
   --radius: 14px;
   --radius-small: 8px;
   --radius-panel: 44px; /* large radius for the photo-section "lift" panels */
-  --shadow-card: 0 4px 18px rgba(43, 33, 24, 0.08);
-  --shadow-card-hover: 0 10px 28px rgba(43, 33, 24, 0.14);
+  --shadow-card: 0 4px 18px rgba(59, 22, 18, 0.08);
+  --shadow-card-hover: 0 10px 28px rgba(59, 22, 18, 0.14);
+  --shadow-header: 0 4px 24px rgba(59, 22, 18, 0.08);
 
   /* ---- Glass nav ----
      Translucent header that solidifies into a soft blurred
      pill once the page scrolls past the hero. */
-  --glass-bg: rgba(255, 252, 247, 0.6);
+  --glass-bg: rgba(255, 250, 232, 0.6);
   --glass-border: rgba(255, 255, 255, 0.4);
   --glass-blur: 14px;
-  --glass-bg-strong: rgba(
-    255,
-    252,
-    247,
-    0.86
-  ); /* more opaque glass for the booking form, so its labels stay readable over a dark photo */
+  /* More opaque glass for the booking form, so its labels stay
+     readable over a dark photo. */
+  --glass-bg-strong: rgba(255, 250, 232, 0.86);
 
   /* ---- Photo-section duotone overlay ----
      Every content section sits on a real photo background;
      this gradient keeps it from looking like a raw snapshot
      and keeps the "peek" of photo above each panel readable. */
-  --overlay-from: rgba(30, 22, 15, 0.58);
+  --overlay-from: rgba(92, 31, 25, 0.55);
+  /* Darkens the hero photo so its white heading stays readable. */
+  --hero-overlay: rgba(59, 22, 18, 0.55);
   --overlay-to: rgba(46, 69, 49, 0.5);
 
   /* ---- Motion ---- */
