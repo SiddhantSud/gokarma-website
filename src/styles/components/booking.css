@@ -49,7 +49,7 @@
 .booking-field select:focus {
   outline: 2px solid var(--color-pop);
   outline-offset: 1px;
-  border-color: var(--color-terracotta);
+  border-color: var(--color-maroon);
 }
 
 .booking-form .btn {

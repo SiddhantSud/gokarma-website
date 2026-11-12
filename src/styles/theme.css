@@ -5,32 +5,30 @@
    here as a CSS variable. Change a value here and it updates
    everywhere it's used, on every page.
 
-   No real brand palette has been chosen yet — these are a
-   placeholder earthy/rustic palette (pulled from the actual
-   property photos: terracotta ceilings, forest greens, warm
-   sand) plus one "pop" accent color for playful highlights,
-   as requested. Swap the hex values below once a real palette
-   is ready; nothing else in the codebase needs to change.
+   The owners haven't chosen a full brand palette yet. Current
+   direction (Siddhant, 2026-11-12): red-oxide maroon as the main
+   colour, cream with a hint of yellow, forest green as a second
+   colour, and one amber "pop" accent for small highlights. Change
+   a value below and nothing else in the codebase needs to change.
 ========================================================= */
 
 :root {
   /* ---- Brand colors ---- */
-  --color-terracotta: #c1592b; /* primary brand color */
-  --color-terracotta-dark: #9c4520; /* hover/active state of primary */
+  /* Red-oxide maroon, the colour of traditional red-oxide floors.
+     The primary brand colour (Siddhant, 2026-11-12): buttons, links,
+     highlights, icons, the footer and the photo overlays. It also
+     tints the body text below. */
+  --color-maroon: #7a2a22;
+  --color-maroon-dark: #5c1f19; /* hover/active state of primary */
+
   --color-forest: #3f5d42; /* secondary brand color */
   --color-forest-dark: #2e4531;
-
-  /* Red-oxide maroon, the colour of traditional red-oxide floors.
-     Used for the footer and the dark photo overlays, and it tints
-     the body text below. */
-  --color-maroon: #7a2a22;
-  --color-maroon-dark: #5c1f19;
 
   /* ---- The "dash and pop" playful accent ----
      Used sparingly: small highlights, badges, hover accents.
      Not a background color, not a body-text color. */
-  --color-pop: #ffb13c;
-  --color-pop-dark: #e8991f;
+  --color-pop: #e8c872; /* soft gold, replaced the old orange-amber */
+  --color-pop-dark: #d4ad4f;
 
   /* ---- Neutrals ---- */
   /* Cream with a hint of yellow. */

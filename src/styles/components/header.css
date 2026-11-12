@@ -68,7 +68,7 @@
 }
 
 .site-header.is-scrolled .logo {
-  color: var(--color-terracotta);
+  color: var(--color-maroon);
   text-shadow: none;
 }
 
@@ -99,11 +99,11 @@
 
 .site-header.is-scrolled .main-nav a:hover,
 .site-header.is-scrolled .main-nav a.is-active {
-  color: var(--color-terracotta);
+  color: var(--color-maroon);
 }
 
 .nav-cta {
-  background-color: var(--color-terracotta);
+  background-color: var(--color-maroon);
   color: var(--color-white) !important;
   padding: 8px 18px;
   border-radius: 30px;
@@ -111,7 +111,7 @@
 }
 
 .nav-cta:hover {
-  background-color: var(--color-terracotta-dark);
+  background-color: var(--color-maroon-dark);
 }
 
 /* Composed with .btn-circle in the markup for the round bordered
@@ -170,6 +170,6 @@
 
   .main-nav.open a:hover,
   .main-nav.open a.is-active {
-    color: var(--color-terracotta);
+    color: var(--color-maroon);
   }
 }

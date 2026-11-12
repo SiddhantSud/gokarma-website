@@ -59,7 +59,7 @@
   align-items: center;
   gap: 6px;
   font-weight: 600;
-  color: var(--color-terracotta);
+  color: var(--color-maroon);
   margin-top: 10px;
   transition: gap var(--transition-fast);
 }

@@ -225,7 +225,8 @@ hardcode a hex value elsewhere; add a token instead. On 2026-11-12 Siddhant
 asked for the dark brown to become a rich **red-oxide maroon**
 (`--color-maroon` #7a2a22: footer, overlays, icons; body text is a deep
 maroon-brown #3b1612) and the cream to have **a hint of yellow**
-(`--color-bg` #fdf5df). Terracotta stays the button colour. The owners
+(`--color-bg` #fdf5df). Later the same day the orange (terracotta) buttons, links and highlights
+were switched to the maroon too, so maroon is now the primary colour. The owners
 still haven't chosen a full brand palette.
 
 ### Booking (StayFlexi)

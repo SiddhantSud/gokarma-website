@@ -21,23 +21,23 @@
 }
 
 .btn-primary {
-  background-color: var(--color-terracotta);
+  background-color: var(--color-maroon);
   color: var(--color-white);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-terracotta-dark);
+  background-color: var(--color-maroon-dark);
   box-shadow: var(--shadow-card-hover);
 }
 
 .btn-outline {
-  border-color: var(--color-terracotta);
-  color: var(--color-terracotta);
+  border-color: var(--color-maroon);
+  color: var(--color-maroon);
   background: transparent;
 }
 
 .btn-outline:hover {
-  background-color: var(--color-terracotta);
+  background-color: var(--color-maroon);
   color: var(--color-white);
 }
 
