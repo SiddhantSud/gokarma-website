@@ -26,8 +26,8 @@
 }
 
 .btn-circle:hover {
-  background: var(--color-terracotta);
+  background: var(--color-maroon);
   color: var(--color-white);
-  border-color: var(--color-terracotta);
+  border-color: var(--color-maroon);
   transform: rotate(45deg);
 }

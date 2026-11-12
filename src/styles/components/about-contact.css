@@ -32,7 +32,7 @@
   margin-top: 18px;
 }
 .owner-bio h3 {
-  color: var(--color-terracotta);
+  color: var(--color-maroon);
   margin-bottom: 4px;
 }
 
@@ -70,7 +70,7 @@
 
 .contact-phone a {
   font-weight: 600;
-  color: var(--color-terracotta);
+  color: var(--color-maroon);
 }
 
 /* Mobile: these two-column layouts stack into one column. */

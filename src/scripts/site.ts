@@ -71,7 +71,7 @@ document.querySelectorAll('.reveal, [data-bg]').forEach((el) => revealObserver.o
 
 // ---- "Aangan" in other languages ----
 // The logo word fades between Aangan in English, Hindi, Tamil,
-// Malayalam, Telugu and Marathi (list in src/config/site.ts).
+// Malayalam, Telugu, Marathi and Kannada (list in src/config/site.ts).
 // Skipped for visitors who've asked their device to reduce motion.
 const logoWord = document.querySelector<HTMLElement>('.logo-word[data-words]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

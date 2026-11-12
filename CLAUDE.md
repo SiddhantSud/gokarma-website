@@ -41,7 +41,12 @@ This is a real small business, not a demo. The bar is **authenticity**:
   owners. `content-questionnaire.md` holds the question set for owners and
   guests, including the consent checklist before quoting a guest.
 - No stock photos. Every image on the site is a real photo of the property,
-  its food, its community or nearby scenery.
+  its food, its community or nearby scenery. **One exception, approved by
+  Siddhant (2026-11-12):** the Temple, Kudle Beach and Main Beach cards on
+  Home use Creative Commons photos from Wikimedia Commons
+  (`src/assets/images/places/`), credited on the page as their licences
+  require. Replace them when the owners send their own. Never copy photos
+  from Google Images or other sites without a licence that allows it.
 
 Facts that appear on several pages live in **`src/config/site.ts`**:
 
@@ -220,7 +225,8 @@ hardcode a hex value elsewhere; add a token instead. On 2026-11-12 Siddhant
 asked for the dark brown to become a rich **red-oxide maroon**
 (`--color-maroon` #7a2a22: footer, overlays, icons; body text is a deep
 maroon-brown #3b1612) and the cream to have **a hint of yellow**
-(`--color-bg` #fdf5df). Terracotta stays the button colour. The owners
+(`--color-bg` #fdf5df). Later the same day the orange (terracotta) buttons, links and highlights
+were switched to the maroon too, so maroon is now the primary colour. The owners
 still haven't chosen a full brand palette.
 
 ### Booking (StayFlexi)
@@ -329,10 +335,10 @@ still haven't chosen a full brand palette.
   - Follow-up (same day): the booking form moved from the hero to a "Check
     Availability" section after The Vibe (the hero has a button that jumps
     to it). "What our guests say" was renamed "Stories We Have Lived". The
-    logo word cycles through Aangan in Hindi, Tamil, Malayalam, Telugu and
-    Marathi (`AANGAN_WORDS` in `src/config/site.ts`, needs a native-speaker
+    logo word cycles through Aangan in Hindi, Tamil, Malayalam, Telugu,
+    Marathi and Kannada (`AANGAN_WORDS` in `src/config/site.ts`, needs a native-speaker
     check). The nav collapses below 960px. Walking times from the owners:
-    Kudle Hilltop 5 min, Mahabaleshwar Temple 10, Kudle Beach 10–15,
+    Kudle Hilltop 5 min, Mahabaleshwar Temple 15, Kudle Beach 10–15,
     Main Beach 15.
   - **Animals:** only cats, dogs and birds may be mentioned (Siddhant's
     instruction).

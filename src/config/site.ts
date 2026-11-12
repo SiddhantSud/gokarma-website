@@ -53,6 +53,7 @@ export const AANGAN_WORDS: { lang: string; word: string }[] = [
   { lang: 'ml', word: 'മുറ്റം' }, // Malayalam
   { lang: 'te', word: 'ప్రాంగణం' }, // Telugu
   { lang: 'mr', word: 'अंगण' }, // Marathi
+  { lang: 'kn', word: 'ಅಂಗಳ' }, // Kannada
 ];
 
 /** A wa.me link that opens WhatsApp with `message` already typed. */
