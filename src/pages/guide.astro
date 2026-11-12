@@ -2,7 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
 import GuideCard from '../components/GuideCard.astro';
-import { GUIDE_POSTS } from '../data/guide';
+import SubmitStory from '../components/SubmitStory.astro';
+import { getGuideArticles } from '../lib/guide';
+
+const guideArticles = await getGuideArticles();
 ---
 
 <BaseLayout
@@ -26,14 +29,20 @@ import { GUIDE_POSTS } from '../data/guide';
   <PhotoSection bg="scenery/waterfall" panel="alt">
     <div class="container">
       <div class="auto-grid grid-min-280">
-        {GUIDE_POSTS.map((post) => (
-          <GuideCard post={post} />
+        {guideArticles.map((article) => (
+          <GuideCard article={article} />
         ))}
       </div>
     </div>
   </PhotoSection>
 
-  <PhotoSection bg="property/property-4" panelClass="text-center">
+  <PhotoSection bg="community/chess-night" panelClass="text-center">
+    <div class="container">
+      <SubmitStory />
+    </div>
+  </PhotoSection>
+
+  <PhotoSection bg="property/property-4" panel="alt" panelClass="text-center">
     <div class="container">
       <h2 class="section-title">Reading This on the Road?</h2>
       <p class="section-subtitle">

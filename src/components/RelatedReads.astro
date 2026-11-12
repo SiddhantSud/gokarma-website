@@ -1,24 +1,24 @@
 ---
 // "Related reads" links under a guide article: every other
-// article in src/data/guide.ts.
-import { GUIDE_POSTS } from '../data/guide';
+// published article in src/content/guide/.
+import { articleHref, getGuideArticles } from '../lib/guide';
 
 interface Props {
-  /** The current article's file name, which is left out of the list. */
+  /** The current article's id (file name without .md), left out of the list. */
   current: string;
 }
 
 const { current } = Astro.props;
-const others = GUIDE_POSTS.filter((post) => post.slug !== current);
+const others = (await getGuideArticles()).filter((article) => article.id !== current);
 ---
 
 <div class="related-reads">
   <h2 class="section-title">Related Reads</h2>
   <ul>
-    {others.map((post) => (
+    {others.map((article) => (
       <li>
-        <a class="explore-link" href={post.slug}>
-          {post.title} →
+        <a class="explore-link" href={articleHref(article)}>
+          {article.data.title} →
         </a>
       </li>
     ))}

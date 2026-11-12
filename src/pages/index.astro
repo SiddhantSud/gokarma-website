@@ -12,10 +12,11 @@ import Reviews from '../components/Reviews.astro';
 import GettingHere from '../components/GettingHere.astro';
 import { SITE } from '../config/site';
 import { ROOMS } from '../data/rooms';
-import { GUIDE_POSTS } from '../data/guide';
+import { getGuideArticles } from '../lib/guide';
 import { photoUrl } from '../lib/images';
 
 const heroBg = await photoUrl('property/property-4');
+const guideArticles = await getGuideArticles();
 const ratingLine = `${SITE.rating}★ on Google · ${SITE.reviewCount} Reviews`;
 
 // Business details Google reads (schema.org LodgingBusiness).
@@ -185,8 +186,8 @@ const jsonLd = {
         Real, practical guides for backpacking, solo travel, and finding Gokarna's offbeat side.
       </p>
       <div class="auto-grid grid-min-260">
-        {GUIDE_POSTS.map((post) => (
-          <GuideCard post={post} />
+        {guideArticles.map((article) => (
+          <GuideCard article={article} />
         ))}
       </div>
     </div>

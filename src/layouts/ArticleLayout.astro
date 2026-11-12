@@ -1,93 +1,81 @@
 ---
 // ============================================================
 // Layout for a Gokarna Guide article: hero photo, title block,
-// the article text (whatever the page puts inside), then
+// the article text, an optional "stay with us" box, then
 // "Related reads". Adds the Article structured data Google
-// reads. The article's card on guide.html comes from
-// src/data/guide.ts.
+// reads. Everything comes from the article's Markdown file in
+// src/content/guide/ (see src/content.config.ts for the fields).
 // ============================================================
 import BaseLayout from './BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
 import Photo from '../components/Photo.astro';
 import RelatedReads from '../components/RelatedReads.astro';
 import { SITE } from '../config/site';
+import { articleHref, type GuideArticle } from '../lib/guide';
 
 interface Props {
-  title: string;
-  description: string;
-  /** File name, e.g. "guide-solo-travel-in-gokarna.html" */
-  path: string;
-  tag: string;
-  heading: string;
-  /** Short line under the heading. */
-  meta: string;
-  /** Headline for Google's Article data. */
-  headline: string;
-  datePublished: string;
-  heroImage: string;
-  heroAlt: string;
-  /** Backdrop photos for the article section and the "Related reads" section. */
-  bg: string;
-  relatedBg: string;
+  article: GuideArticle;
 }
 
-const {
-  title,
-  description,
-  path,
-  tag,
-  heading,
-  meta,
-  headline,
-  datePublished,
-  heroImage,
-  heroAlt,
-  bg,
-  relatedBg,
-} = Astro.props;
+const { article } = Astro.props;
+const { data } = article;
+const path = articleHref(article);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline,
-  author: { '@type': 'Organization', name: SITE.name },
+  headline: data.title,
+  author: data.author
+    ? { '@type': 'Person', name: data.author }
+    : { '@type': 'Organization', name: SITE.name },
   publisher: { '@type': 'Organization', name: SITE.name },
-  datePublished,
+  datePublished: data.date.toISOString().slice(0, 10),
 };
 ---
 
 <BaseLayout
-  title={title}
-  description={description}
+  title={data.seoTitle ?? `${data.title} | ${SITE.name}`}
+  description={data.description}
   path={path}
   page="guide"
-  ogImage={heroImage}
+  ogImage={data.image}
   jsonLd={jsonLd}
 >
-  <PhotoSection bg={bg}>
+  <PhotoSection bg={data.backdrop ?? 'scenery/river-pool'}>
     <div class="container">
       <div class="article-hero photo-box tall">
         <Photo
-          src={heroImage}
-          alt={heroAlt}
+          src={data.image}
+          alt={data.imageAlt}
           sizes="(max-width:800px) 100vw, 720px"
           loading="eager"
         />
       </div>
 
       <div class="article-body">
-        <span class="section-eyebrow">{tag}</span>
-        <h1>{heading}</h1>
-        <p class="article-meta">{meta}</p>
+        <span class="section-eyebrow">{data.tag}</span>
+        <h1>{data.title}</h1>
+        {data.subtitle && <p class="article-meta">{data.subtitle}</p>}
+        {data.author && <p class="article-meta">By {data.author}</p>}
 
         <slot />
+
+        {data.ctaTitle && (
+          <div class="cta-banner">
+            <h3>{data.ctaTitle}</h3>
+            {data.ctaText && <p>{data.ctaText}</p>}
+            <a href="rooms.html" class="btn btn-primary">
+              See Rooms &amp; Rates
+            </a>
+          </div>
+        )}
       </div>
     </div>
   </PhotoSection>
 
-  <PhotoSection bg={relatedBg} panel="alt">
+  <PhotoSection bg={data.relatedBackdrop ?? 'community/catan-night'} panel="alt">
     <div class="container">
-      <RelatedReads current={path} />
+      <RelatedReads current={article.id} />
     </div>
   </PhotoSection>
 </BaseLayout>
