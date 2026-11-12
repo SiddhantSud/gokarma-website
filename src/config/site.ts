@@ -42,6 +42,19 @@ export const SITE = {
     'https://maps.google.com/maps?q=Aangan%20by%20Gokarma%20Living%2C%20Gokarna&t=&z=15&ie=UTF8&iwloc=&output=embed',
 };
 
+// ---- "Aangan" in other languages ----
+// The logo cycles through these on a timer. Aangan means the
+// open courtyard of a home; each entry is that word in the
+// language. Have a native speaker check before adding more.
+export const AANGAN_WORDS: { lang: string; word: string }[] = [
+  { lang: 'en', word: 'Aangan' },
+  { lang: 'hi', word: 'आँगन' }, // Hindi
+  { lang: 'ta', word: 'முற்றம்' }, // Tamil
+  { lang: 'ml', word: 'മുറ്റം' }, // Malayalam
+  { lang: 'te', word: 'ప్రాంగణం' }, // Telugu
+  { lang: 'mr', word: 'अंगण' }, // Marathi
+];
+
 /** A wa.me link that opens WhatsApp with `message` already typed. */
 export function whatsappLink(message?: string): string {
   const base = `https://wa.me/${SITE.whatsappNumber}`;

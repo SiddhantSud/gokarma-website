@@ -326,11 +326,21 @@ still haven't chosen a full brand palette.
   reviews, how to reach, rooms, guide, then CTA. The amenities and
   how-to-reach styling follow revibehostel.com, which Siddhant gave as the
   reference.
+  - Follow-up (same day): the booking form moved from the hero to a "Check
+    Availability" section after The Vibe (the hero has a button that jumps
+    to it). "What our guests say" was renamed "Stories We Have Lived". The
+    logo word cycles through Aangan in Hindi, Tamil, Malayalam, Telugu and
+    Marathi (`AANGAN_WORDS` in `src/config/site.ts`, needs a native-speaker
+    check). The nav collapses below 960px. Walking times from the owners:
+    Kudle Hilltop 5 min, Mahabaleshwar Temple 10, Kudle Beach 10–15,
+    Main Beach 15.
+  - **Animals:** only cats, dogs and birds may be mentioned (Siddhant's
+    instruction).
   - Waiting on the owners: what to tell the auto driver and the auto fares
-    (`LAST_LEG` in `src/data/getting-here.ts`), walking times to Main
-    Beach/temple and the sunset spot (`src/data/nearby.ts`). These are
-    hidden or shown as "Walkable" until filled in. Also waiting on photos:
-    dogs, garden/trees, a work/Wi-Fi corner, art/murals.
+    (`LAST_LEG` in `src/data/getting-here.ts`), photos for the
+    Temple, Kudle Beach, Main Beach and Shiva caves cards
+    (`src/data/nearby.ts`, icon shown until then), and photos of the cats
+    and dogs, garden/trees, a work/Wi-Fi corner, art/murals.
 - **Waiting on the owners** (through Siddhant):
   - First-person voice copy for Our Story and other owner-voice sections (see
     `content-questionnaire.md`). The voice rewrite is paused until real

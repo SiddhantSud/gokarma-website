@@ -1,7 +1,10 @@
 ---
 // "Everything's a walk away": the places guests can walk to,
-// from src/data/nearby.ts.
+// from src/data/nearby.ts. Each card shows a real photo when
+// there is one (otherwise an icon), the walking time, and a
+// link to the guide article about it.
 import { Landmark, Mountain, Sunset, Umbrella } from '@lucide/astro';
+import Photo from './Photo.astro';
 import { NEARBY, type NearbyPlace } from '../data/nearby';
 
 const ICONS: Record<NearbyPlace['icon'], typeof Sunset> = {
@@ -17,12 +20,29 @@ const ICONS: Record<NearbyPlace['icon'], typeof Sunset> = {
     const Icon = ICONS[place.icon];
     return (
       <div class="nearby-card reveal">
-        <span class="amenity-icon">
-          <Icon size={22} aria-hidden="true" />
-        </span>
-        <h3>{place.name}</h3>
-        <p>{place.description}</p>
-        <span class="nearby-walk">{place.walk ?? 'Walkable'}</span>
+        <div class="nearby-photo">
+          {place.image ? (
+            <Photo
+              src={place.image}
+              alt={place.alt ?? place.name}
+              sizes="(max-width: 700px) 100vw, 280px"
+            />
+          ) : (
+            <span class="nearby-photo-icon">
+              <Icon size={36} aria-hidden="true" />
+            </span>
+          )}
+          <span class="nearby-walk">{place.walk}</span>
+        </div>
+        <div class="nearby-body">
+          <h3>{place.name}</h3>
+          <p>{place.description}</p>
+          {place.link && (
+            <a href={place.link.href} class="explore-link">
+              {place.link.label} →
+            </a>
+          )}
+        </div>
       </div>
     );
   })}

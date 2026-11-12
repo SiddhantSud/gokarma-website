@@ -68,3 +68,27 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll('.reveal, [data-bg]').forEach((el) => revealObserver.observe(el));
+
+// ---- "Aangan" in other languages ----
+// The logo word fades between Aangan in English, Hindi, Tamil,
+// Malayalam, Telugu and Marathi (list in src/config/site.ts).
+// Skipped for visitors who've asked their device to reduce motion.
+const logoWord = document.querySelector<HTMLElement>('.logo-word[data-words]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (logoWord && !reduceMotion) {
+  const words: { lang: string; word: string }[] = JSON.parse(logoWord.dataset.words ?? '[]');
+  const SHOW_FOR_MS = 2500;
+  const FADE_MS = 300;
+  let index = 0;
+
+  window.setInterval(() => {
+    index = (index + 1) % words.length;
+    logoWord.classList.add('is-fading');
+    window.setTimeout(() => {
+      logoWord.textContent = words[index].word;
+      logoWord.lang = words[index].lang;
+      logoWord.classList.remove('is-fading');
+    }, FADE_MS);
+  }, SHOW_FOR_MS);
+}
