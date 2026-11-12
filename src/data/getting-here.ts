@@ -10,6 +10,7 @@
 // ride. Fields left as null are hidden on the site until the
 // owners fill them in.
 // ============================================================
+import travelTips from './travel-tips.json';
 
 export interface BookingLink {
   label: string;
@@ -66,14 +67,11 @@ export const ROUTES: Route[] = [
 ];
 
 // ---- The last leg: auto from the Gokarna bus stand ----
-export const LAST_LEG = {
-  // What a guest should tell the auto driver.
-  // Placeholder: waiting on the owners.
-  sayToDriver: null as string | null,
-  // Usual auto fare from the bus stand, e.g. '₹150–200'.
-  // Placeholder: waiting on the owners.
-  fareFromBusStand: null as string | null,
-  // Usual auto fare from Gokarna Road station.
-  // Placeholder: waiting on the owners.
-  fareFromStation: null as string | null,
+// Lives in travel-tips.json so the owners can fill it in from
+// /admin: what to tell the auto driver, and the usual fares.
+// Empty (null) fields stay hidden on the site.
+export const LAST_LEG = travelTips as {
+  sayToDriver: string | null;
+  fareFromBusStand: string | null;
+  fareFromStation: string | null;
 };

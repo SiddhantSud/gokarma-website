@@ -1,0 +1,30 @@
+---
+// ============================================================
+// One page per Gokarna Guide article in src/content/guide/.
+// The Markdown file's name becomes the address, e.g.
+// guide-solo-travel-in-gokarna.md → guide-solo-travel-in-gokarna.html.
+// Drafts are skipped.
+// ============================================================
+import { render } from 'astro:content';
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import { getGuideArticles, type GuideArticle } from '../lib/guide';
+
+export async function getStaticPaths() {
+  const articles = await getGuideArticles();
+  return articles.map((article) => ({
+    params: { article: article.id },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: GuideArticle;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+
+<ArticleLayout article={article}>
+  <Content />
+</ArticleLayout>

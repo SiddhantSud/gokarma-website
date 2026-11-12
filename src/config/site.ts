@@ -6,26 +6,17 @@
 // Every value here must be real (from the owners or their
 // Google / StayFlexi listings). See CLAUDE.md, section 2.
 // ============================================================
+import facts from '../data/facts.json';
 
 export const SITE = {
   name: 'Aangan by Gokarma Living',
   shortName: 'Aangan',
 
-  // ---- Google rating ----
-  // From the Google listing (checked 2026-11-12). Update by hand when it changes.
-  rating: '4.9',
-  reviewCount: 359,
-
-  // ---- Price shown as "Dorm beds start from around ₹___/night" ----
-  // Possibly outdated: StayFlexi showed ₹650-700 + tax on 2026-10-29.
-  // Waiting on the owners to confirm before changing it.
-  dormPriceFrom: 850,
-
-  // ---- Contact ----
-  phoneDisplay: '+91 78928 03231',
-  phoneLink: '+917892803231', // used in tel: links
-  whatsappNumber: '917892803231', // country code + number, no "+" or spaces
-  instagramUrl: 'https://instagram.com/hostel_gokarna',
+  // ---- Rating, price and contact details ----
+  // These live in src/data/facts.json so they can be edited from
+  // /admin. Every value must be real; see the notes in CLAUDE.md
+  // (rating from the Google listing, price waiting on the owners).
+  ...facts,
 
   // ---- Location ----
   address: {

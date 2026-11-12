@@ -1,0 +1,34 @@
+{
+  "cards": [
+    {
+      "label": "Outdoor living",
+      "image": "images/scenery/cottage-row.jpg",
+      "alt": "The cottages at Aangan, seen from the path"
+    },
+    {
+      "label": "Under the trees",
+      "image": "images/property/property-2.jpg",
+      "alt": "Forest path through Aangan's property"
+    },
+    {
+      "label": "Sunset walks",
+      "image": "images/scenery/sunset-cliff.jpg",
+      "alt": "Guests watching the sunset from a clifftop near Gokarna"
+    },
+    {
+      "label": "Board games",
+      "image": "images/community/catan-night.jpg",
+      "alt": "A game of Catan in progress at the cafe"
+    },
+    {
+      "label": "Top-rated cafe",
+      "image": "images/food/thali-spread.jpg",
+      "alt": "A thali spread of chapati, rice and curry"
+    },
+    {
+      "label": "Hand-painted everything",
+      "image": "images/property/sign-board.jpg",
+      "alt": "Hand-painted Gokarma Cafe and Hostel sign"
+    }
+  ]
+}

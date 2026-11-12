@@ -1,0 +1,28 @@
+{
+  "rooms": [
+    {
+      "id": "four-bed-dorm",
+      "name": "4-Bed Mixed Dorm",
+      "badge": null,
+      "image": "images/rooms/4-bed-dorm-1.jpg",
+      "alt": "4-bed mixed dorm room with orange bunk beds",
+      "features": ["Attached bathroom", "AC & ceiling fan", "Personal locker & reading light"]
+    },
+    {
+      "id": "six-bed-dorm",
+      "name": "6-Bed Mixed Dorm",
+      "badge": "Great for Groups",
+      "image": "images/rooms/6-bed-dorm-1.jpg",
+      "alt": "6-bed mixed dorm room with multiple bunk beds",
+      "features": ["Attached bathroom", "AC & ceiling fan", "Personal locker & reading light"]
+    },
+    {
+      "id": "vintage-room",
+      "name": "Vintage Room (Private)",
+      "badge": null,
+      "image": "images/rooms/vintage-room-1.jpg",
+      "alt": "Vintage private room with hand-painted walls and a low platform bed",
+      "features": ["Private double bed", "Hand-painted walls, ceiling fan", "Shared bathroom"]
+    }
+  ]
+}

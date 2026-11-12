@@ -1,0 +1,384 @@
+/* =========================================================
+   Styles for the admin page (index.html) and setup.html.
+   Plain and practical: it's a tool, not part of the website.
+   Colours follow the site's maroon and cream.
+========================================================= */
+
+:root {
+  --maroon: #7a2a22;
+  --maroon-dark: #5c1f19;
+  --cream: #fdf5df;
+  --surface: #fffae8;
+  --border: #ead9ad;
+  --text: #3b1612;
+  --muted: #6e5148;
+  --danger: #a3261b;
+  --success: #2e6b3a;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  color: var(--text);
+  background: var(--cream);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button,
+.button-like {
+  font: inherit;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover,
+.button-like:hover {
+  border-color: var(--maroon);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+button.primary {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+  font-weight: 600;
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--maroon-dark);
+}
+
+button.danger {
+  color: var(--danger);
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ---- Password screen ---- */
+.login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.login-box {
+  width: min(380px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.login-box h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.login-box label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.message {
+  margin: 0;
+  min-height: 1.2em;
+  color: var(--danger);
+}
+
+/* ---- Top bar ---- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.change-count {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.status {
+  margin: 0;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.status.success {
+  color: var(--success);
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+/* ---- Layout ---- */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-self: start;
+  position: sticky;
+  top: 76px;
+}
+
+.nav button {
+  text-align: left;
+}
+
+.nav button.active {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+
+.nav-link {
+  margin-top: 12px;
+  color: var(--maroon);
+  font-size: 0.9rem;
+}
+
+.panel h2 {
+  margin: 0 0 6px;
+}
+
+.note {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---- Forms ---- */
+.fields {
+  display: grid;
+  gap: 14px;
+  margin: 12px 0;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field > span {
+  font-weight: 600;
+}
+
+.field small {
+  color: var(--muted);
+}
+
+.field.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.field.checkbox input {
+  width: auto;
+}
+
+.group {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.group legend {
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.photo-preview {
+  max-width: 260px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.photo-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.button-like input[type='file'] {
+  display: none;
+}
+
+/* ---- Lists (gallery, rooms, ...) ---- */
+.item {
+  margin-bottom: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.item > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.item[open] > summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.item > .fields {
+  padding: 0 12px 12px;
+}
+
+.item-title {
+  flex: 1;
+  font-weight: 600;
+}
+
+.item-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.item-actions button {
+  padding: 4px 10px;
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--border);
+}
+
+button.add {
+  margin-top: 8px;
+  border-style: dashed;
+}
+
+/* ---- Articles ---- */
+.article-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.article-row-text {
+  display: grid;
+  gap: 2px;
+}
+
+.article-body {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.back {
+  margin-bottom: 12px;
+}
+
+.wide {
+  margin-top: 24px;
+}
+
+/* ---- Setup page ---- */
+.setup {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+.setup ol {
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.setup form {
+  display: grid;
+  gap: 14px;
+}
+
+/* ---- Phones ---- */
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .topbar strong {
+    display: none;
+  }
+}

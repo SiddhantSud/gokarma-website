@@ -1,21 +1,22 @@
 ---
-// One Gokarna Guide article card. Articles come from
-// src/data/guide.ts.
+// One Gokarna Guide article card. Articles come from the
+// Markdown files in src/content/guide/.
 import Photo from './Photo.astro';
-import type { GuidePost } from '../data/guide';
+import { articleHref, type GuideArticle } from '../lib/guide';
 
 interface Props {
-  post: GuidePost;
+  article: GuideArticle;
 }
 
-const { post } = Astro.props;
+const { article } = Astro.props;
+const { data } = article;
 ---
 
-<a href={post.slug} class="card guide-card reveal">
+<a href={articleHref(article)} class="card guide-card reveal">
   <div class="photo-box small">
-    <Photo src={post.image} alt={post.title} sizes="(max-width: 700px) 100vw, 340px" />
+    <Photo src={data.image} alt={data.imageAlt} sizes="(max-width: 700px) 100vw, 340px" />
   </div>
-  <span class="tag">{post.tag}</span>
-  <h3>{post.title}</h3>
-  <p>{post.excerpt}</p>
+  <span class="tag">{data.tag}</span>
+  <h3>{data.title}</h3>
+  <p>{data.excerpt}</p>
 </a>

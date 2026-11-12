@@ -1,0 +1,53 @@
+---
+// ============================================================
+// "Write for the Gokarna Guide": invites travellers to send in
+// their own Gokarna story. Nothing is published automatically:
+// submissions reach the owners, who review them and publish the
+// good ones from /admin as Guide articles (with the author's
+// name in the article's "author" field).
+//
+// Submissions go by email when `submissionsEmail` is set in
+// src/data/facts.json, otherwise by WhatsApp.
+// ============================================================
+import { SITE, whatsappLink } from '../config/site';
+
+const email = SITE.submissionsEmail as string | null;
+const subject = 'Story for the Gokarna Guide';
+const body = [
+  'Name (as you want it shown):',
+  'Title of your story:',
+  '',
+  'Your story:',
+  '',
+  '(Attach 1–5 of your own photos.)',
+  '',
+  'I wrote this and took these photos, and I give Aangan by Gokarma Living permission to publish and lightly edit them with my name.',
+].join('\n');
+
+const href = email
+  ? `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  : whatsappLink("Hi! I'd like to share a story for the Gokarna Guide.");
+---
+
+<div class="submit-story">
+  <span class="section-eyebrow">Write for Us</span>
+  <h2 class="section-title">Share Your Gokarna Story</h2>
+  <p class="section-subtitle">
+    Found a quiet beach, a great thali, or a trek worth doing? Send us your story and we may publish
+    it here, with your name on it.
+  </p>
+  <ul class="submit-guidelines">
+    <li>Your own experience in Gokarna, written by you</li>
+    <li>Anything from a few paragraphs to a full guide</li>
+    <li>Up to 5 of your own photos</li>
+    <li>We read every story and may edit lightly before publishing</li>
+  </ul>
+  <a
+    href={href}
+    class="btn btn-primary"
+    target={email ? undefined : '_blank'}
+    rel={email ? undefined : 'noopener'}
+  >
+    {email ? 'Email your story' : 'Send your story on WhatsApp'}
+  </a>
+</div>

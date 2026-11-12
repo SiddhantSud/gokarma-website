@@ -75,3 +75,21 @@
 .cta-banner .btn-primary {
   margin-top: 12px;
 }
+
+/* ---- "Share your Gokarna story" (SubmitStory.astro) ---- */
+.submit-story {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.submit-guidelines {
+  display: inline-block;
+  margin: 0 auto 28px;
+  padding-left: 20px;
+  text-align: left;
+  color: var(--color-text-muted);
+}
+
+.submit-guidelines li {
+  margin-bottom: 6px;
+}

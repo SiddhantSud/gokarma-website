@@ -6,6 +6,9 @@
 // `image` is a path inside src/assets/images, without the
 // file extension. `id` is used in book.html?room=<id>.
 // ============================================================
+// The list itself lives in rooms.json, which /admin edits.
+// Edit it there (or in the JSON file); this file only adds types.
+import data from './rooms.json';
 
 export interface Room {
   id: string;
@@ -16,29 +19,4 @@ export interface Room {
   features: string[];
 }
 
-export const ROOMS: Room[] = [
-  {
-    id: 'four-bed-dorm',
-    name: '4-Bed Mixed Dorm',
-    badge: null,
-    image: 'rooms/4-bed-dorm-1',
-    alt: '4-bed mixed dorm room with orange bunk beds',
-    features: ['Attached bathroom', 'AC & ceiling fan', 'Personal locker & reading light'],
-  },
-  {
-    id: 'six-bed-dorm',
-    name: '6-Bed Mixed Dorm',
-    badge: 'Great for Groups',
-    image: 'rooms/6-bed-dorm-1',
-    alt: '6-bed mixed dorm room with multiple bunk beds',
-    features: ['Attached bathroom', 'AC & ceiling fan', 'Personal locker & reading light'],
-  },
-  {
-    id: 'vintage-room',
-    name: 'Vintage Room (Private)',
-    badge: null,
-    image: 'rooms/vintage-room-1',
-    alt: 'Vintage private room with hand-painted walls and a low platform bed',
-    features: ['Private double bed', 'Hand-painted walls, ceiling fan', 'Shared bathroom'],
-  },
-];
+export const ROOMS = data.rooms as Room[];
