@@ -1,0 +1,83 @@
+/* =========================================================
+   Two-column layouts: About (Home), Our Story, and Contact/Location.
+========================================================= */
+
+/* ---- Story / About layout ---- */
+.about-grid,
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-list li {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.story-photo {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+/* Astro wraps the photo in <picture>; without this the grid
+   column grows to the photo's full pixel width. */
+.story-grid > picture {
+  display: block;
+  min-width: 0;
+}
+
+.owner-bio {
+  margin-top: 18px;
+}
+.owner-bio h3 {
+  color: var(--color-terracotta);
+  margin-bottom: 4px;
+}
+
+/* ---- Location ---- */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.location-grid p {
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.map-frame {
+  width: 100%;
+  height: 320px;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+/* ---- Contact block ---- */
+.contact-block {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.contact-phone {
+  margin-top: 18px;
+  color: var(--color-text-muted);
+}
+
+.contact-phone a {
+  font-weight: 600;
+  color: var(--color-terracotta);
+}
+
+/* Mobile: these two-column layouts stack into one column. */
+@media (max-width: 800px) {
+  .about-grid,
+  .story-grid,
+  .location-grid {
+    grid-template-columns: 1fr;
+  }
+}

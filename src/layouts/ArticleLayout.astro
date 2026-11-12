@@ -31,8 +31,20 @@ interface Props {
   relatedBg: string;
 }
 
-const { title, description, path, tag, heading, meta, headline, datePublished, heroImage, heroAlt, bg, relatedBg } =
-  Astro.props;
+const {
+  title,
+  description,
+  path,
+  tag,
+  heading,
+  meta,
+  headline,
+  datePublished,
+  heroImage,
+  heroAlt,
+  bg,
+  relatedBg,
+} = Astro.props;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -44,11 +56,23 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={description} path={path} page="guide" ogImage={heroImage} jsonLd={jsonLd}>
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  page="guide"
+  ogImage={heroImage}
+  jsonLd={jsonLd}
+>
   <PhotoSection bg={bg}>
     <div class="container">
       <div class="article-hero photo-box tall">
-        <Photo src={heroImage} alt={heroAlt} sizes="(max-width:800px) 100vw, 720px" loading="eager" />
+        <Photo
+          src={heroImage}
+          alt={heroAlt}
+          sizes="(max-width:800px) 100vw, 720px"
+          loading="eager"
+        />
       </div>
 
       <div class="article-body">

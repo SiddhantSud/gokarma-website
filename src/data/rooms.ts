@@ -23,11 +23,7 @@ export const ROOMS: Room[] = [
     badge: null,
     image: 'rooms/4-bed-dorm-1',
     alt: '4-bed mixed dorm room with orange bunk beds',
-    features: [
-      'Attached bathroom',
-      'AC & ceiling fan',
-      'Personal locker & reading light',
-    ],
+    features: ['Attached bathroom', 'AC & ceiling fan', 'Personal locker & reading light'],
   },
   {
     id: 'six-bed-dorm',
@@ -35,11 +31,7 @@ export const ROOMS: Room[] = [
     badge: 'Great for Groups',
     image: 'rooms/6-bed-dorm-1',
     alt: '6-bed mixed dorm room with multiple bunk beds',
-    features: [
-      'Attached bathroom',
-      'AC & ceiling fan',
-      'Personal locker & reading light',
-    ],
+    features: ['Attached bathroom', 'AC & ceiling fan', 'Personal locker & reading light'],
   },
   {
     id: 'vintage-room',
@@ -47,10 +39,6 @@ export const ROOMS: Room[] = [
     badge: null,
     image: 'rooms/vintage-room-1',
     alt: 'Vintage private room with hand-painted walls and a low platform bed',
-    features: [
-      'Private double bed',
-      'Hand-painted walls, ceiling fan',
-      'Shared bathroom',
-    ],
+    features: ['Private double bed', 'Hand-painted walls, ceiling fan', 'Shared bathroom'],
   },
 ];

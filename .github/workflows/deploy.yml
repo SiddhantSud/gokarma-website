@@ -1,8 +1,9 @@
 # ============================================================
 # Builds the site with Astro and publishes it to GitHub Pages.
 #
-# - Every pull request: build only, as a check that nothing is
-#   broken. Nothing is published.
+# - Every pull request: code checks (formatting, lint, type
+#   check) and a build, to make sure nothing is broken. Nothing
+#   is published.
 # - Every merge to master: build, then publish to
 #   https://siddhantsud.github.io/gokarma-website/
 #   (live about 2-3 minutes after the merge).
@@ -31,6 +32,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Same checks as `npm run verify` locally, minus the build
+  # (the build job below does that).
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Formatting (Prettier)
+        run: npm run format:check
+      - name: Lint (ESLint)
+        run: npm run lint
+      - name: Type check (astro check)
+        run: npm run check
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +61,7 @@ jobs:
 
   deploy:
     if: github.event_name != 'pull_request'
-    needs: build
+    needs: [checks, build]
     runs-on: ubuntu-latest
     environment:
       name: github-pages

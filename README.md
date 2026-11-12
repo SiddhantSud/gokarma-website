@@ -29,11 +29,14 @@ npm run dev
 and open the address it prints (http://localhost:4321/gokarma-website/). The
 page reloads by itself every time you save a file.
 
-To check that the whole site builds without errors, as it will when published:
+Before opening a pull request, run the same checks GitHub runs (formatting,
+code errors, types, and a full build):
 
 ```bash
-npm run build
+npm run verify
 ```
+
+If only the formatting check fails, `npm run format` fixes it automatically.
 
 ## Publishing changes
 
@@ -41,8 +44,15 @@ Changes go live by merging a pull request into `master` on GitHub. A GitHub
 Action (`.github/workflows/deploy.yml`) then builds the site and publishes it,
 usually in 2–3 minutes. You can follow it on the repo's **Actions** tab.
 
-Every pull request is also built as a check. If the build fails, nothing is
-published and the current site stays up.
+Every pull request is also checked: formatting, code errors, types, and a
+full build. If any check fails, nothing is published and the current site
+stays up.
+
+The fonts are served from the site itself, and every page carries a security
+rule (Content-Security-Policy, set in `astro.config.mjs`) that only allows
+scripts and files from this site plus the Google Maps embed. If you add
+anything from another website (a widget, an embed, analytics), it has to be
+allowed there too, or the browser will block it.
 
 ## How it's structured
 
@@ -67,7 +77,8 @@ src/data/guide.ts          guide article cards
 src/styles/theme.css       ALL colors & fonts — edit this to re-theme the
                              whole site
 src/styles/base.css        layout/typography basics
-src/styles/components.css  buttons, cards, nav, etc.
+src/styles/components/     one small file per part: header, buttons, cards,
+                             booking form, footer, ...
 
 src/assets/images/         the photos used on the site (originals; Astro
                              makes the resized versions)
@@ -79,18 +90,22 @@ public/                    files copied as-is: robots.txt, sitemap.xml
 ## Common edits
 
 ### Change the rating, review count, price or phone number
+
 Open `src/config/site.ts` and change the value. Every page that shows it
 updates on the next publish.
 
 ### Change the color palette
+
 Open `src/styles/theme.css`. Every color and font used anywhere on the site is
 a variable at the top of that file, with comments.
 
 ### Add or edit a room
+
 Edit the `ROOMS` list in `src/data/rooms.ts`. It appears on the Rooms page,
 the Home page, the landing page and in the booking form.
 
 ### Add a gallery photo
+
 1. Put the photo in a folder under `src/assets/images/` (for example
    `src/assets/images/food/`).
 2. Add an entry to `src/data/gallery.ts` with its path, without the file
@@ -102,6 +117,7 @@ site is built, and those copies never contain the camera's location (GPS)
 data.
 
 ### Add a Gokarna Guide article
+
 1. Copy one of the `src/pages/guide-*.astro` files, rename it, and write the
    new article's text inside it.
 2. Add an entry to `src/data/guide.ts` so it shows up on the Guide page and in
@@ -109,6 +125,7 @@ data.
 3. Add its address to `public/sitemap.xml`.
 
 ### Online booking (StayFlexi)
+
 The "pick your dates" form on the Home page, `book.html` and `landing.html`
 sends guests to StayFlexi's booking page with their dates filled in. Guests
 pick a bed or room, see live rates and pay there, and StayFlexi handles

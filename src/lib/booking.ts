@@ -64,7 +64,7 @@ export function buildStayflexiUrl(bookingUrl: string, { checkin, checkout }: Sta
 /** A WhatsApp chat with the booking request already typed out. */
 export function buildWhatsappBookingUrl(
   whatsappNumber: string,
-  { checkin, checkout, guests, roomName }: Stay & { guests: string; roomName: string }
+  { checkin, checkout, guests, roomName }: Stay & { guests: string; roomName: string },
 ): string {
   const lines = [
     "Hi! I'd like to book a stay at Aangan by Gokarma Living.",

@@ -1,0 +1,89 @@
+/* =========================================================
+   The "pick your dates" booking form (BookingWidget.astro).
+========================================================= */
+
+/* ---- Booking form (BookingWidget.astro) ----
+   Always two columns -- check-in/check-out side by side, then
+   guests/room under them when shown -- on every screen size,
+   with the button and the "what happens next" note spanning
+   the full width underneath. minmax(0, ...) lets long room
+   names shrink inside a column instead of stretching it. */
+.booking-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: end;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  text-align: left;
+}
+
+.booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-field span {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.booking-field input,
+.booking-field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-small);
+}
+
+.booking-field input:focus,
+.booking-field select:focus {
+  outline: 2px solid var(--color-pop);
+  outline-offset: 1px;
+  border-color: var(--color-terracotta);
+}
+
+.booking-form .btn {
+  grid-column: 1 / -1;
+  font-size: 1.05rem;
+}
+
+/* Two-class selector so it wins over .hero p's larger size */
+.booking-form .booking-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Frosted version for sitting directly on a hero photo */
+.booking-glass .booking-form {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Explore links over a dark hero photo need to be light */
+.hero .explore-link {
+  color: var(--color-white);
+  margin-top: 18px;
+}
+
+/* The form placed in a page section (Landing's "Ready to Book?"),
+   rather than over the hero photo. */
+.booking-inline {
+  max-width: 720px;
+  margin: 0 auto;
+}

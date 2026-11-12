@@ -9,12 +9,12 @@ the rules that aren't obvious from the code, and the current state of things.
 
 ## 1. What this is and who it's for
 
-- **The business**: *Aangan by Gokarma Living*, a backpacker hostel + cafe on
+- **The business**: _Aangan by Gokarma Living_, a backpacker hostel + cafe on
   Kudle hilltop, Gokarna, Karnataka, India. Dorms (4-bed and 6-bed mixed) plus a
   private "Vintage Room", with an on-site cafe.
 - **The owners**: **Kushal & Geetika**.
 - **Who builds it**: **Siddhant** (GitHub `SiddhantSud`) builds and maintains the
-  site *on the owners' behalf*. He is **not** an owner. Anything that is
+  site _on the owners' behalf_. He is **not** an owner. Anything that is
   supposed to sound like the owners, such as first-person story copy, welcome
   text, FAQ answers or opinions, has to come from Kushal & Geetika, relayed
   through Siddhant. Don't ask Siddhant to answer as them, and never write it for
@@ -45,13 +45,13 @@ This is a real small business, not a demo. The bar is **authenticity**:
 
 Facts that appear on several pages live in **`src/config/site.ts`**:
 
-| Fact | Field | Source / status |
-|---|---|---|
-| 4.9★ on Google, 321 reviews | `rating`, `reviewCount` | Google listing at time of build; update by hand when it changes |
-| "Dorm beds from around ₹850/night" | `dormPriceFrom` | **Possibly outdated.** StayFlexi showed ₹650 (6-bed) and ₹700 (4-bed) + tax on 2026-10-29. Waiting on Siddhant/owners to decide whether to change it |
-| Address "Kudle Beach Road, Gokarna 581326" | `address` | Real listing |
-| Map location 14.5364615, 74.3154106 | `geo`, `mapUrl` | Google Maps listing |
-| WhatsApp / phone `+91 78928 03231` | `phoneDisplay`, `phoneLink`, `whatsappNumber` | Real |
+| Fact                                       | Field                                         | Source / status                                                                                                                                      |
+| ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4.9★ on Google, 321 reviews                | `rating`, `reviewCount`                       | Google listing at time of build; update by hand when it changes                                                                                      |
+| "Dorm beds from around ₹850/night"         | `dormPriceFrom`                               | **Possibly outdated.** StayFlexi showed ₹650 (6-bed) and ₹700 (4-bed) + tax on 2026-10-29. Waiting on Siddhant/owners to decide whether to change it |
+| Address "Kudle Beach Road, Gokarna 581326" | `address`                                     | Real listing                                                                                                                                         |
+| Map location 14.5364615, 74.3154106        | `geo`, `mapUrl`                               | Google Maps listing                                                                                                                                  |
+| WhatsApp / phone `+91 78928 03231`         | `phoneDisplay`, `phoneLink`, `whatsappNumber` | Real                                                                                                                                                 |
 
 ---
 
@@ -67,14 +67,26 @@ Facts that appear on several pages live in **`src/config/site.ts`**:
 - Internal links are written as relative file names (`href="rooms.html"`),
   which works because every page sits at the site root. Asset URLs from Astro
   already include the base path.
-- Dependencies are deliberately few: `astro` and `photoswipe` (gallery
-  lightbox). Don't add UI frameworks (React, Tailwind, ...) without Siddhant
+- Dependencies are deliberately few: `astro`, `photoswipe` (gallery
+  lightbox) and the two self-hosted font packages (`@fontsource/poppins`,
+  `@fontsource-variable/fraunces`). Dev tools: Prettier, ESLint and
+  `@astrojs/check` (TypeScript 6.0, since typescript-eslint and
+  `@astrojs/check` don't support 7 yet). Don't add UI frameworks (React, Tailwind, ...) without Siddhant
   asking. Pin new packages to an exact version that's at least two weeks old.
 - Client-side JavaScript is small, bundled `<script>` blocks: `src/scripts/site.ts`
   (menu, glass nav, reveal), the booking form script in `BookingWidget.astro`,
   and PhotoSwipe in `Gallery.astro`. Everything else is rendered at build time.
-- External resources: Google Fonts (Fraunces for display, Poppins for body)
-  and the Google Maps embed on the contact page.
+- Fonts are self-hosted (imported in `BaseLayout.astro`): Fraunces Variable
+  for display, Poppins 400–700 for body. The only third party a page loads
+  is the Google Maps embed on the contact page.
+- **Content-Security-Policy**: `security.csp` in `astro.config.mjs` makes
+  Astro write a CSP `<meta>` tag into every page, with hashes for its own
+  inline scripts and styles. It allows only same-site scripts, styles, fonts
+  and images, `style=""` attributes, and Google Maps frames. Anything new
+  from another site (an embed, a widget, analytics) must be added there or
+  the browser blocks it. Check the console for "Content Security Policy"
+  errors. GitHub Pages can't send headers, so it's a meta tag (which means
+  `frame-ancestors` isn't available).
 - Hosting is a static site, so there's **no backend and nowhere to keep
   secrets**. Anything that needs an API key (for example StayFlexi's Flex API)
   is out of scope unless a backend gets added.
@@ -88,12 +100,13 @@ npm install        # once
 npm run dev        # live-reloading preview at http://localhost:4321/gokarma-website/
 npm run build      # full production build into dist/
 npm run preview    # serve dist/ to check the production build
+npm run format     # auto-format everything with Prettier
+npm run verify     # what CI runs: format check, ESLint, astro check, build
 ```
 
-Needs Node.js 22.22+ (Astro 7's minimum). There are no automated tests or
-linters yet (Phase 3 of the code review). To check a change, run
-`npm run build` (it fails on a missing photo path or a template error), then
-look at the affected pages at phone width (~375px) and desktop. Most guests
+Needs Node.js 22.22+ (Astro 7's minimum). There are no automated tests. Run
+`npm run verify` before opening a PR. CI runs the same checks and blocks
+publishing if any fail. Then look at the affected pages at phone width (~375px) and desktop. Most guests
 arrive on a phone from Instagram or WhatsApp links, so mobile is the primary
 layout.
 
@@ -122,7 +135,8 @@ src/data/rooms.ts, gallery.ts, guide.ts   Content lists (typed)
 src/lib/images.ts            photo('rooms/4-bed-dorm-1') / photoUrl() lookups
 src/lib/booking.ts           Date helpers + StayFlexi/WhatsApp URL builders
 src/scripts/site.ts          Mobile menu, glass nav, footer year, reveal + lazy backgrounds
-src/styles/theme.css, base.css, components.css   Imported once by BaseLayout
+src/styles/theme.css, base.css   Design tokens; reset, layout, utilities (grid-min-*, text-left, mt-sm)
+src/styles/components.css      Imports src/styles/components/*.css in cascade order (one file per part)
 
 src/assets/images/<category>/  Original photos used on the site (rooms, property, food,
                                community, scenery, kushal-geetika.png)
@@ -145,11 +159,13 @@ content-questionnaire.md       Questions to gather real owner and guest content
 ## 6. How the main systems work
 
 ### Content and data
+
 Rooms, gallery photos and guide cards are typed arrays in `src/data/*.ts`,
 rendered at build time. To change content, **edit the data file, not the
 page**. Guide article text is written directly in each `guide-*.astro` page.
 
 ### Photos
+
 - Photos are referenced by short path without extension:
   `photo('rooms/4-bed-dorm-1')` → `src/assets/images/rooms/4-bed-dorm-1.jpg`.
   A wrong path **fails the build** with a clear error.
@@ -171,6 +187,7 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
   attributes (which prevents layout shift).
 
 ### Visual system (glass nav, photo sections, marquee)
+
 - **Glass nav**: the header is transparent over the hero and gets
   `.is-scrolled` after 40px of scroll (`src/scripts/site.ts`). This works on
   landing.html too, since it uses the same layout.
@@ -190,12 +207,14 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
   Siddhant's machine.
 
 ### Theming
+
 **All colors and fonts are CSS variables in `src/styles/theme.css`.** Never
 hardcode a hex value elsewhere; add a token instead. The current palette is a
 **placeholder** taken from the property photos. The owners haven't chosen a
 real brand palette yet.
 
 ### Booking (StayFlexi)
+
 - The owners use **StayFlexi** as their property management system and booking
   engine. Hotel ID **30713**. URL in `src/config/booking.ts`:
   `https://bookingengine.stayflexi.com/?hotel_id=30713`.
@@ -229,17 +248,17 @@ real brand palette yet.
 
 ## 7. Common edits (quick reference)
 
-| Task | Where |
-|---|---|
-| Rating, review count, price, phone, address | `src/config/site.ts` |
-| Re-theme colors or fonts | `src/styles/theme.css` |
-| Add or edit a room | `src/data/rooms.ts` (the `id` is used in `book.html?room=`) |
-| Add a gallery photo | File into `src/assets/images/<category>/`, then an entry in `src/data/gallery.ts` (first 4 = Home teaser) |
-| Add a guide article | Copy a `src/pages/guide-*.astro`, add to `src/data/guide.ts` and `public/sitemap.xml` |
-| Change nav or footer | `src/components/Header.astro` / `Footer.astro` (landing variant is in `BaseLayout.astro`) |
-| Change the booking destination | `src/config/booking.ts` |
-| Add a page | New `src/pages/<name>.astro` using `BaseLayout`, then add it to `public/sitemap.xml` |
-| Move to a custom domain | `site`/`base` in `astro.config.mjs`, plus `public/robots.txt` and `public/sitemap.xml` |
+| Task                                        | Where                                                                                                     |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Rating, review count, price, phone, address | `src/config/site.ts`                                                                                      |
+| Re-theme colors or fonts                    | `src/styles/theme.css`                                                                                    |
+| Add or edit a room                          | `src/data/rooms.ts` (the `id` is used in `book.html?room=`)                                               |
+| Add a gallery photo                         | File into `src/assets/images/<category>/`, then an entry in `src/data/gallery.ts` (first 4 = Home teaser) |
+| Add a guide article                         | Copy a `src/pages/guide-*.astro`, add to `src/data/guide.ts` and `public/sitemap.xml`                     |
+| Change nav or footer                        | `src/components/Header.astro` / `Footer.astro` (landing variant is in `BaseLayout.astro`)                 |
+| Change the booking destination              | `src/config/booking.ts`                                                                                   |
+| Add a page                                  | New `src/pages/<name>.astro` using `BaseLayout`, then add it to `public/sitemap.xml`                      |
+| Move to a custom domain                     | `site`/`base` in `astro.config.mjs`, plus `public/robots.txt` and `public/sitemap.xml`                    |
 
 ---
 
@@ -262,7 +281,8 @@ real brand palette yet.
   (Pages source = "GitHub Actions"). It's live about 2–3 minutes after the
   merge. A failed build publishes nothing. Treat a merge as a production
   release and get Siddhant's OK first.
-- Every PR runs the same build as a check (no publish).
+- Every PR runs the `checks` job (Prettier, ESLint, `astro check`) and the
+  build, with no publish. Deploy only runs if both pass.
 - **`master` is protected**: changes go in only through a PR (no approvals
   required), the rule applies to admins too, and force-pushes and branch
   deletion are blocked.
@@ -270,7 +290,9 @@ real brand palette yet.
   squash-merge it (`gh pr merge <n> --squash --delete-branch`).
 - Merged PRs: #1 authentic photos, #2 glass nav/photo backdrops/marquee,
   #3 StayFlexi booking form + this file, #4 photo GPS removal, #5 map
-  coordinates in JSON-LD.
+  coordinates in JSON-LD, #7 move to Astro.
+- Line endings are LF everywhere (`.gitattributes`), so Prettier's check
+  passes on Windows too.
 - Dependabot alerts and security updates are on (they now cover npm). GitHub
   secret scanning and push protection are on.
 - Ask before creating repos, pushing, merging or changing GitHub settings.
@@ -279,17 +301,16 @@ real brand palette yet.
 
 ---
 
-## 10. Status and open items (as of 2026-11-04)
+## 10. Status and open items (as of 2026-11-12)
 
 - **Live**: the multi-page site with real photos, the glass-nav/photo-backdrop
   redesign, SEO, and the StayFlexi booking form.
 - **Code review** (2026-11-02, https://claude.ai/artifact/ACH3csd9DLBBawmaVD91Jp):
   - Phase 1 (security fixes) is done.
-  - Phase 2 (move to Astro, PhotoSwipe, one site config) is in the PR from
-    branch `astro-migration`.
-  - Phase 3 is next: Prettier, ESLint and `astro check` in CI; move inline
-    styles into CSS; split `components.css`; self-host fonts; add a
-    Content-Security-Policy.
+  - Phase 2 (move to Astro, PhotoSwipe, one site config) is done (PR #7).
+  - Phase 3 (Prettier/ESLint/astro check in CI, inline styles moved into
+    CSS, components.css split, self-hosted fonts, CSP) is in the PR from
+    branch `phase-3-polish`.
 - **Waiting on the owners** (through Siddhant):
   - First-person voice copy for Our Story and other owner-voice sections (see
     `content-questionnaire.md`). The voice rewrite is paused until real
@@ -304,12 +325,15 @@ real brand palette yet.
 
 ## 11. Style notes for code in this repo
 
-- Each file opens with a banner comment (`// ====...`) explaining *what it
-  does and why*, with short `// ---- Subsection ----` headers inside.
+- Each file opens with a banner comment (`// ====...`) explaining _what it
+  does and why_, with short `// ---- Subsection ----` headers inside.
   Comments are written for a non-expert maintainer.
 - Small components with typed `Props`, plain functions, no classes. Data in
   `src/data/`, facts in `src/config/`, never hardcoded in a page.
-- New design values go into `theme.css` as variables.
+- New design values go into `theme.css` as variables. No `style=""`
+  attributes for static styling; add a class (only computed values such as
+  the hero photo URL stay inline).
+- Formatting is Prettier's (single quotes, 100 columns). Don't hand-format.
 - Keep things accessible: real `alt` text that describes the actual photo,
   `aria-*` on toggles, labels wrapping inputs, and reduced-motion respected.
 - Keep `README.md` in sync when a workflow changes. It's the owners' manual.

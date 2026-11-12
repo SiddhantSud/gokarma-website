@@ -47,16 +47,18 @@ const roomPhotos = [
       <span class="section-eyebrow">Where You'll Sleep</span>
       <h1>Rooms &amp; Rates</h1>
       <p class="section-subtitle">
-        Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Rates change with season and demand,
-        so pick your dates to check exact pricing and availability.
+        Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Rates change with season and
+        demand, so pick your dates to check exact pricing and availability.
       </p>
     </div>
   </PhotoSection>
 
   <PhotoSection bg="community/catan-night" panel="alt">
     <div class="container">
-      <div class="auto-grid" style="--grid-min: 280px;">
-        {ROOMS.map((room) => <RoomCard room={room} />)}
+      <div class="auto-grid grid-min-280">
+        {ROOMS.map((room) => (
+          <RoomCard room={room} />
+        ))}
       </div>
     </div>
   </PhotoSection>
@@ -66,23 +68,18 @@ const roomPhotos = [
       <h2 class="section-title">Room Photos</h2>
       <p class="section-subtitle">A closer look at each room and its bathroom.</p>
 
-      {
-        roomPhotos.map((room, i) => (
-          <>
-            <h3 style="margin-bottom:16px;">{room.name}</h3>
-            <div
-              class="auto-grid mt-lg"
-              style={`--grid-min: 200px;${i < roomPhotos.length - 1 ? ' margin-bottom: 40px;' : ''}`}
-            >
-              {room.photos.map((p) => (
-                <div class="photo-box gallery-box">
-                  <Photo src={p.src} alt={p.alt} sizes="(max-width:700px) 50vw, 300px" />
-                </div>
-              ))}
-            </div>
-          </>
-        ))
-      }
+      {roomPhotos.map((room) => (
+        <>
+          <h3 class="room-photos-title">{room.name}</h3>
+          <div class="auto-grid grid-min-200 mt-lg room-photo-group">
+            {room.photos.map((p) => (
+              <div class="photo-box gallery-box">
+                <Photo src={p.src} alt={p.alt} sizes="(max-width:700px) 50vw, 300px" />
+              </div>
+            ))}
+          </div>
+        </>
+      ))}
     </div>
   </PhotoSection>
 
@@ -91,7 +88,9 @@ const roomPhotos = [
       <div class="cta-banner">
         <h3>Ready to book?</h3>
         <p>Pick your dates and we'll take it from there.</p>
-        <a href="book.html" class="btn btn-primary">Book Your Stay</a>
+        <a href="book.html" class="btn btn-primary">
+          Book Your Stay
+        </a>
       </div>
     </div>
   </PhotoSection>

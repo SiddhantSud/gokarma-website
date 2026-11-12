@@ -13,10 +13,14 @@ const others = GUIDE_POSTS.filter((post) => post.slug !== current);
 ---
 
 <div class="related-reads">
-  <h2 class="section-title" style="text-align:left; margin-bottom:16px;">Related Reads</h2>
+  <h2 class="section-title">Related Reads</h2>
   <ul>
     {others.map((post) => (
-      <li><a class="explore-link" href={post.slug}>{post.title} →</a></li>
+      <li>
+        <a class="explore-link" href={post.slug}>
+          {post.title} →
+        </a>
+      </li>
     ))}
   </ul>
 </div>

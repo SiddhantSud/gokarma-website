@@ -1,0 +1,59 @@
+/* =========================================================
+   The looping ticker under the hero (Marquee.astro).
+========================================================= */
+
+/* ---- Marquee ----
+   A continuously-running ticker of short facts -- the one
+   "always moving" animation on the site, used sparingly (Home
+   and the ad-landing page only). Pure CSS, pauses for anyone
+   with reduced-motion set. */
+.marquee {
+  overflow: hidden;
+  background: var(--color-surface-alt);
+  padding: 16px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 48px;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-shrink: 0;
+}
+
+.marquee-group span {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--text-small);
+  color: var(--color-forest);
+  white-space: nowrap;
+}
+
+.marquee-group .dot {
+  color: var(--color-pop);
+  font-weight: 700;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}

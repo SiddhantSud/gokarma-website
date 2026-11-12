@@ -23,8 +23,10 @@ const { street, locality, region, postalCode } = SITE.address;
   <PhotoSection bg="property/sign-board" panel="alt">
     <div class="container location-grid">
       <div class="reveal">
-        <h2 class="section-title" style="text-align:left">Find Us</h2>
-        <p>📍 {street}, {locality}, {region} {postalCode}</p>
+        <h2 class="section-title text-left">Find Us</h2>
+        <p>
+          📍 {street}, {locality}, {region} {postalCode}
+        </p>
         <p>🏖️ ~8-10 minute walk from Kudle Beach</p>
         <p>🛕 ~4-5 minute walk from the Shiva caves</p>
         <p>✈️ Nearest airport: Dabolim (Goa), ~136 km away</p>
@@ -34,17 +36,18 @@ const { street, locality, region, postalCode } = SITE.address;
         src={SITE.mapEmbedUrl}
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="Aangan by Gokarma Living location map"></iframe>
+        title="Aangan by Gokarma Living location map"
+      ></iframe>
     </div>
   </PhotoSection>
 
   <PhotoSection bg="community/game-night">
-    <div class="container contact-block" style="margin: 0 auto;">
+    <div class="container contact-block">
       <span class="section-eyebrow">Get In Touch</span>
       <h2 class="section-title">Message Us</h2>
       <p class="section-subtitle">
-        The fastest way to reach us is WhatsApp — message us for rates, availability, or
-        anything else about your stay.
+        The fastest way to reach us is WhatsApp — message us for rates, availability, or anything
+        else about your stay.
       </p>
       <a
         href={whatsappLink("Hi! I'd like to know more about staying at Aangan by Gokarma Living.")}

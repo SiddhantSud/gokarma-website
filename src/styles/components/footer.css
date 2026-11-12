@@ -1,0 +1,31 @@
+/* =========================================================
+   Site footer. Stays a solid color on purpose (owner direction).
+========================================================= */
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--color-text);
+  color: var(--color-white);
+  padding: 28px 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Landing page: a single centered line. */
+.footer-inner.is-centered {
+  justify-content: center;
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+}
+.socials a:hover {
+  color: var(--color-pop);
+}

@@ -1,0 +1,158 @@
+/* =========================================================
+   Site header and navigation, including the glass effect on scroll
+   (toggled by src/scripts/site.ts) and the mobile dropdown.
+========================================================= */
+
+/* ---- Header / Navigation ----
+   Starts transparent over the photo at the top of every page,
+   then solidifies into a soft blurred "glass" pill once the
+   page scrolls (see .is-scrolled, toggled by src/scripts/site.ts). */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background var(--transition-medium),
+    border-color var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+.site-header.is-scrolled {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(43, 33, 24, 0.08);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+/* Landing page: just the logo, centered. */
+.header-inner.is-centered {
+  justify-content: center;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition:
+    color var(--transition-medium),
+    text-shadow var(--transition-medium);
+}
+
+.site-header.is-scrolled .logo {
+  color: var(--color-terracotta);
+  text-shadow: none;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.main-nav a {
+  font-weight: 600;
+  color: var(--color-white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition:
+    color var(--transition-fast),
+    text-shadow var(--transition-medium);
+}
+
+.site-header.is-scrolled .main-nav a {
+  color: var(--color-text);
+  text-shadow: none;
+}
+
+.main-nav a:hover,
+.main-nav a.is-active {
+  color: var(--color-pop);
+}
+
+.site-header.is-scrolled .main-nav a:hover,
+.site-header.is-scrolled .main-nav a.is-active {
+  color: var(--color-terracotta);
+}
+
+.nav-cta {
+  background-color: var(--color-terracotta);
+  color: var(--color-white) !important;
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-shadow: none !important;
+}
+
+.nav-cta:hover {
+  background-color: var(--color-terracotta-dark);
+}
+
+/* Composed with .btn-circle in the markup for the round bordered
+   look; specificity here is bumped (.site-header .menu-toggle)
+   so these color/shadow rules reliably win over .btn-circle's
+   plain `color: inherit`, regardless of each rule's position in
+   this file. */
+.site-header .menu-toggle {
+  display: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--color-white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition: color var(--transition-medium);
+}
+
+.site-header.is-scrolled .menu-toggle {
+  color: var(--color-text);
+  text-shadow: none;
+}
+
+/* Mobile: the nav collapses into a dropdown behind the menu button. */
+@media (max-width: 800px) {
+  .site-header .menu-toggle {
+    display: block;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 16px;
+    display: none;
+    box-shadow: 0 8px 12px rgba(43, 33, 24, 0.1);
+  }
+
+  .main-nav.open {
+    display: flex;
+  }
+
+  /* The open mobile dropdown always has a solid light
+     background (regardless of .is-scrolled), so its links need
+     dark text even when the header itself is still transparent
+     over a photo. */
+  .main-nav.open a {
+    color: var(--color-text);
+    text-shadow: none;
+  }
+
+  .main-nav.open a:hover,
+  .main-nav.open a.is-active {
+    color: var(--color-terracotta);
+  }
+}
