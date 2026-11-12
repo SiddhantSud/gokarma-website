@@ -30,6 +30,7 @@ const state = {
   files: {}, // path -> { original, data }
   articles: [], // { id, path, original, data, body, isNew, deleted }
   uploads: {}, // repo path -> { base64, previewUrl }
+  thumbs: {}, // photo path -> small preview URL on the website
   section: SECTIONS[0].id,
   openArticle: null,
 };
@@ -125,12 +126,17 @@ async function openEditor(token) {
 // ============================================================
 async function loadEverything() {
   showStatus('Loading the website content…');
+  // Small previews of every photo, made when the site is built.
+  state.thumbs = await fetch('thumbs.json', { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : {}))
+    .catch(() => ({}));
   state.files = {};
   state.uploads = {};
   for (const section of SECTIONS) {
     if (!section.file) continue;
     const text = await state.github.readText(section.file);
-    state.files[section.file] = { original: text, data: JSON.parse(text) };
+    const data = JSON.parse(text);
+    state.files[section.file] = { original: JSON.stringify(data), data };
   }
   const entries = await state.github.list(ARTICLES_FOLDER);
   state.articles = [];
@@ -140,7 +146,7 @@ async function loadEverything() {
     state.articles.push({
       id: entry.name.replace(/\.md$/, ''),
       path: entry.path,
-      original: text,
+      original: articleFingerprint(data, body),
       data,
       body,
     });
@@ -148,6 +154,11 @@ async function loadEverything() {
   sortArticles();
   showStatus('');
   render();
+}
+
+// Only real edits count as changes, not formatting differences.
+function articleFingerprint(data, body) {
+  return JSON.stringify([data, body.trim()]);
 }
 
 function sortArticles() {
@@ -160,16 +171,18 @@ function sortArticles() {
 function changedFiles() {
   const changes = [];
   for (const [path, file] of Object.entries(state.files)) {
-    const text = `${JSON.stringify(file.data, null, 2)}\n`;
-    if (text !== file.original) changes.push({ path, text });
+    if (JSON.stringify(file.data) !== file.original) {
+      changes.push({ path, text: `${JSON.stringify(file.data, null, 2)}\n` });
+    }
   }
   for (const article of state.articles) {
     if (article.deleted) {
       if (!article.isNew) changes.push({ path: article.path, delete: true });
       continue;
     }
-    const text = serialiseArticle(article.data, article.body);
-    if (article.isNew || text !== article.original) changes.push({ path: article.path, text });
+    if (article.isNew || articleFingerprint(article.data, article.body) !== article.original) {
+      changes.push({ path: article.path, text: serialiseArticle(article.data, article.body) });
+    }
   }
   for (const [path, upload] of Object.entries(state.uploads)) {
     if (isPhotoStillUsed(path)) changes.push({ path, base64: upload.base64 });
@@ -637,7 +650,7 @@ function renderPhotoField(field, obj, label, hint, set) {
   const showPreview = () => {
     const value = obj[field.key];
     const upload = value && state.uploads[`src/assets/${value}`];
-    preview.src = upload ? upload.previewUrl : photoPreviewUrl(value);
+    preview.src = upload ? upload.previewUrl : previewFor(value);
     preview.hidden = !value;
   };
   showPreview();
@@ -690,8 +703,15 @@ function thumbnail(value) {
     class: 'thumb',
     alt: '',
     loading: 'lazy',
-    src: upload ? upload.previewUrl : photoPreviewUrl(value),
+    src: upload ? upload.previewUrl : previewFor(value),
   });
+}
+
+/** A small built copy if there is one, otherwise the original from GitHub. */
+function previewFor(value) {
+  if (!value) return '';
+  const key = value.replace(/^\/+/, '').replace(/^images\//, '');
+  return state.thumbs[key] || photoPreviewUrl(value);
 }
 
 function fileToBase64(file) {
