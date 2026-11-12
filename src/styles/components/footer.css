@@ -4,7 +4,7 @@
 
 /* ---- Footer ---- */
 .site-footer {
-  background: var(--color-text);
+  background: var(--color-maroon);
   color: var(--color-white);
   padding: 28px 0;
 }

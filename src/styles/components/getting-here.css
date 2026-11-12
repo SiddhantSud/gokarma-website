@@ -1,0 +1,66 @@
+/* =========================================================
+   "How to reach us" (GettingHere.astro): one card per route,
+   plus the last auto ride up to Aangan.
+========================================================= */
+
+.reach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  text-align: left;
+}
+
+.reach-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.reach-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.reach-head h3 {
+  margin: 0;
+}
+
+.reach-summary {
+  margin: 2px 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+}
+
+.reach-steps {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.reach-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin: 0;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+.reach-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--color-terracotta);
+}
+
+/* The last-leg card is highlighted: it's the part guests ask about. */
+.reach-last-leg {
+  grid-column: 1 / -1;
+  border: 2px solid var(--color-maroon);
+}

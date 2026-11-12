@@ -12,9 +12,9 @@ export const SITE = {
   shortName: 'Aangan',
 
   // ---- Google rating ----
-  // From the Google listing. Update by hand when it changes.
+  // From the Google listing (checked 2026-11-12). Update by hand when it changes.
   rating: '4.9',
-  reviewCount: 321,
+  reviewCount: 359,
 
   // ---- Price shown as "Dorm beds start from around ₹___/night" ----
   // Possibly outdated: StayFlexi showed ₹650-700 + tax on 2026-10-29.

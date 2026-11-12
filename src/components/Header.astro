@@ -11,20 +11,22 @@ interface Props {
 
 const { page } = Astro.props;
 
+// The "Aangan" name on the left is the link back to Home, so
+// Home isn't repeated in the list.
 const links = [
-  { href: 'index.html', page: 'home', label: 'Home' },
-  { href: 'rooms.html', page: 'rooms', label: 'Rooms' },
+  { href: 'rooms.html', page: 'rooms', label: 'Stay' },
   { href: 'story.html', page: 'story', label: 'Our Story' },
   { href: 'guide.html', page: 'guide', label: 'Gokarna Guide' },
   { href: 'gallery.html', page: 'gallery', label: 'Gallery' },
-  { href: 'contact.html', page: 'contact', label: 'Contact' },
+  { href: 'contact.html', page: 'contact', label: 'Contact Us' },
 ];
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo">
-      🏡 Aangan
+    <a href="index.html" class="logo" aria-label="Aangan, home page">
+      {' '}
+      🏡 Aangan{' '}
     </a>
 
     <button

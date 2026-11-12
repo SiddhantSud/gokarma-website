@@ -1,0 +1,25 @@
+---
+// "What our guests say": real review quotes from
+// src/data/reviews.ts in a swipeable row, plus a link to read
+// every review on Google.
+import SwipeRow from './SwipeRow.astro';
+import { REVIEWS } from '../data/reviews';
+import { SITE } from '../config/site';
+---
+
+<SwipeRow label="Guest reviews">
+  {REVIEWS.map((review) => (
+    <blockquote class="card review-card">
+      <p>&ldquo;{review.quote}&rdquo;</p>
+      <footer>
+        — {review.name}, via {review.source}
+      </footer>
+    </blockquote>
+  ))}
+</SwipeRow>
+
+<p class="text-center mt-lg">
+  <a href={SITE.mapUrl} class="explore-link" target="_blank" rel="noopener">
+    Read all {SITE.reviewCount} reviews on Google →
+  </a>
+</p>

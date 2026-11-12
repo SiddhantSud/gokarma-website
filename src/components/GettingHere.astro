@@ -1,0 +1,96 @@
+---
+// "How to reach us": routes from Bangalore and Mumbai, by air,
+// and the last auto ride up to Aangan. Content comes from
+// src/data/getting-here.ts; anything the owners haven't
+// confirmed yet (null there) is left out.
+import { Bus, CarTaxiFront, ExternalLink, MapPin, Plane, TrainFront } from '@lucide/astro';
+import { LAST_LEG, ROUTES, type Route } from '../data/getting-here';
+import { SITE, whatsappLink } from '../config/site';
+
+const ICONS: Record<Route['mode'], typeof Bus> = {
+  bus: Bus,
+  train: TrainFront,
+  plane: Plane,
+};
+---
+
+<div class="reach-grid">
+  {ROUTES.map((route) => {
+    const Icon = ICONS[route.mode];
+    return (
+      <div class="card reach-card reveal">
+        <div class="reach-head">
+          <span class="amenity-icon">
+            <Icon size={22} aria-hidden="true" />
+          </span>
+          <div>
+            <h3>{route.from}</h3>
+            <p class="reach-summary">{route.summary}</p>
+          </div>
+        </div>
+        <ul class="reach-steps">
+          {route.steps.map((step) => (
+            <li>{step}</li>
+          ))}
+        </ul>
+        {route.links.length > 0 && (
+          <p class="reach-links">
+            Book on:{' '}
+            {route.links.map((link) => (
+              <a href={link.url} target="_blank" rel="noopener">
+                {link.label}
+                <ExternalLink size={14} aria-hidden="true" />
+              </a>
+            ))}
+          </p>
+        )}
+      </div>
+    );
+  })}
+
+  <div class="card reach-card reach-last-leg reveal">
+    <div class="reach-head">
+      <span class="amenity-icon">
+        <CarTaxiFront size={22} aria-hidden="true" />
+      </span>
+      <div>
+        <h3>The last bit: auto from Gokarna</h3>
+        <p class="reach-summary">From the bus stand or Gokarna Road station</p>
+      </div>
+    </div>
+    <ul class="reach-steps">
+      <li>
+        Take an auto from the bus stand or the station. Ask for Aangan by Gokarma Living on{' '}
+        {SITE.address.street}.
+      </li>
+      {LAST_LEG.sayToDriver && (
+        <li>
+          Tell the driver: <strong>“{LAST_LEG.sayToDriver}”</strong>
+        </li>
+      )}
+      {LAST_LEG.fareFromBusStand && (
+        <li>
+          Usual fare from the bus stand: <strong>{LAST_LEG.fareFromBusStand}</strong>
+        </li>
+      )}
+      {LAST_LEG.fareFromStation && (
+        <li>
+          Usual fare from Gokarna Road station: <strong>{LAST_LEG.fareFromStation}</strong>
+        </li>
+      )}
+      <li>Stuck? Message us on WhatsApp and we'll help you find the way.</li>
+    </ul>
+    <p class="reach-links">
+      <a href={SITE.mapUrl} target="_blank" rel="noopener">
+        <MapPin size={14} aria-hidden="true" /> Open in Google Maps
+      </a>
+      <a
+        href={whatsappLink("Hi! I'm on my way to Aangan, can you help with directions?")}
+        target="_blank"
+        rel="noopener"
+      >
+        WhatsApp us
+      </a>
+    </p>
+  </div>
+</div>

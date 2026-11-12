@@ -1,6 +1,5 @@
 /* =========================================================
-   Cards (rooms, guide articles, stats, quotes), teaser links and
-   the amenities grid.
+   Cards (rooms, guide articles, stats, quotes) and teaser links.
 ========================================================= */
 
 /* ---- Cards (rooms / guide articles share this shape) ---- */
@@ -67,31 +66,6 @@
 
 .explore-link:hover {
   gap: 12px;
-}
-
-/* ---- Amenities ---- */
-.amenities-grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  text-align: center;
-}
-
-.amenity {
-  background: var(--color-surface);
-  padding: 26px 14px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-}
-
-.amenity .icon {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.amenity p {
-  font-weight: 600;
 }
 
 /* ---- Stat cards (e.g. "4.9/5 on Google" on Book and Landing) ---- */

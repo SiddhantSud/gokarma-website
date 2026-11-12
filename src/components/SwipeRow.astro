@@ -1,0 +1,36 @@
+---
+// ============================================================
+// A horizontal row of cards that you swipe on a phone (or
+// scroll sideways with a trackpad), with previous/next buttons
+// for mouse users. Used for the Home photo strip and the guest
+// reviews. Put the cards inside it:
+//
+//   <SwipeRow label="Photos of life at Aangan">...cards...</SwipeRow>
+// ============================================================
+import { ChevronLeft, ChevronRight } from '@lucide/astro';
+
+interface Props {
+  /** Describes the row for screen readers. */
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="swipe" data-swipe>
+  <div class="swipe-track" role="region" aria-label={label} tabindex="0">
+    <slot />
+  </div>
+  <div class="swipe-buttons">
+    <button type="button" class="btn-circle" data-swipe-prev aria-label="Scroll back">
+      <ChevronLeft size={20} aria-hidden="true" />
+    </button>
+    <button type="button" class="btn-circle" data-swipe-next aria-label="Scroll forward">
+      <ChevronRight size={20} aria-hidden="true" />
+    </button>
+  </div>
+</div>
+
+<script>
+  import '../scripts/swipe.ts';
+</script>
