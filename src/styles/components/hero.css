@@ -1,0 +1,52 @@
+/* =========================================================
+   The full-height photo hero at the top of Home, Book and Landing.
+========================================================= */
+
+/* ---- Hero (shared by Home + Landing, sized via modifier) ---- */
+.hero {
+  min-height: 78vh;
+  background-color: #3a3a3a; /* shows briefly while the image loads */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding-top: 90px; /* clearance for the fixed header overlaying the top of the photo */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(30, 22, 15, 0.55), rgba(30, 22, 15, 0.55));
+}
+
+.hero-overlay {
+  position: relative;
+  color: var(--color-white);
+  max-width: 720px;
+  padding: 0 20px;
+}
+
+.hero-overlay .section-eyebrow {
+  color: var(--color-pop);
+}
+
+.hero h1 {
+  font-size: var(--text-hero);
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  margin-bottom: 30px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

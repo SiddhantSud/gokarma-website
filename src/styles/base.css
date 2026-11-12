@@ -36,17 +36,28 @@ img {
   display: block;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-display);
   line-height: 1.2;
   font-weight: 600;
 }
 
-h1 { font-size: var(--text-h1); }
-h2 { font-size: var(--text-h2); }
-h3 { font-size: var(--text-h3); }
+h1 {
+  font-size: var(--text-h1);
+}
+h2 {
+  font-size: var(--text-h2);
+}
+h3 {
+  font-size: var(--text-h3);
+}
 
-p { font-size: var(--text-body); }
+p {
+  font-size: var(--text-body);
+}
 
 /* ---- Page container ---- */
 .container {
@@ -94,6 +105,22 @@ p { font-size: var(--text-body); }
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 260px), 1fr));
 }
 
+.grid-min-200 {
+  --grid-min: 200px;
+}
+.grid-min-220 {
+  --grid-min: 220px;
+}
+.grid-min-240 {
+  --grid-min: 240px;
+}
+.grid-min-260 {
+  --grid-min: 260px;
+}
+.grid-min-280 {
+  --grid-min: 280px;
+}
+
 /* ---- Playful hand-drawn section divider ----
    Echoes the hand-painted wall border visible in the real
    Vintage Room photos -- ties "rustic" and "playful" together
@@ -113,13 +140,15 @@ p { font-size: var(--text-body); }
 
 /* ---- Scroll-reveal ----
    Elements start slightly faded/offset, then settle into
-   place as they enter the viewport (see js/main.js). Users
+   place as they enter the viewport (see src/scripts/site.ts). Users
    with reduced-motion preferences just see content directly. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity var(--transition-medium), transform var(--transition-medium);
+    transition:
+      opacity var(--transition-medium),
+      transform var(--transition-medium);
   }
 
   .reveal.is-visible {
@@ -129,8 +158,18 @@ p { font-size: var(--text-body); }
 }
 
 /* ---- Utility ---- */
-.text-center { text-align: center; }
-.mt-lg { margin-top: clamp(32px, 6vw, 56px); }
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.mt-sm {
+  margin-top: 12px;
+}
+.mt-lg {
+  margin-top: clamp(32px, 6vw, 56px);
+}
 .visually-hidden {
   position: absolute;
   width: 1px;

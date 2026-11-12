@@ -64,7 +64,7 @@ const revealObserver = new IntersectionObserver(
       revealObserver.unobserve(el);
     });
   },
-  { threshold: 0.1, rootMargin: '150px 0px' }
+  { threshold: 0.1, rootMargin: '150px 0px' },
 );
 
 document.querySelectorAll('.reveal, [data-bg]').forEach((el) => revealObserver.observe(el));

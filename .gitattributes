@@ -1,0 +1,6 @@
+# Store and check out text files with LF line endings on every OS,
+# so Prettier and git agree and diffs stay clean on Windows.
+* text=auto eol=lf
+*.jpg binary
+*.jpeg binary
+*.png binary

@@ -18,9 +18,14 @@ const { room } = Astro.props;
   </div>
   <h3>{room.name}</h3>
   <ul>
-    {room.features.map((feature) => <li>{feature}</li>)}
+    {room.features.map((feature) => (
+      <li>{feature}</li>
+    ))}
   </ul>
-  <a href={`book.html?room=${room.id}`} class:list={['btn', room.badge ? 'btn-primary' : 'btn-outline']}>
+  <a
+    href={`book.html?room=${room.id}`}
+    class:list={['btn', room.badge ? 'btn-primary' : 'btn-outline']}
+  >
     Book This Room
   </a>
 </div>

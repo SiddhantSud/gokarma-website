@@ -1,0 +1,56 @@
+/* =========================================================
+   Buttons: primary, outline, large, and the amber "pop" accent.
+========================================================= */
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-terracotta-dark);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.btn-outline {
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
+}
+
+.btn-large {
+  padding: 16px 36px;
+  font-size: 1.1rem;
+}
+
+.btn-pop {
+  background-color: var(--color-pop);
+  color: var(--color-text);
+}
+
+.btn-pop:hover {
+  background-color: var(--color-pop-dark);
+}

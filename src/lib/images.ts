@@ -13,11 +13,13 @@ import { getImage } from 'astro:assets';
 
 // Not loaded up front: only photos a page actually uses end up
 // in the built site.
-const allPhotos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpg,jpeg,png}');
+const allPhotos = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/**/*.{jpg,jpeg,png}',
+);
 
 export async function photo(path: string): Promise<ImageMetadata> {
   const match = Object.entries(allPhotos).find(([file]) =>
-    file.replace(/\.(jpe?g|png)$/, '').endsWith(`/images/${path}`)
+    file.replace(/\.(jpe?g|png)$/, '').endsWith(`/images/${path}`),
   );
   if (!match) {
     throw new Error(`No photo found at src/assets/images/${path} (.jpg/.png)`);

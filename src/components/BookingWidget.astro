@@ -24,10 +24,9 @@ import { isValidBookingUrl } from '../lib/booking';
 
 interface Props {
   class?: string;
-  style?: string;
 }
 
-const { class: className, style } = Astro.props;
+const { class: className } = Astro.props;
 const sendsToStayflexi = isValidBookingUrl(BOOKING.stayflexiBookingUrl);
 const guestCounts = Array.from({ length: BOOKING.maxGuests }, (_, i) => i + 1);
 
@@ -36,7 +35,7 @@ const nextStepNote = sendsToStayflexi
   : "This opens WhatsApp with your dates filled in. Just hit send and we'll confirm availability and rates.";
 ---
 
-<div class={className} style={style}>
+<div class={className}>
   <form class="booking-form" data-booking-form>
     <label class="booking-field">
       <span>Check-in</span>
@@ -47,27 +46,31 @@ const nextStepNote = sendsToStayflexi
       <input type="date" name="checkout" required />
     </label>
 
-    {
-      !sendsToStayflexi && (
-        <>
-          <label class="booking-field">
-            <span>Guests</span>
-            <select name="guests">
-              {guestCounts.map((count) => <option value={count}>{count}</option>)}
-            </select>
-          </label>
-          <label class="booking-field">
-            <span>Room</span>
-            <select name="room">
-              <option value="">Not sure yet</option>
-              {ROOMS.map((room) => <option value={room.id}>{room.name}</option>)}
-            </select>
-          </label>
-        </>
-      )
-    }
+    {!sendsToStayflexi && (
+      <>
+        <label class="booking-field">
+          <span>Guests</span>
+          <select name="guests">
+            {guestCounts.map((count) => (
+              <option value={count}>{count}</option>
+            ))}
+          </select>
+        </label>
+        <label class="booking-field">
+          <span>Room</span>
+          <select name="room">
+            <option value="">Not sure yet</option>
+            {ROOMS.map((room) => (
+              <option value={room.id}>{room.name}</option>
+            ))}
+          </select>
+        </label>
+      </>
+    )}
 
-    <button type="submit" class="btn btn-primary">Check Availability</button>
+    <button type="submit" class="btn btn-primary">
+      Check Availability
+    </button>
     <p class="booking-note">{nextStepNote}</p>
   </form>
 </div>

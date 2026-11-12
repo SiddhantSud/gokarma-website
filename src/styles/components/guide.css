@@ -1,0 +1,77 @@
+/* =========================================================
+   Gokarna Guide: article pages, tags and related reads.
+========================================================= */
+
+/* ---- Guide / Blog ---- */
+.guide-card .tag {
+  display: inline-block;
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-forest);
+  background: rgba(63, 93, 66, 0.12);
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.article-body {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.article-body h2 {
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+
+.article-body p {
+  margin-bottom: 1.2em;
+  color: var(--color-text);
+}
+
+.article-body ul {
+  margin: 0 0 1.2em 1.2em;
+  list-style: disc;
+}
+
+.article-hero {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.article-meta {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  margin-bottom: 24px;
+}
+
+.related-reads {
+  max-width: 720px;
+  margin: 56px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border);
+}
+
+.related-reads .section-title {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.cta-banner {
+  background: var(--color-forest);
+  color: var(--color-white);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta-banner h3 {
+  color: var(--color-white);
+  margin-bottom: 8px;
+}
+.cta-banner .btn-primary {
+  margin-top: 12px;
+}

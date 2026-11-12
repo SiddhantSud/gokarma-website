@@ -18,6 +18,14 @@ import Footer from '../components/Footer.astro';
 import { SITE } from '../config/site';
 import { photoUrl } from '../lib/images';
 
+// Fonts are served from this site (not Google), so visitors'
+// browsers don't contact a third party just to show text.
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+
 import '../styles/theme.css';
 import '../styles/base.css';
 import '../styles/components.css';
@@ -59,7 +67,11 @@ const ogImageUrl = new URL(await photoUrl(ogImage), Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {isLanding ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={pageUrl} />}
+    {isLanding ? (
+      <meta name="robots" content="noindex, follow" />
+    ) : (
+      <link rel="canonical" href={pageUrl} />
+    )}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
@@ -69,40 +81,34 @@ const ogImageUrl = new URL(await photoUrl(ogImage), Astro.site).href;
     <meta property="og:url" content={pageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body data-page={page}>
-    {
-      isLanding ? (
-        <header class="site-header">
-          <div class="container header-inner" style="justify-content:center;">
-            <a href="index.html" class="logo">🏡 {SITE.name}</a>
-          </div>
-        </header>
-      ) : (
-        <Header page={page} />
-      )
-    }
+    {isLanding ? (
+      <header class="site-header">
+        <div class="container header-inner is-centered">
+          <a href="index.html" class="logo">
+            🏡 {SITE.name}
+          </a>
+        </div>
+      </header>
+    ) : (
+      <Header page={page} />
+    )}
 
     <slot />
 
-    {
-      isLanding ? (
-        <footer class="site-footer">
-          <div class="container footer-inner" style="justify-content:center;">
-            <p>&copy; <span id="year">{new Date().getFullYear()}</span> {SITE.name}.</p>
-          </div>
-        </footer>
-      ) : (
-        <Footer />
-      )
-    }
+    {isLanding ? (
+      <footer class="site-footer">
+        <div class="container footer-inner is-centered">
+          <p>
+            &copy; <span id="year">{new Date().getFullYear()}</span> {SITE.name}.
+          </p>
+        </div>
+      </footer>
+    ) : (
+      <Footer />
+    )}
 
     <script>
       import '../scripts/site.ts';

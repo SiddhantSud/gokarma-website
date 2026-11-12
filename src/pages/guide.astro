@@ -17,17 +17,18 @@ import { GUIDE_POSTS } from '../data/guide';
       <span class="section-eyebrow">The Gokarna Guide</span>
       <h1>Backpacking, Solo Travel &amp; Offbeat Gokarna</h1>
       <p class="section-subtitle">
-        Practical, honest guides for getting the most out of Gokarna — written for
-        travelers who'd rather trek to a quiet beach than fight for a sunbed on a
-        crowded one.
+        Practical, honest guides for getting the most out of Gokarna — written for travelers who'd
+        rather trek to a quiet beach than fight for a sunbed on a crowded one.
       </p>
     </div>
   </PhotoSection>
 
   <PhotoSection bg="scenery/waterfall" panel="alt">
     <div class="container">
-      <div class="auto-grid" style="--grid-min: 280px;">
-        {GUIDE_POSTS.map((post) => <GuideCard post={post} />)}
+      <div class="auto-grid grid-min-280">
+        {GUIDE_POSTS.map((post) => (
+          <GuideCard post={post} />
+        ))}
       </div>
     </div>
   </PhotoSection>
@@ -35,8 +36,12 @@ import { GUIDE_POSTS } from '../data/guide';
   <PhotoSection bg="property/property-4" panelClass="text-center">
     <div class="container">
       <h2 class="section-title">Reading This on the Road?</h2>
-      <p class="section-subtitle">Aangan is on Kudle hilltop, right along the beach-trek route this guide covers.</p>
-      <a href="rooms.html" class="explore-link">Check rooms &amp; rates →</a>
+      <p class="section-subtitle">
+        Aangan is on Kudle hilltop, right along the beach-trek route this guide covers.
+      </p>
+      <a href="rooms.html" class="explore-link">
+        Check rooms &amp; rates →
+      </a>
     </div>
   </PhotoSection>
 </BaseLayout>

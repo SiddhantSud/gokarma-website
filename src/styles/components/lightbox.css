@@ -1,0 +1,20 @@
+/* =========================================================
+   Gallery full-screen viewer (PhotoSwipe) adjustments.
+========================================================= */
+
+/* ---- Lightbox (Gallery page) ----
+   The full-screen photo viewer is PhotoSwipe (see
+   src/components/Gallery.astro), which brings its own styles.
+   Only its backdrop color is matched to the site here. */
+.pswp {
+  --pswp-bg: rgb(20, 15, 10);
+}
+
+.btn-pop {
+  background-color: var(--color-pop);
+  color: var(--color-text);
+}
+
+.btn-pop:hover {
+  background-color: var(--color-pop-dark);
+}
