@@ -4,8 +4,10 @@
 // `image` is a path inside src/assets/images, without the
 // file extension.
 //
-// Not shown yet, waiting on photos from the owners: the dogs,
-// the garden and trees, a work/Wi-Fi corner, art and murals.
+// Only cats, dogs and birds are mentioned as animals on the site
+// (Siddhant, 2026-11-12). Waiting on photos from the owners:
+// the cats and dogs, the garden and trees, a work/Wi-Fi corner,
+// art and murals.
 // ============================================================
 
 export interface VibeCard {
@@ -15,11 +17,6 @@ export interface VibeCard {
 }
 
 export const VIBE_CARDS: VibeCard[] = [
-  {
-    label: 'Slow living',
-    image: 'scenery/verandah',
-    alt: 'A quiet moment on the verandah, looking out at the trees',
-  },
   {
     label: 'Outdoor living',
     image: 'scenery/cottage-row',
@@ -49,10 +46,5 @@ export const VIBE_CARDS: VibeCard[] = [
     label: 'Hand-painted everything',
     image: 'property/sign-board',
     alt: 'Hand-painted Gokarma Cafe and Hostel sign',
-  },
-  {
-    label: 'Cats, dogs (and a goat)',
-    image: 'property/property-5',
-    alt: 'A resident cat and a visiting goat at the entrance gate',
   },
 ];

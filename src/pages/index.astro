@@ -64,10 +64,14 @@ const jsonLd = {
         A backpacker hostel &amp; cafe tucked into the forest above Kudle Beach — the offbeat
         basecamp for exploring Gokarna.
       </p>
-      <BookingWidget class="booking-glass" />
-      <a href="rooms.html" class="explore-link">
-        See the rooms first →
-      </a>
+      <div class="hero-actions">
+        <a href="#check-availability" class="btn btn-primary btn-large">
+          Check Availability
+        </a>
+        <a href="rooms.html" class="explore-link">
+          See the rooms first →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -85,7 +89,7 @@ const jsonLd = {
         Aangan is a hostel and cafe for living slowly and mostly outdoors: mornings under the trees,
         a big garden to spread out in, sunset walks along the cliffs, and board games that run late.
         There's Wi-Fi when you need it, a top-rated cafe when you're hungry, hand-painted walls
-        everywhere, and cats and dogs for company.
+        everywhere, and cats, dogs and birds for company.
       </p>
       <VibeStrip />
       <p class="text-center mt-lg">
@@ -96,8 +100,20 @@ const jsonLd = {
     </div>
   </PhotoSection>
 
+  <!-- ============ CHECK AVAILABILITY ============ -->
+  <PhotoSection bg="scenery/verandah" panel="alt" panelClass="text-center">
+    <div class="container" id="check-availability">
+      <span class="section-eyebrow">Book Direct</span>
+      <h2 class="section-title">Check Availability</h2>
+      <p class="section-subtitle">
+        Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Pick your dates to see live rates.
+      </p>
+      <BookingWidget class="booking-inline" />
+    </div>
+  </PhotoSection>
+
   <!-- ============ WALKABLE FROM AANGAN ============ -->
-  <PhotoSection bg="scenery/sunset-cliff" panel="alt">
+  <PhotoSection bg="community/chess-night">
     <div class="container">
       <span class="section-eyebrow">Right on the Doorstep</span>
       <h2 class="section-title">Everything's a Walk Away</h2>
@@ -110,7 +126,7 @@ const jsonLd = {
   </PhotoSection>
 
   <!-- ============ AMENITIES ============ -->
-  <PhotoSection bg="community/catan-night">
+  <PhotoSection bg="community/catan-night" panel="alt">
     <div class="container">
       <span class="section-eyebrow">What's Included</span>
       <h2 class="section-title">Amenities</h2>
@@ -119,17 +135,17 @@ const jsonLd = {
     </div>
   </PhotoSection>
 
-  <!-- ============ WHAT OUR GUESTS SAY ============ -->
-  <PhotoSection bg="community/game-night" panel="alt">
+  <!-- ============ STORIES WE HAVE LIVED (guest reviews) ============ -->
+  <PhotoSection bg="community/game-night">
     <div class="container">
       <span class="section-eyebrow">{ratingLine}</span>
-      <h2 class="section-title">What Our Guests Say</h2>
+      <h2 class="section-title">Stories We Have Lived</h2>
       <Reviews />
     </div>
   </PhotoSection>
 
   <!-- ============ HOW TO REACH US ============ -->
-  <PhotoSection bg="property/dorm-outside-2">
+  <PhotoSection bg="property/dorm-outside-2" panel="alt">
     <div class="container" id="getting-here">
       <span class="section-eyebrow">Getting Here</span>
       <h2 class="section-title">How to Reach Us</h2>
@@ -141,7 +157,7 @@ const jsonLd = {
   </PhotoSection>
 
   <!-- ============ ROOMS TEASER ============ -->
-  <PhotoSection bg="property/dorm-outside-1" panel="alt">
+  <PhotoSection bg="property/dorm-outside-1">
     <div class="container">
       <span class="section-eyebrow">Where You'll Sleep</span>
       <h2 class="section-title">Rooms</h2>
@@ -163,7 +179,7 @@ const jsonLd = {
   </PhotoSection>
 
   <!-- ============ GOKARNA GUIDE TEASER ============ -->
-  <PhotoSection bg="scenery/waterfall">
+  <PhotoSection bg="scenery/waterfall" panel="alt">
     <div class="container">
       <span class="section-eyebrow">The Gokarna Guide</span>
       <h2 class="section-title">Plan Your Trip</h2>
@@ -179,7 +195,7 @@ const jsonLd = {
   </PhotoSection>
 
   <!-- ============ LOCATION TEASER + FINAL CTA ============ -->
-  <PhotoSection bg="scenery/river-pool" panel="alt" panelClass="text-center">
+  <PhotoSection bg="scenery/river-pool" panelClass="text-center">
     <div class="container">
       <span class="section-eyebrow">Kudle Beach Road, Gokarna</span>
       <h2 class="section-title">Ready to Stay?</h2>

@@ -5,6 +5,8 @@
 // The glass-on-scroll effect and the mobile menu button are
 // wired up in src/scripts/site.ts.
 // ============================================================
+import { AANGAN_WORDS } from '../config/site';
+
 interface Props {
   page?: string;
 }
@@ -25,8 +27,10 @@ const links = [
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo" aria-label="Aangan, home page">
-      {' '}
-      🏡 Aangan{' '}
+      <span aria-hidden="true">🏡</span>
+      <span class="logo-word" data-words={JSON.stringify(AANGAN_WORDS)} aria-hidden="true">
+        Aangan
+      </span>
     </a>
 
     <button

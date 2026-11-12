@@ -42,6 +42,7 @@
 }
 
 .logo {
+  white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.3rem;
@@ -50,6 +51,20 @@
   transition:
     color var(--transition-medium),
     text-shadow var(--transition-medium);
+}
+
+/* The word after the house icon cycles through languages
+   (src/scripts/site.ts). A fixed width keeps the nav from
+   shifting as the word changes length. */
+.logo-word {
+  display: inline-block;
+  width: 5em;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.logo-word.is-fading {
+  opacity: 0;
 }
 
 .site-header.is-scrolled .logo {
@@ -118,8 +133,10 @@
   text-shadow: none;
 }
 
-/* Mobile: the nav collapses into a dropdown behind the menu button. */
-@media (max-width: 800px) {
+/* Phones and small tablets: the nav collapses into a dropdown
+   behind the menu button. 960px is where the six nav items stop
+   fitting on one line. */
+@media (max-width: 960px) {
   .site-header .menu-toggle {
     display: block;
   }
