@@ -374,29 +374,33 @@ still haven't chosen a full brand palette.
   `aria-*` on toggles, labels wrapping inputs, and reduced-motion respected.
 - Keep `README.md` in sync when a workflow changes. It's the owners' manual.
 
-## 12. Admin console (/admin)
+## 12. Admin page (/admin)
 
-- `public/admin/` serves Sveltia CMS (`@sveltia/cms@0.253.2` from unpkg) at
-  `/gokarma-website/admin/`. It isn't linked anywhere, has `noindex`, and is
-  disallowed in robots.txt. Sign-in uses a GitHub fine-grained token only
-  (`auth_methods: [token]`), so no OAuth server or extra service is involved.
-  The owner guide is `docs/admin-console.md`.
-- `publish_mode: editorial_workflow` with stages draft and pending_publish:
-  each save is a PR, and Publish merges it. That works with the `master`
-  rule (PR required, 0 approvals), so no protection change was needed.
-- **Editable content moved out of code** so the console can edit it:
+- `public/admin/` is a small custom admin page (plain HTML/CSS/JS) at
+  `/gokarma-website/admin/`, opened with a **password**. Siddhant chose this
+  over Sveltia CMS on 2026-11-12: he wanted a simple password page that shows
+  all existing content. It isn't linked anywhere, has `noindex`, and is
+  disallowed in robots.txt. The owner guide is `docs/admin-console.md`.
+- How it works without a server: a GitHub fine-grained token (Contents and
+  Pull requests read/write, this repo only) is encrypted with the admin
+  password (PBKDF2-SHA256 600k + AES-GCM) by `setup.html` and published as
+  `public/admin/key.json`. The password unlocks it in the browser. **The
+  password is the only lock**, so it must be a long passphrase.
+- Publish: all changes become one commit on a new branch → PR → squash-merge
+  via the API → the deploy runs. That satisfies the `master` PR rule.
+- What's editable is defined in `public/admin/lib/content.js`. If you add an
+  editable field to the site, add it there too.
+- **Editable content lives outside code**:
   - Guide articles are Markdown in `src/content/guide/*.md`, with the schema
     in `src/content.config.ts`. They're rendered by `src/pages/[article].astro`,
     and the file name is the URL. Heading anchors are auto-generated slugs.
   - Lists are JSON in `src/data/*.json` (gallery, vibe, rooms, reviews,
-    nearby, facts, travel-tips). The `.ts` files next to them only add
-    types. `SITE` in `src/config/site.ts` spreads `facts.json`.
-  - Photo paths in JSON and Markdown use the editor's form
-    `images/<folder>/<file>.jpg`. `photo()` in `src/lib/images.ts` also
-    accepts the short form `rooms/4-bed-dorm-1`. Uploads land in
-    `src/assets/images/uploads/` or `src/assets/images/guide/`.
-- If you add an editable field, update `public/admin/config.yml` too.
+    nearby, facts, travel-tips). The `.ts` files next to them only add types.
+    `SITE` in `src/config/site.ts` spreads `facts.json`.
+  - Photo paths look like `images/<folder>/<file>.jpg`, and `photo()` also
+    accepts the short form. Uploads land in `src/assets/images/uploads/`.
+  - `src/content/` and `src/data/*.json` are excluded from Prettier, because
+    the admin page writes them in its own format and CI would otherwise fail.
 - **Guest story submissions**: `SubmitStory.astro` on the Guide page sends
   stories by email (`submissionsEmail` in facts.json) or, while that's
-  empty, by WhatsApp. Nothing auto-publishes; owners publish via /admin with
-  `author` set.
+  empty, by WhatsApp. Nothing auto-publishes.

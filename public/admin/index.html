@@ -1,20 +1,57 @@
 <!doctype html>
 <!--
-  The Aangan admin console (Sveltia CMS). Not linked from the site
-  and hidden from search engines. Signing in needs a GitHub access
-  token from an account with access to the gokarma-website repo;
-  see docs/admin-console.md. What can be edited is set in
-  config.yml next to this file.
+  The Aangan admin page. Not linked from the site and hidden from
+  search engines. Enter the admin password to see and edit the
+  site's content; "Publish" puts changes live in about 2-3 minutes.
+  How it works: docs/admin-console.md. First-time setup: setup.html.
 -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://raw.githubusercontent.com; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
     <title>Aangan Admin</title>
-    <link rel="cms-config-url" href="config.yml" type="application/yaml" />
+    <link rel="stylesheet" href="admin.css" />
   </head>
   <body>
-    <script src="https://unpkg.com/@sveltia/cms@0.253.2/dist/sveltia-cms.js"></script>
+    <!-- Password screen -->
+    <main id="login" class="login" hidden>
+      <form id="loginForm" class="login-box">
+        <h1>🏡 Aangan admin</h1>
+        <label>
+          Password
+          <input
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            required
+            autofocus
+          />
+        </label>
+        <button type="submit" class="primary">Open</button>
+        <p id="loginMessage" class="message" role="alert"></p>
+      </form>
+    </main>
+
+    <!-- The editor -->
+    <div id="app" class="app" hidden>
+      <header class="topbar">
+        <strong>🏡 Aangan admin</strong>
+        <span id="changeCount" class="change-count"></span>
+        <button id="publishButton" class="primary" disabled>Publish</button>
+        <button id="lockButton">Lock</button>
+      </header>
+      <p id="status" class="status" role="status" hidden></p>
+      <div class="layout">
+        <nav id="nav" class="nav" aria-label="Sections"></nav>
+        <main id="panel" class="panel"></main>
+      </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
   </body>
 </html>

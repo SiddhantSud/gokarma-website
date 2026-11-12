@@ -4,3 +4,8 @@ node_modules/
 package-lock.json
 src/assets/
 photo-library/
+
+# Written by the /admin page in its own format
+src/content/
+src/data/*.json
+public/admin/key.json

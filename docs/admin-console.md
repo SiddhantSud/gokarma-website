@@ -1,89 +1,92 @@
-# The admin console
+# The admin page
 
-The admin console is where you edit the website's photos, Gokarna Guide
-articles, rooms, guest quotes, prices and travel tips, without touching code.
+The admin page is where you edit the website's content: prices and contact
+details, travel tips, Gokarna Guide articles, gallery photos, the Home photo
+strip, walkable places, rooms and guest quotes. No code needed.
 
 **Address:** https://siddhantsud.github.io/gokarma-website/admin/
 
-It isn't linked anywhere on the site and is hidden from Google. Opening the
-address only shows a sign-in screen. Nothing can be changed without a GitHub
-account that has access to the website's repository.
+It isn't linked anywhere on the site and is hidden from Google. It opens with a
+password.
 
-## Signing in (once per device)
+## Using it
 
-You need a free GitHub account that Siddhant has added to the repository
-(see "Adding someone" below). Then:
+1. Open the address and type the admin password.
+2. Pick a section on the left. Everything already on the website is there.
+3. Edit, add, remove or reorder. Lists (gallery, rooms…) open when you click an
+   item. Use ↑ ↓ to reorder and ✕ to remove.
+4. For photos, click **Choose a new photo** and pick one from your phone or
+   computer. Always fill in **Describe the photo**.
+5. The top bar shows how many changes aren't published yet. Press **Publish**
+   when you're done. The website updates in about 2–3 minutes.
+6. Press **Lock** when you're finished, especially on a shared computer.
 
-1. On GitHub, open **Settings → Developer settings → Personal access tokens →
-   Fine-grained tokens → Generate new token**.
-2. Name it "Aangan admin". For expiry, pick a year.
-3. Under **Repository access**, choose **Only select repositories** and pick
-   **SiddhantSud/gokarma-website**.
-4. Under **Permissions → Repository permissions**, set:
-   - **Contents:** Read and write
-   - **Pull requests:** Read and write
-   - (Metadata: Read-only is added automatically)
-5. Generate the token and copy it.
-6. Open the admin address, choose **Sign In Using Access Token**, and paste the
-   token. The browser remembers it, so you only do this once per device.
+Nothing changes on the website until you press Publish. Every publish is saved
+in the site's history, so anything can be undone.
 
-Treat the token like a password. If a phone or laptop is lost, delete the token
-on GitHub (same page as step 1) and make a new one.
+Uploaded photos are resized automatically for phones and computers, and the
+location data that phones store in photos is removed.
 
-## How changes go live
+### Articles
 
-Saving never changes the live site straight away:
+- **Gokarna Guide articles** lists every article. Click one to edit it, or
+  **+ New article** to start one. New articles start hidden ("draft"). Untick
+  **Hide from the site** when the article is ready, then Publish.
+- In the article text, start a line with `##` for a heading and `-` for a bullet
+  point, and wrap words in `**double stars**` for bold.
 
-1. **Save** keeps your change as a draft.
-2. When it's ready, mark it **Ready** and press **Publish**.
-3. The site rebuilds itself and the change is live in about 2–3 minutes.
+### Guest stories
 
-Every change is recorded with who made it and when, so anything can be undone.
+The Gokarna Guide page invites travellers to send in their own stories. They
+arrive on WhatsApp, or by email once an address is set under **Rating, price &
+contact → Email for guest stories**. Nothing is published automatically.
 
-## What you can edit
+To publish one: check they gave permission and the photos are theirs, create a
+new article, paste the story, add their photos, put their name in **Author**,
+edit lightly, untick "Hide from the site", and Publish.
 
-| In the console                          | What it changes                                                                                                           |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **Gokarna Guide articles**              | Add, edit or hide articles. Write in the editor like a normal document. Tick "Hide from the site" to keep one as a draft. |
-| **Photos → Gallery page**               | Add, remove or reorder gallery photos. The first 4 also show on the Home page.                                            |
-| **Photos → Home photo strip**           | The tall swipeable photos under "The Vibe".                                                                               |
-| **Photos → Walkable places**            | Kudle Hilltop, the temple, the beaches: walking times, photos, links.                                                     |
-| **Photos → Rooms**                      | Room names, photos and features. Don't change a room's ID.                                                                |
-| **Details → Rating, price and contact** | Google rating and review count, "dorm beds from" price, phone, WhatsApp, Instagram, and the email for story submissions.  |
-| **Details → Travel tips**               | What to tell the auto driver, and the usual fares. Empty fields stay hidden.                                              |
-| **Details → Guest quotes**              | The "Stories We Have Lived" quotes. Copy them word for word from real reviews.                                            |
+## One-time setup (Siddhant)
 
-When you upload a photo, the site makes phone-sized and desktop-sized copies
-automatically and removes the location data phones store in photos. Always
-describe the photo in the "Describe the photo" field.
+The page saves changes to GitHub, where the website's files live, so it needs a
+GitHub access token. Setup locks that token with the admin password; after that,
+people only ever type the password.
 
-## Guest stories for the Gokarna Guide
+1. Create a **fine-grained token** on GitHub: Settings → Developer settings →
+   Personal access tokens → Fine-grained tokens → Generate new token.
+   - Repository access: **Only select repositories → gokarma-website**
+   - Permissions: **Contents: Read and write**, **Pull requests: Read and write**
+   - Expiry: up to a year (put a reminder in your calendar to renew it)
+2. Open **…/gokarma-website/admin/setup.html**, paste the token, choose the
+   admin password twice, and press **Lock the token and save**.
+3. Wait 2–3 minutes for the site to rebuild, then open the admin page and sign
+   in with the password.
 
-The Guide page invites travellers to send in their own Gokarna stories. They
-arrive by WhatsApp, or by email once an address is set in
-**Details → Rating, price and contact**. Nothing is published automatically.
+**The password must be long**: four or five random words, at least 16
+characters. The locked token is stored on the public website, so the password is
+the only thing protecting it.
 
-To publish one:
+### Changing the password, replacing the token, or removing access
 
-1. Make sure they ticked or stated permission to publish, and that the photos
-   are their own.
-2. In **Gokarna Guide articles**, choose **New article**, paste the story, add
-   their photos, and put their name in **Author**.
-3. Edit lightly, save, and publish as above.
-
-## Adding or removing someone
-
-Siddhant manages access on GitHub: **Repository → Settings → Collaborators →
-Add people**, with the **Write** role. To remove someone, remove them there and
-their token stops working straight away. Turn on two-step sign-in for every
-account that has access.
+Run **setup.html** again with a token and a new password. To shut the admin page
+off completely, delete the token on GitHub; the page then can't change anything.
+If the password leaks, delete the token straight away, make a new one, and run
+setup again with a new password.
 
 ## For developers
 
-- The console is [Sveltia CMS](https://sveltiacms.app), loaded by
-  `public/admin/index.html`. What it can edit is set in `public/admin/config.yml`.
-- It uses the `editorial_workflow` publish mode: each save is a pull request,
-  and Publish merges it. That fits the `master` rule that changes must arrive
-  as pull requests.
-- Articles are Markdown in `src/content/guide/`; the fields are checked by
-  `src/content.config.ts`. Lists and facts are JSON in `src/data/`.
+- Plain HTML/CSS/JS in `public/admin/` (no framework, no build step). It has its
+  own CSP, which allows only `api.github.com` and `raw.githubusercontent.com`
+  (for thumbnails).
+  - `lib/crypto.js`: PBKDF2-SHA256 (600k rounds) + AES-GCM lock/unlock.
+    `key.json` holds the locked token.
+  - `lib/github.js`: reads from master; publishes all changes as one commit on a
+    new branch, opens a PR, squash-merges it and deletes the branch. This fits
+    the `master` PR rule.
+  - `lib/content.js`: what's editable and the fields of each. **Add new
+    editable fields here.**
+  - `admin.js`: the UI. It builds everything with DOM methods, never innerHTML.
+- Content files: articles in `src/content/guide/*.md` (schema in
+  `src/content.config.ts`), lists and facts in `src/data/*.json`. These are
+  excluded from Prettier because the admin page writes them in its own format.
+- The decrypted token lives in `sessionStorage` until the tab closes or Lock is
+  pressed.

@@ -1,0 +1,67 @@
+<!doctype html>
+<!--
+  One-time setup for the admin page: locks a GitHub token with the
+  admin password and saves the locked copy (key.json) to the site.
+  Run it again to change the password or replace the token.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <title>Aangan Admin Setup</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <main class="setup">
+      <h1>Set up the admin page</h1>
+      <p>
+        Do this once. It locks your GitHub token with the admin password, so afterwards everyone
+        just types the password. Run it again any time to change the password.
+      </p>
+      <ol>
+        <li>
+          Create a GitHub token:
+          <strong
+            >Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong
+          >, only for the <strong>gokarma-website</strong> repository, with
+          <strong>Contents</strong> and <strong>Pull requests</strong> set to "Read and write".
+        </li>
+        <li>Paste it below and choose the admin password.</li>
+        <li>
+          Use a long passphrase, e.g. four or five random words. Anyone with the password can change
+          the website.
+        </li>
+      </ol>
+
+      <form id="setupForm">
+        <label class="field">
+          <span>GitHub token</span>
+          <input type="password" name="token" autocomplete="off" required />
+        </label>
+        <label class="field">
+          <span>Admin password</span>
+          <input
+            type="password"
+            name="password"
+            autocomplete="new-password"
+            minlength="16"
+            required
+          />
+          <small>At least 16 characters.</small>
+        </label>
+        <label class="field">
+          <span>Admin password again</span>
+          <input type="password" name="confirm" autocomplete="new-password" required />
+        </label>
+        <button type="submit" class="primary">Lock the token and save</button>
+        <p id="setupMessage" class="message" role="alert"></p>
+      </form>
+    </main>
+    <script type="module" src="setup.js"></script>
+  </body>
+</html>
