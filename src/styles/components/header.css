@@ -103,15 +103,15 @@
 }
 
 .nav-cta {
-  background-color: var(--color-maroon);
-  color: var(--color-white) !important;
+  background-color: var(--color-button);
+  color: var(--color-button-text) !important;
   padding: 8px 18px;
   border-radius: 30px;
   text-shadow: none !important;
 }
 
 .nav-cta:hover {
-  background-color: var(--color-maroon-dark);
+  background-color: var(--color-button-hover);
 }
 
 /* Composed with .btn-circle in the markup for the round bordered

@@ -21,24 +21,24 @@
 }
 
 .btn-primary {
-  background-color: var(--color-maroon);
-  color: var(--color-white);
+  background-color: var(--color-button);
+  color: var(--color-button-text);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-maroon-dark);
+  background-color: var(--color-button-hover);
   box-shadow: var(--shadow-card-hover);
 }
 
 .btn-outline {
-  border-color: var(--color-maroon);
-  color: var(--color-maroon);
+  border-color: var(--color-button);
+  color: var(--color-button);
   background: transparent;
 }
 
 .btn-outline:hover {
-  background-color: var(--color-maroon);
-  color: var(--color-white);
+  background-color: var(--color-button);
+  color: var(--color-button-text);
 }
 
 .btn-large {
