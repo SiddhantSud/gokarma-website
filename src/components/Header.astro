@@ -13,6 +13,12 @@ interface Props {
 
 const { page } = Astro.props;
 
+// The courtyard mark from the Aangan logo kit (public/brand/).
+// Two copies: a cream one that reads over the hero photo, and the
+// full-colour one shown once the header turns to glass on scroll
+// (header.css swaps them).
+const brand = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/`;
+
 // The "Aangan" name on the left is the link back to Home, so
 // Home isn't repeated in the list.
 const links = [
@@ -27,7 +33,22 @@ const links = [
 <header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo" aria-label="Aangan, home page">
-      <span aria-hidden="true">🏡</span>
+      <span class="logo-mark" aria-hidden="true">
+        <img
+          class="logo-mark-light"
+          src={`${brand}aangan-mark-reversed-for-dark-backgrounds.svg`}
+          alt=""
+          width="38"
+          height="40"
+        />
+        <img
+          class="logo-mark-colour"
+          src={`${brand}aangan-mark-full-colour.svg`}
+          alt=""
+          width="38"
+          height="40"
+        />
+      </span>
       <span class="logo-word" data-words={JSON.stringify(AANGAN_WORDS)} aria-hidden="true">
         Aangan
       </span>

@@ -17,6 +17,14 @@
   gap: 12px;
 }
 
+/* The cream seal from the logo kit. 96px is the seal's
+   smallest size before its ring text stops being readable. */
+.footer-seal {
+  width: 104px;
+  height: 104px;
+  flex: none;
+}
+
 /* Landing page: a single centered line. */
 .footer-inner.is-centered {
   justify-content: center;

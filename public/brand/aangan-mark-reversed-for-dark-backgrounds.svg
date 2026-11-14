@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 448" width="420" height="448" role="img" aria-label="Aangan courtyard mark, reversed">
+<title>Aangan courtyard mark, reversed</title>
+<defs><clipPath id="aanganWellBody"><path d="M253,330 L257,354 Q278,362 299,354 L303,330 Z"></path></clipPath></defs>
+<g transform="translate(-30,-32)">
+      <ellipse cx="240" cy="352" rx="90" ry="16" fill="none"/>
+      <path d="M152,352 H328" fill="none" stroke="#f5ead8" stroke-width="2.5" stroke-linecap="round"/>
+      <g stroke="#f5ead8" stroke-linecap="round" stroke-linejoin="round">
+        <g fill="none" stroke-width="2.6">
+          <rect x="306" y="232" width="8" height="122" rx="4" transform="rotate(-2 310 293)"/>
+          <rect x="318" y="248" width="7" height="106" rx="3.5" transform="rotate(4 321 301)"/>
+        </g>
+        <g fill="none" stroke-width="2.2">
+          <path d="M305,272 H315"/><path d="M306,312 H316"/>
+          <path d="M317,288 H326"/><path d="M318,324 H327"/>
+        </g>
+      </g>
+      <g fill="none" stroke="#b7c79b" stroke-width="2.2" stroke-linejoin="round">
+        <path d="M0,0 C9,-3.5 19,-3 26,0 C19,3.5 9,3 0,0 Z" transform="translate(310 232) rotate(-46)"/>
+        <path d="M0,0 C9,-3.5 19,-3 26,0 C19,3.5 9,3 0,0 Z" transform="translate(311 242) rotate(-8)"/>
+        <path d="M0,0 C9,-3.5 19,-3 26,0 C19,3.5 9,3 0,0 Z" transform="translate(321 248) rotate(-34)"/>
+      </g>
+      <g fill="none" stroke="#f5ead8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M231,352 C226,320 227,286 233,222" stroke-width="4.6"/>
+        <path d="M251,352 C256,320 255,286 249,222" stroke-width="4.6"/>
+        <path d="M231,352 C224,344 218,341 210,341" stroke-width="2.5"/>
+        <path d="M251,352 C258,344 264,341 272,341" stroke-width="2.5"/>
+        <path d="M233,252 C214,250 196,245 172,239" stroke-width="3.6"/>
+      </g>
+      <path d="M172,220 C148,212 144,184 164,172 C152,148 170,122 196,128 C208,106 242,102 256,120 C282,106 312,120 312,146 C336,156 336,192 312,206 Q298,218 284,210 Q266,222 248,214 Q228,224 208,214 Q188,226 172,220 Z" fill="none" stroke="#b7c79b" stroke-width="3.5" stroke-linejoin="round"/>
+      <g fill="none" stroke="#b7c79b" stroke-width="2.4" stroke-linejoin="round">
+        <path d="M0,0 C-1,-4 -3,-6 -6,-8 C-14,-11 -17,-19 -10,-22 C-9,-19 -6,-16 -4,-15 C-9,-24 -7,-33 0,-36 C7,-33 9,-24 4,-15 C6,-16 9,-19 10,-22 C17,-19 14,-11 6,-8 C3,-6 1,-4 0,0 Z" transform="translate(234 253) rotate(180) scale(0.95)"/>
+        <path d="M0,0 C-1,-4 -3,-6 -6,-8 C-14,-11 -17,-19 -10,-22 C-9,-19 -6,-16 -4,-15 C-9,-24 -7,-33 0,-36 C7,-33 9,-24 4,-15 C6,-16 9,-19 10,-22 C17,-19 14,-11 6,-8 C3,-6 1,-4 0,0 Z" transform="translate(174 239) rotate(196) scale(0.92)"/>
+      </g>
+      <g fill="#dd8a4e" stroke="#f5ead8" stroke-width="2.2" stroke-linecap="round">
+        <path d="M206,217 V221" fill="none"/>
+        <circle cx="206" cy="227" r="6.2"/>
+        <path d="M286,212 V216" fill="none"/>
+        <circle cx="286" cy="222" r="5.6"/>
+      </g>
+      <g stroke="#f5ead8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M253,330 L257,354 Q278,362 299,354 L303,330 Z" fill="none" stroke-width="3"/>
+        <g clip-path="url(#aanganWellBody)" fill="none" stroke-width="2.2">
+          <path d="M251,339 H305"/><path d="M252,348 H304"/>
+          <path d="M266,328 V339"/><path d="M290,328 V339"/>
+          <path d="M254,339 V348"/><path d="M278,339 V348"/><path d="M302,339 V348"/>
+          <path d="M266,348 V362"/><path d="M290,348 V362"/>
+        </g>
+        <ellipse cx="278" cy="330" rx="25" ry="7.2" fill="none" stroke-width="2.6"/>
+      </g>
+      <path d="M154,356 L158,330 L163,348 L167,320 L172,345 L176,322 L181,342 L186,356 Z" fill="none" stroke="#b7c79b" stroke-width="2.8" stroke-linejoin="round"/>
+      <g stroke="#f5ead8" stroke-linecap="round" stroke-linejoin="round">
+        <g fill="none" stroke-width="2.2">
+          <path d="M194,244 V331"/><path d="M216,249 V331"/>
+        </g>
+        <rect x="188" y="328" width="33" height="7" rx="3.5" fill="none" stroke-width="2.4"/>
+      </g>
+      <g fill="none" stroke="#f5ead8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M100,262 L152,276 L152,356 L100,410 Z"/>
+        <g stroke-width="2.2">
+          <path d="M113,265.5 V396.5"/><path d="M126,269 V383"/><path d="M139,272.5 V369.5"/>
+          <path d="M100,336 L152,318"/>
+        </g>
+        <path d="M380,262 L328,276 L328,356 L380,410 Z"/>
+        <g stroke-width="2.2">
+          <path d="M367,265.5 V396.5"/><path d="M354,269 V383"/><path d="M341,272.5 V369.5"/>
+          <path d="M380,336 L328,318"/>
+        </g>
+        <rect x="88" y="252" width="14" height="158" rx="7" stroke-width="3.5"/>
+        <rect x="378" y="252" width="14" height="158" rx="7" stroke-width="3.5"/>
+        <circle cx="95" cy="242" r="7"/>
+        <circle cx="385" cy="242" r="7"/>
+        <path d="M56,412 H424" stroke-width="2.5"/>
+      </g>
+    </g>
+</svg>

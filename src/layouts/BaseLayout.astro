@@ -58,6 +58,9 @@ const isLanding = variant === 'landing';
 const siteRoot = new URL(import.meta.env.BASE_URL.replace(/\/?$/, '/'), Astro.site);
 const pageUrl = new URL(path, siteRoot).href;
 const ogImageUrl = new URL(await photoUrl(ogImage), Astro.site).href;
+// Files in public/ (favicons, the logo kit in public/brand/) are served
+// under the site's base path, so their URLs start with it.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <!doctype html>
@@ -67,6 +70,9 @@ const ogImageUrl = new URL(await photoUrl(ogImage), Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" href={`${base}favicon.ico`} sizes="any" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
     {isLanding ? (
       <meta name="robots" content="noindex, follow" />
     ) : (
@@ -88,7 +94,23 @@ const ogImageUrl = new URL(await photoUrl(ogImage), Astro.site).href;
       <header class="site-header">
         <div class="container header-inner is-centered">
           <a href="index.html" class="logo">
-            🏡 {SITE.name}
+            <span class="logo-mark" aria-hidden="true">
+              <img
+                class="logo-mark-light"
+                src={`${base}brand/aangan-mark-reversed-for-dark-backgrounds.svg`}
+                alt=""
+                width="38"
+                height="40"
+              />
+              <img
+                class="logo-mark-colour"
+                src={`${base}brand/aangan-mark-full-colour.svg`}
+                alt=""
+                width="38"
+                height="40"
+              />
+            </span>
+            {SITE.name}
           </a>
         </div>
       </header>
