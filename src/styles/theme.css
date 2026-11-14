@@ -21,6 +21,12 @@
   --color-maroon: #7a2a22;
   --color-maroon-dark: #5c1f19; /* hover/active state of primary */
 
+  /* Buttons (Siddhant, 2026-11-14): a very deep maroon with
+     turmeric-yellow text. Hover lightens slightly. */
+  --color-button: #3c0008;
+  --color-button-hover: #5a0a14;
+  --color-button-text: #f2b01e; /* turmeric yellow */
+
   --color-forest: #3f5d42; /* secondary brand color */
   --color-forest-dark: #2e4531;
 
