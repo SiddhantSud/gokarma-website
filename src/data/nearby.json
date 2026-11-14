@@ -71,7 +71,8 @@
       "description": "A few minutes from the gate.",
       "walk": "4–5 min walk",
       "icon": "cave",
-      "image": null
+      "image": "images/places/shiva-cave.webp",
+      "alt": "Inside the Shiva cave near Kudle: a blue shrine doorway and a small linga in a red-lit rock chamber"
     }
   ]
 }
