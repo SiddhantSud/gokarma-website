@@ -11,6 +11,9 @@ import facts from '../data/facts.json';
 export const SITE = {
   name: 'Aangan by Gokarma Living',
   shortName: 'Aangan',
+  // The business behind Aangan. Shown under the logo, in the footer
+  // and in the data Google reads, so the site clearly belongs to it.
+  brand: 'Gokarma Living',
 
   // ---- Rating, price and contact details ----
   // These live in src/data/facts.json so they can be edited from

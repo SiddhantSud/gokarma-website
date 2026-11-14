@@ -23,6 +23,14 @@
 
 /* Astro wraps the photo in <picture>; without this the grid
    column grows to the photo's full pixel width. */
+/* The Aangan seal badge above the Our Story heading (min 96px per the logo kit). */
+.story-seal {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin-bottom: 12px;
+}
+
 .story-grid > picture {
   display: block;
   min-width: 0;

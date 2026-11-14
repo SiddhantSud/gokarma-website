@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 380" width="240" height="380" role="img" aria-label="Aangan simplified mark">
+<title>Aangan simplified mark</title>
+<defs><clipPath id="aanganWellBody"><path d="M253,330 L257,354 Q278,362 299,354 L303,330 Z"></path></clipPath></defs>
+<g transform="translate(-120,-79)">
+      <path d="M240,126 C304,126 340,170 333,214 C356,242 334,286 294,283 C272,299 208,299 186,283 C146,287 124,242 147,214 C140,170 176,126 240,126 Z" fill="#fbf6ee" stroke="#3c0008" stroke-width="18" stroke-linejoin="round"/>
+      <path d="M240,404 V288" fill="none" stroke="#3c0008" stroke-width="22" stroke-linecap="round"/>
+      <path d="M150,412 H330" fill="none" stroke="#3c0008" stroke-width="20" stroke-linecap="round"/>
+    </g>
+</svg>

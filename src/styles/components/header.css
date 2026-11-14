@@ -53,7 +53,40 @@
     text-shadow var(--transition-medium);
 }
 
-/* The word after the house icon cycles through languages
+/* The courtyard mark from the logo kit, in front of the name.
+   The cream copy shows over the hero photo; the full-colour copy
+   takes over once the header turns to glass (.is-scrolled). */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-mark {
+  display: inline-grid;
+  flex: none;
+}
+
+.logo-mark img {
+  grid-area: 1 / 1;
+  width: 46px;
+  height: 49px;
+  transition: opacity var(--transition-medium);
+}
+
+.logo-mark-colour {
+  opacity: 0;
+}
+
+.site-header.is-scrolled .logo-mark-light {
+  opacity: 0;
+}
+
+.site-header.is-scrolled .logo-mark-colour {
+  opacity: 1;
+}
+
+/* The word after the logo mark cycles through languages
    (src/scripts/site.ts). A fixed width keeps the nav from
    shifting as the word changes length. */
 .logo-word {
@@ -61,6 +94,23 @@
   width: 5em;
   white-space: nowrap;
   transition: opacity 0.3s ease;
+}
+
+/* "Aangan" with "by Gokarma Living" underneath, so every page
+   says whose place this is. */
+.logo-text {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-by {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .logo-word.is-fading {

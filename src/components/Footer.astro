@@ -6,13 +6,31 @@
 import { SITE, whatsappLink } from '../config/site';
 
 const year = new Date().getFullYear();
+// The cream "reversed" seal from the logo kit (public/brand/), made
+// for dark grounds like this maroon footer.
+const seal = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/aangan-seal-reversed-for-dark-backgrounds.svg`;
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>
-      &copy; <span id="year">{year}</span> {SITE.name}. All rights reserved.
-    </p>
+    <img
+      class="footer-seal"
+      src={seal}
+      alt="Aangan by Gokarma Living seal"
+      width="104"
+      height="104"
+      loading="lazy"
+    />
+    <div class="footer-brand">
+      <p class="footer-name">{SITE.name}</p>
+      <p>
+        A {SITE.brand} hostel &amp; cafe · {SITE.address.street}, {SITE.address.locality}{' '}
+        {SITE.address.postalCode}
+      </p>
+      <p>
+        &copy; <span id="year">{year}</span> {SITE.brand}. All rights reserved.
+      </p>
+    </div>
     <div class="socials">
       <a href={SITE.instagramUrl} target="_blank" rel="noopener">
         Instagram

@@ -124,6 +124,14 @@ data.
    "Related Reads".
 3. Add its address to `public/sitemap.xml`.
 
+### The Aangan logo
+
+The logo files are in `public/brand/` (what the site shows) and the full
+kit with its usage rules is in `brand-kit/`. To swap a logo, replace the
+file in `public/brand/` with a file of the same name from the kit. The
+browser tab icons are `public/favicon.*`, `apple-touch-icon.png` and
+`icon-192/512.png`.
+
 ### Online booking (StayFlexi)
 
 The "pick your dates" form on the Home page, `book.html` and `landing.html`

@@ -218,6 +218,21 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
   `C:\Users\siddh\.claude\plans\purrfect-whistling-hejlsberg.md` on
   Siddhant's machine.
 
+### Logo (Aangan)
+
+- Siddhant designed the logo for **Aangan** (not Gokarma Living), delivered
+  2026-11-14. The full kit (SVGs, README with usage rules, preview sheet)
+  is kept in `brand-kit/`, outside the build. Follow `brand-kit/README.md`:
+  no stretching, recolouring or effects, clear space of 1/4 of the width,
+  seal at 96px or more.
+- Published copies live in `public/brand/` and are used as: the courtyard
+  mark in the header (cream `-reversed` over the hero, full colour once the
+  header turns to glass), the reversed seal in the footer, and the
+  full-colour seal above the Our Story heading. Favicons, apple-touch icon
+  and `site.webmanifest` (icon-192/512) are in `public/`.
+- The kit's fonts (Caprasimo, Figtree) and palette are not applied to the
+  site yet. That's Siddhant's call.
+
 ### Theming
 
 **All colors and fonts are CSS variables in `src/styles/theme.css`.** Never

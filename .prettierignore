@@ -9,3 +9,6 @@ photo-library/
 src/content/
 src/data/*.json
 public/admin/key.json
+
+# The Aangan logo kit as delivered by the designer
+brand-kit/
