@@ -69,8 +69,8 @@
 
 .logo-mark img {
   grid-area: 1 / 1;
-  width: 38px;
-  height: 40px;
+  width: 46px;
+  height: 49px;
   transition: opacity var(--transition-medium);
 }
 

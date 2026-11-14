@@ -2,6 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
 import Photo from '../components/Photo.astro';
+
+// The full-colour Aangan seal from the logo kit (public/brand/), shown
+// as a badge above the heading. The kit asks for at least 96px.
+const seal = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/aangan-seal-full-colour.svg`;
 ---
 
 <BaseLayout
@@ -22,6 +26,13 @@ import Photo from '../components/Photo.astro';
       />
 
       <div class="story-text reveal">
+        <img
+          class="story-seal"
+          src={seal}
+          alt="Aangan by GoKarma Living seal"
+          width="112"
+          height="112"
+        />
         <span class="section-eyebrow">Our Story</span>
         <h1>Meet Kushal &amp; Geetika</h1>
         <p class="story-intro">
