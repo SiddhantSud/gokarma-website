@@ -51,6 +51,18 @@ const jsonLd = {
           loading="eager"
         />
       </div>
+      {data.imageCredit && (
+        <p class="photo-credit">
+          Photo:{' '}
+          {data.imageCreditUrl ? (
+            <a href={data.imageCreditUrl} target="_blank" rel="noopener">
+              {data.imageCredit}
+            </a>
+          ) : (
+            data.imageCredit
+          )}
+        </p>
+      )}
 
       <div class="article-body">
         <span class="section-eyebrow">{data.tag}</span>
@@ -59,6 +71,45 @@ const jsonLd = {
         {data.author && <p class="article-meta">By {data.author}</p>}
 
         <slot />
+
+        {data.gallery.length > 0 && (
+          <div class="article-gallery">
+            {data.gallery.map((item) => (
+              <figure>
+                <div class="photo-box">
+                  <Photo src={item.image} alt={item.alt} sizes="(max-width:800px) 100vw, 360px" />
+                </div>
+                {item.credit && (
+                  <figcaption class="photo-credit">
+                    Photo:{' '}
+                    {item.creditUrl ? (
+                      <a href={item.creditUrl} target="_blank" rel="noopener">
+                        {item.credit}
+                      </a>
+                    ) : (
+                      item.credit
+                    )}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        )}
+
+        {data.sources.length > 0 && (
+          <div class="article-sources">
+            <h2>Read and watch more</h2>
+            <ul>
+              {data.sources.map((source) => (
+                <li>
+                  <a href={source.url} target="_blank" rel="noopener">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {data.ctaTitle && (
           <div class="cta-banner">

@@ -203,6 +203,14 @@ export const ARTICLE_FIELDS = [
   },
   { key: 'image', label: 'Main photo', type: 'photo' },
   { key: 'imageAlt', label: 'Describe the main photo', type: 'text' },
+  {
+    key: 'imageCredit',
+    label: 'Main photo credit',
+    type: 'text',
+    optional: true,
+    hint: 'Only for photos that are not ours, e.g. "Name, CC BY-SA 4.0"',
+  },
+  { key: 'imageCreditUrl', label: 'Main photo credit link', type: 'text', optional: true },
   { key: 'excerpt', label: 'Short summary for the card', type: 'longtext' },
   {
     key: 'description',
@@ -228,6 +236,10 @@ const FRONTMATTER_ORDER = [
   'excerpt',
   'image',
   'imageAlt',
+  'imageCredit',
+  'imageCreditUrl',
+  'gallery',
+  'sources',
   'date',
   'order',
   'ctaTitle',
@@ -247,8 +259,9 @@ export function parseArticle(text) {
     if (!pair) continue;
     const [, key, raw] = pair;
     let value = raw.trim();
-    if (value.startsWith('"')) value = JSON.parse(value);
-    else if (value.startsWith("'")) value = value.slice(1, -1).replace(/''/g, "'");
+    if (value.startsWith('"') || value.startsWith('[') || value.startsWith('{')) {
+      value = JSON.parse(value);
+    } else if (value.startsWith("'")) value = value.slice(1, -1).replace(/''/g, "'");
     else if (value === 'true' || value === 'false') value = value === 'true';
     else if (/^-?\d+(\.\d+)?$/.test(value)) value = Number(value);
     data[key] = value;
@@ -266,7 +279,9 @@ export function serialiseArticle(data, body) {
   for (const key of keys) {
     const value = data[key];
     if (value === undefined || value === null || value === '') continue;
+    if (Array.isArray(value) && !value.length) continue;
     if (typeof value === 'boolean' || typeof value === 'number') lines.push(`${key}: ${value}`);
+    else if (typeof value === 'object') lines.push(`${key}: ${JSON.stringify(value)}`);
     else lines.push(`${key}: ${JSON.stringify(String(value))}`);
   }
   lines.push('---', '');

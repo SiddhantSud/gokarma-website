@@ -83,6 +83,12 @@ p {
   margin: 0 auto 40px auto;
 }
 
+/* An intro paragraph as wide as the content below it (e.g. the
+   Home photo strip), instead of the narrower default. */
+.section-subtitle.full-width {
+  max-width: none;
+}
+
 .section-eyebrow {
   display: block;
   text-align: center;

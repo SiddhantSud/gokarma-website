@@ -28,6 +28,22 @@ const guide = defineCollection({
     excerpt: z.string(),
     image: z.string(),
     imageAlt: z.string(),
+    /** Credit for a main photo that isn't Aangan's own (licence requirement). */
+    imageCredit: z.string().optional(),
+    imageCreditUrl: z.string().optional(),
+    /** Extra photos shown under the article, each with an optional credit. */
+    gallery: z
+      .array(
+        z.object({
+          image: z.string(),
+          alt: z.string(),
+          credit: z.string().optional(),
+          creditUrl: z.string().optional(),
+        }),
+      )
+      .default([]),
+    /** Blogs, videos and official pages the article draws on. */
+    sources: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
     date: z.coerce.date(),
     /** Who wrote it; leave empty for articles by Aangan. */
     author: z.string().optional(),

@@ -24,9 +24,11 @@ import { isValidBookingUrl } from '../lib/booking';
 
 interface Props {
   class?: string;
+  /** Show the "what happens next" line under the button. Default: true. */
+  note?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, note = true } = Astro.props;
 const sendsToStayflexi = isValidBookingUrl(BOOKING.stayflexiBookingUrl);
 const guestCounts = Array.from({ length: BOOKING.maxGuests }, (_, i) => i + 1);
 
@@ -71,7 +73,7 @@ const nextStepNote = sendsToStayflexi
     <button type="submit" class="btn btn-primary">
       Check Availability
     </button>
-    <p class="booking-note">{nextStepNote}</p>
+    {note && <p class="booking-note">{nextStepNote}</p>}
   </form>
 </div>
 
