@@ -5,7 +5,7 @@
 // The glass-on-scroll effect and the mobile menu button are
 // wired up in src/scripts/site.ts.
 // ============================================================
-import { AANGAN_WORDS } from '../config/site';
+import { AANGAN_WORDS, SITE } from '../config/site';
 
 interface Props {
   page?: string;
@@ -32,7 +32,7 @@ const links = [
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo" aria-label="Aangan, home page">
+    <a href="index.html" class="logo" aria-label={`${SITE.name}, home page`}>
       <span class="logo-mark" aria-hidden="true">
         <img
           class="logo-mark-light"
@@ -49,8 +49,11 @@ const links = [
           height="49"
         />
       </span>
-      <span class="logo-word" data-words={JSON.stringify(AANGAN_WORDS)} aria-hidden="true">
-        Aangan
+      <span class="logo-text" aria-hidden="true">
+        <span class="logo-word" data-words={JSON.stringify(AANGAN_WORDS)}>
+          Aangan
+        </span>
+        <span class="logo-by">by {SITE.brand}</span>
       </span>
     </a>
 

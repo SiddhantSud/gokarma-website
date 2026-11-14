@@ -16,14 +16,21 @@ const seal = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/aangan-seal-
     <img
       class="footer-seal"
       src={seal}
-      alt="Aangan by GoKarma Living seal"
+      alt="Aangan by Gokarma Living seal"
       width="104"
       height="104"
       loading="lazy"
     />
-    <p>
-      &copy; <span id="year">{year}</span> {SITE.name}. All rights reserved.
-    </p>
+    <div class="footer-brand">
+      <p class="footer-name">{SITE.name}</p>
+      <p>
+        A {SITE.brand} hostel &amp; cafe · {SITE.address.street}, {SITE.address.locality}{' '}
+        {SITE.address.postalCode}
+      </p>
+      <p>
+        &copy; <span id="year">{year}</span> {SITE.brand}. All rights reserved.
+      </p>
+    </div>
     <div class="socials">
       <a href={SITE.instagramUrl} target="_blank" rel="noopener">
         Instagram

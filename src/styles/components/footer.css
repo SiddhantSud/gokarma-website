@@ -25,6 +25,20 @@
   flex: none;
 }
 
+/* Who runs the place, the address and the copyright line. */
+.footer-brand {
+  flex: 1 1 260px;
+}
+
+.footer-brand p {
+  margin: 0 0 4px;
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
 /* Landing page: a single centered line. */
 .footer-inner.is-centered {
   justify-content: center;

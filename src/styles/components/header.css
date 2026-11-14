@@ -96,6 +96,23 @@
   transition: opacity 0.3s ease;
 }
 
+/* "Aangan" with "by Gokarma Living" underneath, so every page
+   says whose place this is. */
+.logo-text {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-by {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
 .logo-word.is-fading {
   opacity: 0;
 }
