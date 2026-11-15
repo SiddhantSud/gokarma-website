@@ -10,7 +10,7 @@
 .marquee {
   overflow: hidden;
   background: var(--color-button);
-  padding: 16px 0;
+  padding: 10px 0;
 }
 
 .marquee-track {
@@ -54,4 +54,10 @@
   .marquee-track {
     animation: none;
   }
+}
+
+/* The section right after the banner starts closer to it, so the
+   banner reads as the top edge of that block. */
+.marquee + .section-photo {
+  padding-top: clamp(20px, 3vw, 36px);
 }

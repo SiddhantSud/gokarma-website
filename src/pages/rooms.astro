@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
 import Photo from '../components/Photo.astro';
 import RoomCard from '../components/RoomCard.astro';
-import { SITE } from '../config/site';
 import { ROOMS } from '../data/rooms';
 
 // Extra photos of each room, shown under the room cards.
@@ -14,14 +13,12 @@ const roomPhotos = [
       { src: 'rooms/4-bed-dorm-2', alt: '4-bed dorm, alternate view' },
       { src: 'rooms/4-bed-dorm-3', alt: '4-bed dorm, alternate view' },
       { src: 'rooms/4-bed-dorm-bathroom', alt: '4-bed dorm attached bathroom' },
-    ],
-  },
-  {
-    name: '6-Bed Mixed Dorm',
-    photos: [
-      { src: 'rooms/6-bed-dorm-3', alt: '6-bed dorm, alternate view' },
-      { src: 'rooms/6-bed-dorm-7', alt: '6-bed dorm, alternate view' },
-      { src: 'rooms/6-bed-dorm-bathroom-1', alt: '6-bed dorm attached bathroom' },
+      // The second dorm room. It used to sleep six and is now a 4-bed
+      // dorm too (owners, 2026-11-15), so its photos live here.
+      { src: 'rooms/6-bed-dorm-1', alt: 'The second mixed dorm room with bunk beds' },
+      { src: 'rooms/6-bed-dorm-3', alt: 'The second mixed dorm room, alternate view' },
+      { src: 'rooms/6-bed-dorm-7', alt: 'The second mixed dorm room, alternate view' },
+      { src: 'rooms/6-bed-dorm-bathroom-1', alt: 'Attached bathroom of the second dorm room' },
     ],
   },
   {
@@ -37,7 +34,7 @@ const roomPhotos = [
 
 <BaseLayout
   title="Rooms & Rates | Aangan by Gokarma Living"
-  description="4-bed and 6-bed mixed dorms with attached bathrooms, plus a private Vintage Room with hand-painted walls — see the rooms and book your stay."
+  description="4-bed mixed dorms with attached bathrooms, plus a private Vintage Room with hand-painted walls — see the rooms and book your stay."
   path="rooms.html"
   page="rooms"
   ogImage="rooms/4-bed-dorm-1"
@@ -47,8 +44,8 @@ const roomPhotos = [
       <span class="section-eyebrow">Where You'll Sleep</span>
       <h1>Rooms &amp; Rates</h1>
       <p class="section-subtitle">
-        Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Rates change with season and
-        demand, so pick your dates to check exact pricing and availability.
+        Rates change with season and demand, so pick your dates to check exact pricing and
+        availability.
       </p>
     </div>
   </PhotoSection>

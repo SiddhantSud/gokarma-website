@@ -45,6 +45,39 @@
   border-radius: var(--radius-small);
 }
 
+/* The date written out as "15 Nov 2026" over the date field
+   (BookingWidget.astro). The field's own numeric text is hidden
+   only once the script is running, so it still works without it. */
+.booking-field .date-wrap {
+  position: relative;
+  display: block;
+}
+
+.booking-field .date-display {
+  display: none;
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--color-text);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.has-date-display .date-display {
+  display: block;
+}
+
+.has-date-display input[type='date'] {
+  color: transparent;
+}
+
+.has-date-display input[type='date']::-webkit-datetime-edit {
+  opacity: 0;
+}
+
 .booking-field input:focus,
 .booking-field select:focus {
   outline: 2px solid var(--color-pop);
