@@ -1,5 +1,5 @@
 ---
-title: "Kudle Hilltop: Sunsets Five Minutes from Your Bunk"
+title: "Jatayu Teerth: Sunsets Five Minutes from Your Bunk"
 description: "Where to watch the sunset on Kudle hilltop in Gokarna, a five-minute walk from Aangan: when to go, what to bring, and how to get the most of it."
 tag: "Walkable from Aangan"
 subtitle: "A 5-minute walk from Aangan"
@@ -23,7 +23,7 @@ Aim to be up there 30 to 45 minutes before sunset. The light over the sea change
 
 ## Finding your spot
 
-The hillock above the steps down to Kudle Beach looks straight over the bay, and quieter rocks sit along the cliff towards Om Beach. Stay on the open paths: parts of the hill are private property, so don't climb fences or cut through gated land.
+Ask us at Aangan before you head up. We'll point you to the best spot away from the crowd. Stay on the open paths: parts of the hill are private property, so don't climb fences or cut through gated land.
 
 ## What to bring
 

@@ -20,12 +20,11 @@ const { page } = Astro.props;
 const brand = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/`;
 
 // The "Aangan" name on the left is the link back to Home, so
-// Home isn't repeated in the list.
+// Home isn't repeated in the list. The Rooms and Gallery pages
+// are reached from Home and Book Now rather than from the nav.
 const links = [
-  { href: 'rooms.html', page: 'rooms', label: 'Stay' },
   { href: 'story.html', page: 'story', label: 'Our Story' },
   { href: 'guide.html', page: 'guide', label: 'Gokarna Guide' },
-  { href: 'gallery.html', page: 'gallery', label: 'Gallery' },
   { href: 'contact.html', page: 'contact', label: 'Contact Us' },
 ];
 ---

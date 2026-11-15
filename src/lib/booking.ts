@@ -76,3 +76,16 @@ export function buildWhatsappBookingUrl(
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`;
 }
+
+// ---- Dates written out for people ----
+// "2026-11-15" -> "15 Nov 2026". Month names can't be misread the
+// way 03/04/2026 can. Built by hand (not toLocaleDateString) so
+// every visitor sees the same clear format.
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function formatDateForDisplay(dateValue: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateValue);
+  if (!match) return '';
+  const [, year, month, day] = match;
+  return `${Number(day)} ${MONTHS[Number(month) - 1]} ${year}`;
+}

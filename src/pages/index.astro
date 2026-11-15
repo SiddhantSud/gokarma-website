@@ -97,7 +97,9 @@ function lodging() {
   </section>
 
   <!-- ============ TRUST MARQUEE ============ -->
-  <Marquee items={[ratingLine, 'Kudle Hilltop, Gokarna', 'Loved by Solo Travellers']} />
+  <Marquee
+    items={[ratingLine, 'Backpacker Friendly', 'Furry Friends', 'Beach Treks', 'Board Game Nights']}
+  />
 
   <!-- ============ THE VIBE + PHOTO STRIP ============ -->
   <PhotoSection bg="scenery/cottage-row">
@@ -124,9 +126,7 @@ function lodging() {
     <div class="container" id="check-availability">
       <span class="section-eyebrow">Book Direct</span>
       <h2 class="section-title">Check Availability</h2>
-      <p class="section-subtitle">
-        Dorm beds start from around ₹{SITE.dormPriceFrom}/night. Pick your dates to see live rates.
-      </p>
+      <p class="section-subtitle">Dorms and private rooms available</p>
       <BookingWidget class="booking-inline" note={false} />
     </div>
   </PhotoSection>
@@ -181,8 +181,7 @@ function lodging() {
       <span class="section-eyebrow">Where You'll Sleep</span>
       <h2 class="section-title">Rooms</h2>
       <p class="section-subtitle">
-        Dorm beds start from around ₹{SITE.dormPriceFrom}/night — pick your dates to check exact
-        rates.
+        Dorms and private rooms available. Pick your dates to check exact rates.
       </p>
       <div class="auto-grid grid-min-280">
         {ROOMS.slice(0, 3).map((room) => (

@@ -41,11 +41,17 @@ const nextStepNote = sendsToStayflexi
   <form class="booking-form" data-booking-form>
     <label class="booking-field">
       <span>Check-in</span>
-      <input type="date" name="checkin" required />
+      <span class="date-wrap">
+        <input type="date" name="checkin" required />
+        <span class="date-display" aria-hidden="true" />
+      </span>
     </label>
     <label class="booking-field">
       <span>Check-out</span>
-      <input type="date" name="checkout" required />
+      <span class="date-wrap">
+        <input type="date" name="checkout" required />
+        <span class="date-display" aria-hidden="true" />
+      </span>
     </label>
 
     {!sendsToStayflexi && (
@@ -84,6 +90,7 @@ const nextStepNote = sendsToStayflexi
     addDays,
     buildStayflexiUrl,
     buildWhatsappBookingUrl,
+    formatDateForDisplay,
     isValidBookingUrl,
     toDateValue,
   } from '../lib/booking';
@@ -105,6 +112,32 @@ const nextStepNote = sendsToStayflexi
 
     if (roomSelect && preselectedRoom) roomSelect.value = preselectedRoom;
 
+    // Browsers show dates in the visitor's own numeric format
+    // (03/04/2026 is March in the US, April in India). So the
+    // date is written out over the field as "15 Nov 2026"; the
+    // field underneath still opens the normal calendar.
+    const showDates = () => {
+      [checkin, checkout].forEach((input) => {
+        const display = input.parentElement?.querySelector('.date-display');
+        if (display) display.textContent = formatDateForDisplay(input.value);
+      });
+    };
+    form.classList.add('has-date-display');
+    showDates();
+    [checkin, checkout].forEach((input) => {
+      input.addEventListener('input', showDates);
+      input.addEventListener('change', showDates);
+      // Clicking anywhere in the field opens the calendar.
+      input.addEventListener('click', () => {
+        try {
+          input.showPicker?.();
+        } catch {
+          // Some browsers only allow this in certain cases; the
+          // field's own calendar button still works.
+        }
+      });
+    });
+
     // Moving check-in forward pushes check-out along with it, so
     // the form can never hold a zero- or negative-night stay.
     checkin.addEventListener('change', () => {
@@ -114,6 +147,7 @@ const nextStepNote = sendsToStayflexi
       if (!checkout.value || checkout.value < earliestCheckout) {
         checkout.value = earliestCheckout;
       }
+      showDates();
     });
 
     form.addEventListener('submit', (event) => {

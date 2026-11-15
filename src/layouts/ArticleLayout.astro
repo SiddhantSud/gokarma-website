@@ -1,8 +1,10 @@
 ---
 // ============================================================
-// Layout for a Gokarna Guide article: hero photo, title block,
-// the article text, an optional "stay with us" box, then
-// "Related reads". Adds the Article structured data Google
+// Layout for a Gokarna Guide article: hero photo, title, the
+// article text, a photo slideshow, an optional "stay with us"
+// box, then "Related reads". The tag, the line under the title
+// and the list of sources are kept in the article files but not
+// shown on the page (Siddhant, 2026-11-15). Adds the Article structured data Google
 // reads. Everything comes from the article's Markdown file in
 // src/content/guide/ (see src/content.config.ts for the fields).
 // ============================================================
@@ -65,17 +67,15 @@ const jsonLd = {
       )}
 
       <div class="article-body">
-        <span class="section-eyebrow">{data.tag}</span>
         <h1>{data.title}</h1>
-        {data.subtitle && <p class="article-meta">{data.subtitle}</p>}
         {data.author && <p class="article-meta">By {data.author}</p>}
 
         <slot />
 
         {data.gallery.length > 0 && (
-          <div class="article-gallery">
-            {data.gallery.map((item) => (
-              <figure>
+          <div class="article-gallery" data-slideshow>
+            {data.gallery.map((item, i) => (
+              <figure class:list={{ 'is-active': i === 0 }}>
                 <div class="photo-box">
                   <Photo src={item.image} alt={item.alt} sizes="(max-width:800px) 100vw, 360px" />
                 </div>
@@ -93,21 +93,6 @@ const jsonLd = {
                 )}
               </figure>
             ))}
-          </div>
-        )}
-
-        {data.sources.length > 0 && (
-          <div class="article-sources">
-            <h2>Read and watch more</h2>
-            <ul>
-              {data.sources.map((source) => (
-                <li>
-                  <a href={source.url} target="_blank" rel="noopener">
-                    {source.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         )}
 
@@ -130,3 +115,24 @@ const jsonLd = {
     </div>
   </PhotoSection>
 </BaseLayout>
+
+<script>
+  // The article's extra photos change on their own every few
+  // seconds. Visitors who have asked their device to reduce
+  // motion see all the photos side by side instead (guide.css).
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-slideshow]').forEach((show) => {
+    const slides = Array.from(show.querySelectorAll('figure'));
+    if (reduceMotion || slides.length < 2) return;
+
+    const SHOW_FOR_MS = 4500;
+    let index = 0;
+    show.classList.add('is-rotating');
+    window.setInterval(() => {
+      slides[index].classList.remove('is-active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('is-active');
+    }, SHOW_FOR_MS);
+  });
+</script>

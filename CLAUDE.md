@@ -10,7 +10,7 @@ the rules that aren't obvious from the code, and the current state of things.
 ## 1. What this is and who it's for
 
 - **The business**: _Aangan by Gokarma Living_, a backpacker hostel + cafe on
-  Kudle hilltop, Gokarna, Karnataka, India. Dorms (4-bed and 6-bed mixed) plus a
+  Kudle hilltop, Gokarna, Karnataka, India. Dorms (4-bed mixed, non-AC) plus a
   private "Vintage Room", with an on-site cafe.
 - **The owners**: **Kushal & Geetika**.
 - **Who builds it**: **Siddhant** (GitHub `SiddhantSud`) builds and maintains the
@@ -362,6 +362,18 @@ still haven't chosen a full brand palette.
     Temple, Kudle Beach, Main Beach and Shiva caves cards
     (`src/data/nearby.ts`, icon shown until then), and photos of the cats
     and dogs, garden/trees, a work/Wi-Fi corner, art/murals.
+- **Refinements (2026-11-15, Siddhant):** nav is Our Story / Gokarna Guide /
+  Contact Us + Book Now (Rooms and Gallery pages still exist, reached from
+  Home and Book Now). **All rooms are non-AC.** The old 6-bed dorm is now a
+  4-bed dorm, so there is one "4-Bed Mixed Dorm" card and its photos
+  (`6-bed-dorm-*` files) sit under it on the Rooms page. The "from ₹850"
+  line is removed from every page (`dormPriceFrom` is unused). The sunset
+  spot is called **Jatayu Teerth** (article URL unchanged). Articles no
+  longer show the tag, the line under the title or "Read and watch more";
+  gallery photos auto-change. Photo credits for the Wikimedia photos stay,
+  because their licences require them. Booking dates display as
+  "15 Nov 2026" over the native date field. Siddhant will send his own
+  photos for the articles to replace the Wikimedia ones.
 - **Waiting on the owners** (through Siddhant):
   - First-person voice copy for Our Story and other owner-voice sections (see
     `content-questionnaire.md`). The voice rewrite is paused until real
