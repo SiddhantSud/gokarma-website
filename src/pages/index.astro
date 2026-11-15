@@ -4,7 +4,6 @@ import PhotoSection from '../components/PhotoSection.astro';
 import Marquee from '../components/Marquee.astro';
 import BookingWidget from '../components/BookingWidget.astro';
 import RoomCard from '../components/RoomCard.astro';
-import GuideCard from '../components/GuideCard.astro';
 import VibeStrip from '../components/VibeStrip.astro';
 import Nearby from '../components/Nearby.astro';
 import Amenities from '../components/Amenities.astro';
@@ -12,11 +11,9 @@ import Reviews from '../components/Reviews.astro';
 import GettingHere from '../components/GettingHere.astro';
 import { SITE } from '../config/site';
 import { ROOMS } from '../data/rooms';
-import { getGuideArticles } from '../lib/guide';
 import { photoUrl } from '../lib/images';
 
 const heroBg = await photoUrl('property/property-4');
-const guideArticles = await getGuideArticles();
 const ratingLine = `${SITE.rating}★ on Google · ${SITE.reviewCount} Reviews`;
 
 // Business details Google reads (schema.org LodgingBusiness).
@@ -196,24 +193,8 @@ function lodging() {
     </div>
   </PhotoSection>
 
-  <!-- ============ GOKARNA GUIDE TEASER ============ -->
-  <PhotoSection bg="scenery/waterfall" panel="alt">
-    <div class="container">
-      <span class="section-eyebrow">The Gokarna Guide</span>
-      <h2 class="section-title">Plan Your Trip</h2>
-      <p class="section-subtitle">
-        Real, practical guides for backpacking, solo travel, and finding Gokarna's offbeat side.
-      </p>
-      <div class="auto-grid grid-min-260">
-        {guideArticles.map((article) => (
-          <GuideCard article={article} />
-        ))}
-      </div>
-    </div>
-  </PhotoSection>
-
   <!-- ============ LOCATION TEASER + FINAL CTA ============ -->
-  <PhotoSection bg="scenery/river-pool" panelClass="text-center">
+  <PhotoSection bg="scenery/river-pool" panel="alt" panelClass="text-center">
     <div class="container">
       <span class="section-eyebrow">Kudle Beach Road, Gokarna</span>
       <h2 class="section-title">Ready to Stay?</h2>

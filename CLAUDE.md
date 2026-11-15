@@ -344,7 +344,7 @@ still haven't chosen a full brand palette.
 - **Home redesign** (2026-11-12, branch `home-redesign`): nav reads Stay /
   Our Story / Gokarna Guide / Gallery / Contact Us, and "Aangan" links home.
   Home order is hero, vibe + photo strip, walkable places, amenities, guest
-  reviews, how to reach, rooms, guide, then CTA. The amenities and
+  reviews, how to reach, rooms, then CTA (the "Plan Your Trip" guide teaser was removed 2026-11-15). The amenities and
   how-to-reach styling follow revibehostel.com, which Siddhant gave as the
   reference.
   - Follow-up (same day): the booking form moved from the hero to a "Check
