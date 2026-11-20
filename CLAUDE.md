@@ -431,3 +431,29 @@ still haven't chosen a full brand palette.
 - **Guest story submissions**: `SubmitStory.astro` on the Guide page sends
   stories by email (`submissionsEmail` in facts.json) or, while that's
   empty, by WhatsApp. Nothing auto-publishes.
+
+## 13. Guest check-in (checkin.html)
+
+- Added 2026-11-20 at Siddhant's request, to replace photographing IDs into a
+  WhatsApp chat. `src/pages/checkin.astro` + `src/scripts/checkin.ts`, opened
+  from a QR card at the counter (`checkin.html?code=<desk code>`). Uses the
+  landing layout (noindex, no nav), disallowed in robots.txt, not in the
+  sitemap.
+- Two paths: Indian (Aadhaar / Voter ID / Driving Licence, name, DOB,
+  address) and foreign (passport, visa and every Form C field). Both end with
+  the owners' indemnity text (`src/data/house-rules.ts`, word for word from
+  their Google Doc except "Gokarna Living" corrected to "Gokarma Living") and
+  a typed-name signature.
+- Photos are shrunk in the browser (1600px, JPEG 0.82) and posted as JSON
+  (text/plain, no CORS preflight) to a **Google Apps Script web app** in the
+  hosts' own Google account (`checkin-backend/`, copied in by hand, not part
+  of the build). It saves photos to a private Drive folder as
+  `First-Last_YYYY-MM-DD_<kind>.jpg` and rows to a private Sheet, and every 5
+  minutes OCRs new IDs (Drive API) to flag mismatches (`Checks.gs`, tested by
+  `node checkin-backend/test-checks.mjs`).
+- **Guest data must never touch this repo or the site.** The script URL is
+  write-only and needs the desk code (Script Properties, not in the repo).
+  Only the last 4 Aadhaar digits are stored in the sheet.
+- The script URL goes in `src/config/checkin.ts` (`endpointUrl`). While it is
+  empty, the page says to check in at the counter. CSP `connect-src` allows
+  script.google.com and script.googleusercontent.com for this.

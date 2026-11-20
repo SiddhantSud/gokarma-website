@@ -149,6 +149,20 @@ chat with the dates, guest count and room already written into the message.
 Booking-page colors, partial payments and add-ons are all set in that same
 StayFlexi **Booking engine** settings screen, not in this code.
 
+### Guest check-in (ID photos and Form C)
+
+`checkin.html` is the page guests open from the QR card at the counter. They
+choose Indian or another passport, fill in their details, take a photo of
+their ID and sign the house rules. Everything goes to a private Google Sheet
+and Drive folder in the hosts' Google account, never to this website or the
+GitHub repo. Setup, daily use and how to file Form C from the sheet are in
+[`checkin-backend/README.md`](checkin-backend/README.md).
+
+- The web address it sends to: `src/config/checkin.ts`.
+- The house rules guests agree to: `src/data/house-rules.ts` (change
+  `rulesVersion` in `src/config/checkin.ts` when you change them).
+- The page is hidden from search engines and isn't linked from the site.
+
 ## SEO notes
 
 - Every page has its own title, description, canonical link and link-preview

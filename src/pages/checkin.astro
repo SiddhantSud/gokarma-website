@@ -1,0 +1,588 @@
+---
+// ============================================================
+// Guest check-in (checkin.html). Guests open it from the QR card
+// at the counter (the card's link carries the desk code, e.g.
+// checkin.html?code=ABC234), fill it in on their phone, and it
+// sends their details and ID photos to the hosts' PRIVATE Google
+// Drive and Sheet (see checkin-backend/README.md). Nothing a guest
+// types or uploads is stored on this website or in the repo.
+//
+// Two paths:
+//   Indian guests:  Aadhaar / Voter ID / Driving Licence, name,
+//                   date of birth, address.
+//   Foreign guests: passport + visa, and every detail the FRRO's
+//                   Form C asks for, so the hosts can copy it
+//                   straight from the sheet.
+// Both end with the house rules (the owners' indemnity form) and
+// a typed-name signature.
+//
+// Hidden from search (noindex via the landing layout, disallowed
+// in robots.txt, not in the sitemap). The form's logic is in
+// src/scripts/checkin.ts.
+// ============================================================
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoSection from '../components/PhotoSection.astro';
+import { CHECKIN } from '../config/checkin';
+import { SITE } from '../config/site';
+import { HOUSE_RULES, RULES_INTRO, RULES_TITLE } from '../data/house-rules';
+import {
+  COUNTRIES,
+  INDIAN_ID_TYPES,
+  INDIAN_STATES,
+  VISA_TYPES,
+  VISIT_PURPOSES,
+} from '../data/checkin-options';
+import { photoUrl } from '../lib/images';
+
+const heroBg = await photoUrl('property/property-2');
+const isConnected = CHECKIN.endpointUrl.trim() !== '';
+---
+
+<BaseLayout
+  title="Guest Check-in | Aangan by Gokarma Living"
+  description="Check in to Aangan by Gokarma Living from your phone."
+  path="checkin.html"
+  variant="landing"
+>
+  <section class="hero hero-short" style={`background-image: url('${heroBg}');`}>
+    <div class="hero-overlay">
+      <span class="section-eyebrow">Guest Check-in</span>
+      <h1>Welcome to Aangan</h1>
+      <p>A few details and a photo of your ID, and you're in. Takes about two minutes.</p>
+    </div>
+  </section>
+
+  <PhotoSection bg="scenery/cottage-row">
+    <div class="container checkin-container">
+      <form
+        class="checkin-form"
+        data-checkin-form
+        data-endpoint={CHECKIN.endpointUrl}
+        data-rules-version={CHECKIN.rulesVersion}
+        novalidate
+      >
+        <p class="checkin-privacy">
+          🔒 Indian law asks every place you stay to keep a copy of your ID. Yours goes straight to
+          our private records, seen only by the Aangan team. It's never posted anywhere.
+        </p>
+
+        <!-- ---- Desk code (from the QR card; asked for only if the link didn't carry it) ---- -->
+        <label class="checkin-field" data-desk-code-field hidden>
+          <span>Desk code</span>
+          <input
+            type="text"
+            name="deskCode"
+            autocomplete="off"
+            autocapitalize="characters"
+            maxlength="12"
+          />
+          <small>It's on the check-in card at the counter.</small>
+        </label>
+
+        <!-- ---- Step 1: Indian or not ---- -->
+        <fieldset class="checkin-step">
+          <legend>
+            <span class="step-number">1</span> Which passport do you hold?
+          </legend>
+          <div class="choice-cards">
+            <label class="choice-card">
+              <input type="radio" name="nationalityGroup" value="indian" required />
+              <span class="choice-emoji" aria-hidden="true">
+                🇮🇳
+              </span>
+              <span>Indian</span>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="nationalityGroup" value="foreign" required />
+              <span class="choice-emoji" aria-hidden="true">
+                🌍
+              </span>
+              <span>Any other country</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ---- Step 2: Your stay (both paths) ---- -->
+        <fieldset class="checkin-step" data-after-choice hidden>
+          <legend>
+            <span class="step-number">2</span> Your stay
+          </legend>
+          <div class="field-grid">
+            <label class="checkin-field">
+              <span>Arrived at Aangan</span>
+              <span class="date-wrap">
+                <input type="date" name="arrivalDate" required data-default-today />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Nights (roughly)</span>
+              <input type="number" name="nights" min="1" max="90" inputmode="numeric" />
+            </label>
+            <label class="checkin-field span-2">
+              <span>Where are you heading after Aangan?</span>
+              <input
+                type="text"
+                name="goingNext"
+                required
+                placeholder="e.g. Hampi, Karnataka"
+                maxlength="120"
+              />
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ================= Indian guests ================= -->
+        <fieldset class="checkin-step" data-path="indian" hidden disabled>
+          <legend>
+            <span class="step-number">3</span> About you
+          </legend>
+          <div class="field-grid">
+            <label class="checkin-field span-2">
+              <span>Full name (as on your ID)</span>
+              <input type="text" name="fullName" required autocomplete="name" maxlength="100" />
+            </label>
+            <label class="checkin-field">
+              <span>Date of birth</span>
+              <span class="date-wrap">
+                <input type="date" name="dateOfBirth" required data-max-today />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Gender</span>
+              <select name="gender" required>
+                <option value="">Choose</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="checkin-field">
+              <span>Phone</span>
+              <input
+                type="tel"
+                name="phone"
+                required
+                autocomplete="tel"
+                inputmode="tel"
+                maxlength="20"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>
+                Email <em>(optional)</em>
+              </span>
+              <input type="email" name="email" autocomplete="email" maxlength="100" />
+            </label>
+            <label class="checkin-field span-2">
+              <span>Home address (as on your ID)</span>
+              <input
+                type="text"
+                name="address"
+                required
+                autocomplete="street-address"
+                maxlength="200"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>City / town</span>
+              <input
+                type="text"
+                name="city"
+                required
+                autocomplete="address-level2"
+                maxlength="60"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>State</span>
+              <select name="state" required>
+                <option value="">Choose</option>
+                {INDIAN_STATES.map((state) => (
+                  <option>{state}</option>
+                ))}
+              </select>
+            </label>
+            <label class="checkin-field">
+              <span>PIN code</span>
+              <input
+                type="text"
+                name="pin"
+                required
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                autocomplete="postal-code"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Coming from</span>
+              <input type="text" name="comingFrom" placeholder="e.g. Bengaluru" maxlength="120" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="checkin-step" data-path="indian" hidden disabled>
+          <legend>
+            <span class="step-number">4</span> Your ID
+          </legend>
+          <div class="field-grid">
+            <label class="checkin-field">
+              <span>ID type</span>
+              <select name="idType" required data-id-type>
+                {INDIAN_ID_TYPES.map((t) => (
+                  <option value={t.id}>{t.label}</option>
+                ))}
+              </select>
+            </label>
+            <label class="checkin-field">
+              <span data-id-number-label>Last 4 digits of your Aadhaar</span>
+              <input type="text" name="idNumber" required maxlength="20" data-id-number />
+            </label>
+          </div>
+          <p class="checkin-hint" data-aadhaar-tip>
+            We only keep the last 4 digits. A masked Aadhaar (from the mAadhaar app or the UIDAI
+            site) is perfect: it hides the rest of the number for you.
+          </p>
+          <div class="photo-grid">
+            <label class="photo-tile" data-photo-tile>
+              <input type="file" accept="image/*" data-photo="id-front" data-required />
+              <span class="photo-preview" aria-hidden="true">
+                📷
+              </span>
+              <span class="photo-label" data-id-front-label>
+                Front of your Aadhaar
+              </span>
+              <span class="photo-status" aria-live="polite">
+                Tap to take or choose a photo
+              </span>
+            </label>
+            <label class="photo-tile" data-photo-tile>
+              <input type="file" accept="image/*" data-photo="id-back" data-required />
+              <span class="photo-preview" aria-hidden="true">
+                📷
+              </span>
+              <span class="photo-label">Back (the side with your address)</span>
+              <span class="photo-status" aria-live="polite">
+                Tap to take or choose a photo
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ================= Foreign guests ================= -->
+        <fieldset class="checkin-step" data-path="foreign" hidden disabled>
+          <legend>
+            <span class="step-number">3</span> About you
+          </legend>
+          <p class="checkin-hint">Exactly as printed in your passport, please.</p>
+          <div class="field-grid">
+            <label class="checkin-field">
+              <span>Given names</span>
+              <input
+                type="text"
+                name="givenNames"
+                required
+                autocomplete="given-name"
+                maxlength="80"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Surname</span>
+              <input
+                type="text"
+                name="surname"
+                required
+                autocomplete="family-name"
+                maxlength="80"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Date of birth</span>
+              <span class="date-wrap">
+                <input type="date" name="dateOfBirth" required data-max-today />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Gender</span>
+              <select name="gender" required>
+                <option value="">Choose</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="checkin-field span-2">
+              <span>Nationality</span>
+              <input
+                type="text"
+                name="nationality"
+                required
+                list="country-list"
+                autocomplete="off"
+                maxlength="60"
+              />
+            </label>
+            <label class="checkin-field span-2">
+              <span>Home address</span>
+              <input
+                type="text"
+                name="address"
+                required
+                autocomplete="street-address"
+                maxlength="200"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>City</span>
+              <input
+                type="text"
+                name="city"
+                required
+                autocomplete="address-level2"
+                maxlength="60"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Country you live in</span>
+              <input
+                type="text"
+                name="country"
+                required
+                list="country-list"
+                autocomplete="off"
+                maxlength="60"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Phone at home (with country code)</span>
+              <input type="tel" name="phoneHome" required inputmode="tel" maxlength="20" />
+            </label>
+            <label class="checkin-field">
+              <span>
+                Indian phone number <em>(if you have one)</em>
+              </span>
+              <input type="tel" name="phone" inputmode="tel" maxlength="20" />
+            </label>
+            <label class="checkin-field span-2">
+              <span>
+                Email <em>(optional)</em>
+              </span>
+              <input type="email" name="email" autocomplete="email" maxlength="100" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="checkin-step" data-path="foreign" hidden disabled>
+          <legend>
+            <span class="step-number">4</span> Passport &amp; visa
+          </legend>
+          <div class="field-grid">
+            <label class="checkin-field">
+              <span>Passport number</span>
+              <input
+                type="text"
+                name="passportNo"
+                required
+                autocapitalize="characters"
+                maxlength="20"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Passport issued in (city, country)</span>
+              <input type="text" name="passportPlace" required maxlength="80" />
+            </label>
+            <label class="checkin-field">
+              <span>Passport issued on</span>
+              <span class="date-wrap">
+                <input type="date" name="passportIssued" required data-max-today />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Passport expires on</span>
+              <span class="date-wrap">
+                <input type="date" name="passportExpiry" required />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Visa type</span>
+              <select name="visaType" required>
+                <option value="">Choose</option>
+                {VISA_TYPES.map((t) => (
+                  <option>{t}</option>
+                ))}
+              </select>
+            </label>
+            <label class="checkin-field">
+              <span>Visa / e-Visa / OCI number</span>
+              <input
+                type="text"
+                name="visaNo"
+                required
+                autocapitalize="characters"
+                maxlength="30"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Visa issued in (city, country)</span>
+              <input type="text" name="visaPlace" required maxlength="80" />
+            </label>
+            <label class="checkin-field">
+              <span>Visa issued on</span>
+              <span class="date-wrap">
+                <input type="date" name="visaIssued" required data-max-today />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Visa valid till</span>
+              <span class="date-wrap">
+                <input type="date" name="visaValidTill" required />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Arrived in India on</span>
+              <span class="date-wrap">
+                <input type="date" name="indiaArrivalDate" required data-max-today />
+                <span class="date-display" aria-hidden="true"></span>
+              </span>
+            </label>
+            <label class="checkin-field">
+              <span>Flew / came in from (city, country)</span>
+              <input
+                type="text"
+                name="indiaArrivedFrom"
+                required
+                placeholder="e.g. Doha, Qatar"
+                maxlength="80"
+              />
+            </label>
+            <label class="checkin-field">
+              <span>Reason for your trip</span>
+              <select name="purpose" required>
+                <option value="">Choose</option>
+                {VISIT_PURPOSES.map((p) => (
+                  <option>{p}</option>
+                ))}
+              </select>
+            </label>
+            <label class="checkin-field">
+              <span>Are you working in India?</span>
+              <select name="employedInIndia" required>
+                <option value="">Choose</option>
+                <option>No</option>
+                <option>Yes</option>
+              </select>
+            </label>
+          </div>
+          <div class="photo-grid">
+            <label class="photo-tile" data-photo-tile>
+              <input type="file" accept="image/*" data-photo="passport-photo-page" data-required />
+              <span class="photo-preview" aria-hidden="true">
+                📷
+              </span>
+              <span class="photo-label">Passport photo page</span>
+              <span class="photo-status" aria-live="polite">
+                Flat, in good light, with the two lines of &lt;&lt;&lt; at the bottom showing
+              </span>
+            </label>
+            <label class="photo-tile" data-photo-tile>
+              <input type="file" accept="image/*" data-photo="visa" data-required />
+              <span class="photo-preview" aria-hidden="true">
+                📷
+              </span>
+              <span class="photo-label">Indian visa, e-Visa or OCI card</span>
+              <span class="photo-status" aria-live="polite">
+                A screenshot of your e-Visa email works too
+              </span>
+            </label>
+            <label class="photo-tile" data-photo-tile>
+              <input type="file" accept="image/*" data-photo="arrival-stamp" />
+              <span class="photo-preview" aria-hidden="true">
+                📷
+              </span>
+              <span class="photo-label">
+                Arrival stamp <em>(optional)</em>
+              </span>
+              <span class="photo-status" aria-live="polite">
+                The immigration stamp from when you landed in India
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <datalist id="country-list">
+          {COUNTRIES.map((c) => (
+            <option value={c} />
+          ))}
+        </datalist>
+
+        <!-- ---- Last step: house rules (both paths) ---- -->
+        <fieldset class="checkin-step" data-after-choice hidden>
+          <legend>
+            <span class="step-number">5</span> Our house rules
+          </legend>
+          <details class="house-rules">
+            <summary>Read the house rules</summary>
+            <h3>{RULES_TITLE}</h3>
+            <p>{RULES_INTRO}</p>
+            <ol>
+              {HOUSE_RULES.map((rule) => (
+                <li>
+                  <strong>{rule.title}:</strong> {rule.text}
+                </li>
+              ))}
+            </ol>
+          </details>
+          <label class="checkin-check">
+            <input type="checkbox" name="rulesAccepted" required />
+            <span>I've read the house rules and I agree to them.</span>
+          </label>
+          <label class="checkin-field">
+            <span>Type your full name to sign</span>
+            <input type="text" name="signature" required maxlength="100" data-signature />
+          </label>
+        </fieldset>
+
+        <div class="checkin-submit" data-after-choice hidden>
+          <p class="checkin-error" data-form-error role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary btn-large" data-submit>
+            Check me in
+          </button>
+          {!isConnected && (
+            <p class="checkin-hint">
+              Online check-in isn't connected yet, so this won't send anything. Please check in at
+              the counter for now.
+            </p>
+          )}
+        </div>
+      </form>
+
+      <!-- ---- After a successful check-in ---- -->
+      <div class="checkin-done" data-checkin-done hidden tabindex="-1">
+        <span class="checkin-done-emoji" aria-hidden="true">
+          🌿
+        </span>
+        <h2 class="section-title">
+          You're checked in<span data-done-name></span>!
+        </h2>
+        <p>
+          Your details reached us safely. Say hi at the counter and we'll take it from here. Lovely
+          to have you at {SITE.shortName}.
+        </p>
+        <button type="button" class="btn btn-outline" data-another>
+          Check in another guest
+        </button>
+      </div>
+    </div>
+  </PhotoSection>
+</BaseLayout>
+
+<script>
+  import '../scripts/checkin.ts';
+</script>

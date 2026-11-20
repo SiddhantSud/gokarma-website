@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /landing.html
+Disallow: /checkin.html
 Disallow: /admin/
 
 Sitemap: https://siddhantsud.github.io/gokarma-website/sitemap.xml

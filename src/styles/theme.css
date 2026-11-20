@@ -47,6 +47,9 @@
 
   /* ---- Feedback ---- */
   --color-white: #ffffff;
+  /* Form errors (check-in page): a clear red that still sits with the maroon. */
+  --color-error: #b3261e;
+  --color-error-bg: #fbe4e1;
 
   /* ---- Typography ----
      Display font (headings): a serif with warmth/character.

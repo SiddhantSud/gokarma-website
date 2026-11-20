@@ -1,0 +1,398 @@
+/* =========================================================
+   Guest check-in page (checkin.html, src/pages/checkin.astro).
+   Built phone-first: one column, big tap targets, then two
+   columns of fields from tablet width up.
+========================================================= */
+
+/* ---- A shorter hero than Home's: the form is what matters ---- */
+.hero.hero-short {
+  min-height: 46vh;
+}
+
+.hero-short p {
+  margin-bottom: 0;
+}
+
+.checkin-container {
+  max-width: 760px;
+}
+
+/* Parts of the form appear only once they apply. Some have their own
+   display rule below, so make sure "hidden" always wins. */
+.checkin-container [hidden] {
+  display: none !important;
+}
+
+.checkin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.checkin-privacy {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-small);
+}
+
+/* ---- Steps ---- */
+.checkin-step {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-white);
+  padding: 18px 16px 20px;
+  margin: 0;
+  min-width: 0;
+}
+
+.checkin-step legend {
+  /* Floated so the heading sits inside the box instead of cutting
+     through its border (which looks broken when it wraps on phones). */
+  float: left;
+  width: 100%;
+  margin-bottom: 14px;
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--color-maroon);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-number {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-button);
+  color: var(--color-button-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+/* ---- Indian / other country choice ---- */
+.checkin-step legend + * {
+  clear: both;
+}
+
+.choice-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.choice-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 10px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.choice-card input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+
+.choice-card:has(input:checked) {
+  border-color: var(--color-maroon);
+  background: var(--color-surface-alt);
+  box-shadow: 0 0 0 2px var(--color-pop);
+}
+
+.choice-card:has(input:focus-visible) {
+  outline: 2px solid var(--color-pop);
+  outline-offset: 2px;
+}
+
+.choice-emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ---- Fields ---- */
+.field-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 600px) {
+  .field-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .field-grid .span-2 {
+    grid-column: 1 / -1;
+  }
+}
+
+.checkin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.checkin-field > span:first-child {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.checkin-field em,
+.photo-label em {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.checkin-field small {
+  color: var(--color-text-muted);
+}
+
+.checkin-field input,
+.checkin-field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px;
+  font: inherit;
+  /* 16px+ stops iPhones zooming in when a field is tapped */
+  font-size: max(1rem, 16px);
+  color: var(--color-text);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-small);
+}
+
+.checkin-field input:focus,
+.checkin-field select:focus {
+  outline: 2px solid var(--color-pop);
+  outline-offset: 1px;
+  border-color: var(--color-maroon);
+}
+
+/* After a submit attempt, browsers mark empty required fields */
+.checkin-field input:user-invalid,
+.checkin-field select:user-invalid {
+  border-color: var(--color-error);
+}
+
+/* Dates written out as "15 Nov 2026" over the date field, the same
+   way as the booking form (see booking.css). */
+.checkin-field .date-wrap {
+  position: relative;
+  display: block;
+}
+
+.checkin-field .date-display {
+  display: none;
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: max(1rem, 16px);
+  color: var(--color-text);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.has-date-display .checkin-field .date-display {
+  display: block;
+}
+
+.has-date-display .checkin-field input[type='date'] {
+  color: transparent;
+}
+
+.has-date-display .checkin-field input[type='date']::-webkit-datetime-edit {
+  opacity: 0;
+}
+
+.checkin-hint {
+  margin: 12px 0 0;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+.checkin-step > .checkin-hint:first-of-type {
+  margin: 0 0 12px;
+}
+
+/* ---- ID photo boxes ---- */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.photo-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  text-align: center;
+  cursor: pointer;
+}
+
+/* The real file picker covers the whole box, invisible, so a tap
+   anywhere opens the camera / photo picker. */
+.photo-tile input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.photo-tile:has(input:focus-visible) {
+  outline: 2px solid var(--color-pop);
+  outline-offset: 2px;
+}
+
+.photo-tile.has-photo {
+  border-style: solid;
+  border-color: var(--color-forest);
+}
+
+.photo-tile.is-missing {
+  border-color: var(--color-error);
+}
+
+.photo-preview {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 120px;
+  font-size: 2.2rem;
+  overflow: hidden;
+  border-radius: var(--radius-small);
+  background: var(--color-surface-alt);
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.photo-label {
+  font-weight: 600;
+}
+
+.photo-status {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+/* ---- House rules ---- */
+.house-rules {
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.house-rules summary {
+  font-weight: 600;
+  color: var(--color-maroon);
+  cursor: pointer;
+}
+
+.house-rules h3 {
+  font-size: 1.05rem;
+  margin: 14px 0 8px;
+}
+
+.house-rules p,
+.house-rules li {
+  font-size: var(--text-small);
+}
+
+.house-rules ol {
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.checkin-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkin-check input {
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  flex: none;
+  accent-color: var(--color-maroon);
+}
+
+/* ---- Send ---- */
+.checkin-submit {
+  text-align: center;
+}
+
+.checkin-submit .btn {
+  width: 100%;
+  max-width: 360px;
+}
+
+.checkin-submit .btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+  transform: none;
+}
+
+.checkin-error {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-small);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+/* ---- Done ---- */
+.checkin-done {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.checkin-done:focus {
+  outline: none;
+}
+
+.checkin-done-emoji {
+  font-size: 3rem;
+}
+
+.checkin-done p {
+  max-width: 480px;
+  margin: 0 auto 24px;
+}

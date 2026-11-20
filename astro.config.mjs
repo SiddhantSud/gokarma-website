@@ -32,7 +32,9 @@ export default defineConfig({
         "default-src 'self'",
         "img-src 'self' data:",
         "font-src 'self'",
-        "connect-src 'self'",
+        // The check-in page sends to the hosts' Google script, which
+        // answers from script.googleusercontent.com (see checkin-backend/).
+        "connect-src 'self' https://script.google.com https://script.googleusercontent.com",
         'frame-src https://maps.google.com https://www.google.com',
         "object-src 'none'",
         "base-uri 'self'",
