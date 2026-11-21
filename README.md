@@ -99,6 +99,10 @@ updates on the next publish.
 Open `src/styles/theme.css`. Every color and font used anywhere on the site is
 a variable at the top of that file, with comments.
 
+The two brand colours are `--color-deep` (deep maroon) and `--color-turmeric`
+(turmeric yellow). Change one of them and the buttons, the Home ticker, the
+page banners and the footer all change together on every page.
+
 ### Add or edit a room
 
 Edit the `ROOMS` list in `src/data/rooms.ts`. It appears on the Rooms page,

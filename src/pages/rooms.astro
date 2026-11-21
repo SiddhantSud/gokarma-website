@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
+import PageBanner from '../components/PageBanner.astro';
 import Photo from '../components/Photo.astro';
 import RoomCard from '../components/RoomCard.astro';
 import { ROOMS } from '../data/rooms';
@@ -39,16 +40,11 @@ const roomPhotos = [
   page="rooms"
   ogImage="rooms/4-bed-dorm-1"
 >
-  <PhotoSection bg="scenery/waterfall">
-    <div class="container text-center">
-      <span class="section-eyebrow">Where You'll Sleep</span>
-      <h1>Rooms &amp; Rates</h1>
-      <p class="section-subtitle">
-        Rates change with season and demand, so pick your dates to check exact pricing and
-        availability.
-      </p>
-    </div>
-  </PhotoSection>
+  <PageBanner
+    eyebrow="Where You'll Sleep"
+    title="Rooms & Rates"
+    subtitle="Rates change with season and demand, so pick your dates to check exact pricing and availability."
+  />
 
   <PhotoSection bg="community/catan-night" panel="alt">
     <div class="container">

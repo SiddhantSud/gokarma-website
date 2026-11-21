@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
+import PageBanner from '../components/PageBanner.astro';
 import Photo from '../components/Photo.astro';
 
 // The full-colour Aangan seal from the logo kit (public/brand/), shown
@@ -15,6 +16,8 @@ const seal = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/aangan-seal-
   page="story"
   ogImage="kushal-geetika"
 >
+  <PageBanner eyebrow="Our Story" title="Meet Kushal & Geetika" />
+
   <PhotoSection bg="property/property-4">
     <div class="container story-grid">
       <Photo
@@ -33,14 +36,11 @@ const seal = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}brand/aangan-seal-
           width="112"
           height="112"
         />
-        <span class="section-eyebrow">Our Story</span>
-        <h1>Meet Kushal &amp; Geetika</h1>
         <p class="story-intro">
           Aangan by Gokarma Living started as a small dream between two people who love good food,
           good company, and meeting travelers from every corner of the world. Today, Kushal and
-          Geetika run both the hostel and the cozy cafe on-site — home to resident cats, the odd
-          curious goat at the gate, and a menu guests keep coming back for (the Karam Podi Dosa has
-          quite the following).
+          Geetika run both the hostel and the cozy cafe on-site — home to resident cats and dogs,
+          and a menu guests keep coming back for (the Karam Podi Dosa has quite the following).
         </p>
 
         <div class="owner-bio">

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
+import PageBanner from '../components/PageBanner.astro';
 import GuideCard from '../components/GuideCard.astro';
 import SubmitStory from '../components/SubmitStory.astro';
 import { getGuideArticles } from '../lib/guide';
@@ -15,16 +16,11 @@ const guideArticles = await getGuideArticles();
   page="guide"
   ogImage="scenery/river-pool"
 >
-  <PhotoSection bg="scenery/river-pool">
-    <div class="container text-center">
-      <span class="section-eyebrow">The Gokarna Guide</span>
-      <h1>Backpacking, Solo Travel &amp; Offbeat Gokarna</h1>
-      <p class="section-subtitle">
-        Practical, honest guides for getting the most out of Gokarna — written for travelers who'd
-        rather trek to a quiet beach than fight for a sunbed on a crowded one.
-      </p>
-    </div>
-  </PhotoSection>
+  <PageBanner
+    eyebrow="The Gokarna Guide"
+    title="Backpacking, Solo Travel & Offbeat Gokarna"
+    subtitle="Practical, honest guides for getting the most out of Gokarna — written for travelers who'd rather trek to a quiet beach than fight for a sunbed on a crowded one."
+  />
 
   <PhotoSection bg="scenery/waterfall" panel="alt">
     <div class="container">

@@ -47,7 +47,7 @@
   font-weight: 700;
   font-size: 1.3rem;
   color: var(--color-white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px var(--color-shadow);
   transition:
     color var(--transition-medium),
     text-shadow var(--transition-medium);
@@ -131,7 +131,7 @@
 .main-nav a {
   font-weight: 600;
   color: var(--color-white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px var(--color-shadow);
   transition:
     color var(--transition-fast),
     text-shadow var(--transition-medium);
@@ -174,7 +174,7 @@
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--color-white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px var(--color-shadow);
   transition: color var(--transition-medium);
 }
 

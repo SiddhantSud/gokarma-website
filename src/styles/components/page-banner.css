@@ -1,0 +1,28 @@
+/* =========================================================
+   Inner-page banner (PageBanner.astro): a solid deep maroon
+   band with turmeric-yellow text, matching the buttons and
+   the Home ticker. Used on Our Story and the Gokarna Guide.
+========================================================= */
+
+/* ---- Page banner ---- */
+.page-banner {
+  background: var(--color-band);
+  color: var(--color-band-text);
+  text-align: center;
+  padding: 130px 0 56px; /* top clearance for the fixed header */
+}
+
+.page-banner .section-eyebrow {
+  color: var(--color-pop);
+}
+
+.page-banner h1 {
+  color: var(--color-band-text);
+  margin-bottom: 12px;
+}
+
+.page-banner p {
+  color: var(--color-bg);
+  max-width: 640px;
+  margin: 0 auto;
+}
