@@ -4,8 +4,8 @@
 
 /* ---- Footer ---- */
 .site-footer {
-  background: var(--color-button); /* deep maroon, like the buttons */
-  color: var(--color-button-text); /* turmeric yellow */
+  background: var(--color-band);
+  color: var(--color-band-text);
   padding: 28px 0;
 }
 

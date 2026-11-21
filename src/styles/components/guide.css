@@ -100,8 +100,8 @@
 }
 
 .cta-banner {
-  background: var(--color-maroon);
-  color: var(--color-white);
+  background: var(--color-band);
+  color: var(--color-bg);
   border-radius: var(--radius);
   padding: 32px;
   text-align: center;
@@ -109,11 +109,17 @@
 }
 
 .cta-banner h3 {
-  color: var(--color-white);
+  color: var(--color-band-text);
   margin-bottom: 8px;
 }
+/* On the dark band the button flips: turmeric with maroon text. */
 .cta-banner .btn-primary {
   margin-top: 12px;
+  background-color: var(--color-turmeric);
+  color: var(--color-deep);
+}
+.cta-banner .btn-primary:hover {
+  background-color: var(--color-turmeric-dark);
 }
 
 /* ---- "Share your Gokarna story" (SubmitStory.astro) ---- */

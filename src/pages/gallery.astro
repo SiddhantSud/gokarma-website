@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
+import PageBanner from '../components/PageBanner.astro';
 import Gallery from '../components/Gallery.astro';
 ---
 
@@ -11,13 +12,11 @@ import Gallery from '../components/Gallery.astro';
   page="gallery"
   ogImage="community/game-night"
 >
-  <PhotoSection bg="food/thali-spread">
-    <div class="container text-center">
-      <span class="section-eyebrow">A Closer Look</span>
-      <h1>Gallery</h1>
-      <p class="section-subtitle">Click any photo to view it larger.</p>
-    </div>
-  </PhotoSection>
+  <PageBanner
+    eyebrow="A Closer Look"
+    title="Gallery"
+    subtitle="Click any photo to view it larger."
+  />
 
   <PhotoSection bg="scenery/cottage-row" panel="alt">
     <div class="container">

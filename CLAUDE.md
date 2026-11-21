@@ -236,13 +236,26 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
 ### Theming
 
 **All colors and fonts are CSS variables in `src/styles/theme.css`.** Never
-hardcode a hex value elsewhere; add a token instead. On 2026-11-12 Siddhant
-asked for the dark brown to become a rich **red-oxide maroon**
-(`--color-maroon` #7a2a22: footer, overlays, icons; body text is a deep
-maroon-brown #3b1612) and the cream to have **a hint of yellow**
-(`--color-bg` #fdf5df). Later the same day the orange (terracotta) buttons, links and highlights
-were switched to the maroon too, so maroon is now the primary colour. The owners
-still haven't chosen a full brand palette.
+hardcode a color anywhere else; add a variable instead. The only exceptions
+are `theme-color` in `BaseLayout.astro` and `public/site.webmanifest`, which
+can't read CSS variables; keep them equal to `--color-deep`. (The `/admin`
+page has its own small stylesheet and is not part of the public site.)
+
+**Colour changes are global (Siddhant, 2026-11-21).** The brand is deep
+maroon (`--color-deep` #3c0008) and turmeric yellow (`--color-turmeric`
+#f2b01e) on yellow-tinted cream (`--color-bg` #fdf5df). Components never
+point at the palette by hex; they use role variables (`--color-button*`,
+`--color-band*` for the footer, Home ticker, the "Ready to book?" boxes and
+`PageBanner` (the maroon top banner on Rooms, Our Story, Guide, Contact and
+Gallery), `--color-pop`
+for small highlights), which point at the palette. The lighter red-oxide
+`--color-maroon` #7a2a22 is for text-level accents on cream (links, eyebrows,
+icons). Forest green was retired on 2026-11-21.
+
+When Siddhant asks for a colour or style change, apply it to **every page**,
+not only the one he's looking at: change the variable, then check Home,
+Rooms, Book, Our Story, Guide, one article, Contact, Gallery and the footer
+at phone width. Earlier changes landed on Home only and he noticed.
 
 ### Booking (StayFlexi)
 

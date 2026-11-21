@@ -6,8 +6,8 @@
 
 /* ---- Page banner ---- */
 .page-banner {
-  background: var(--color-button);
-  color: var(--color-button-text);
+  background: var(--color-band);
+  color: var(--color-band-text);
   text-align: center;
   padding: 130px 0 56px; /* top clearance for the fixed header */
 }
@@ -17,7 +17,7 @@
 }
 
 .page-banner h1 {
-  color: var(--color-button-text);
+  color: var(--color-band-text);
   margin-bottom: 12px;
 }
 

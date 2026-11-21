@@ -5,37 +5,43 @@
    here as a CSS variable. Change a value here and it updates
    everywhere it's used, on every page.
 
-   The owners haven't chosen a full brand palette yet. Current
-   direction (Siddhant, 2026-11-12): red-oxide maroon as the main
-   colour, cream with a hint of yellow, forest green as a second
-   colour, and one amber "pop" accent for small highlights. Change
-   a value below and nothing else in the codebase needs to change.
+   Current direction (Siddhant, 2026-11-21): deep maroon and
+   turmeric yellow on every page, on cream with a hint of yellow.
+   Colours are never written anywhere else in the code; add a
+   variable here instead. (The only exceptions are the
+   theme-color in BaseLayout.astro and public/site.webmanifest,
+   which can't read CSS variables. Keep them equal to --color-deep.)
 ========================================================= */
 
 :root {
-  /* ---- Brand colors ---- */
+  /* ---- Brand palette ----
+     The site's two signature colours (Siddhant, 2026-11-14 and
+     2026-11-21): a very deep maroon and turmeric yellow. Every
+     dark band on the site uses them together: the buttons, the
+     Home ticker, the inner-page banners and the footer. Change a
+     value here and every page changes with it. */
+  --color-deep: #3c0008; /* deep maroon */
+  --color-deep-hover: #5a0a14;
+  --color-turmeric: #f2b01e; /* turmeric yellow */
+  --color-turmeric-dark: #d4950c; /* hover state of turmeric */
+
   /* Red-oxide maroon, the colour of traditional red-oxide floors.
-     The primary brand colour (Siddhant, 2026-11-12): buttons, links,
-     highlights, icons, the footer and the photo overlays. It also
-     tints the body text below. */
+     A lighter maroon for text-level accents on cream: links,
+     small labels above headings, icons and borders. */
   --color-maroon: #7a2a22;
-  --color-maroon-dark: #5c1f19; /* hover/active state of primary */
+  --color-maroon-dark: #5c1f19; /* hover/active state */
   --color-maroon-tint: rgba(122, 42, 34, 0.1); /* soft maroon wash for tags */
 
-  /* Buttons (Siddhant, 2026-11-14): a very deep maroon with
-     turmeric-yellow text. Hover lightens slightly. */
-  --color-button: #3c0008;
-  --color-button-hover: #5a0a14;
-  --color-button-text: #f2b01e; /* turmeric yellow */
-
-  --color-forest: #3f5d42; /* secondary brand color */
-  --color-forest-dark: #2e4531;
-
-  /* ---- The "dash and pop" playful accent ----
-     Used sparingly: small highlights, badges, hover accents.
-     Not a background color, not a body-text color. */
-  --color-pop: #e8c872; /* soft gold, replaced the old orange-amber */
-  --color-pop-dark: #d4ad4f;
+  /* ---- Where the brand colours are used ----
+     Parts of the page point at the palette above, never at a hex
+     value, so they always stay in step. */
+  --color-button: var(--color-deep);
+  --color-button-hover: var(--color-deep-hover);
+  --color-button-text: var(--color-turmeric);
+  --color-band: var(--color-deep); /* footer, Home ticker, page banners */
+  --color-band-text: var(--color-turmeric);
+  --color-pop: var(--color-turmeric); /* small highlights, dots, focus rings */
+  --color-pop-dark: var(--color-turmeric-dark);
 
   /* ---- Neutrals ---- */
   /* Cream with a hint of yellow. */
@@ -48,6 +54,8 @@
 
   /* ---- Feedback ---- */
   --color-white: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.25); /* text and glass-panel shadows */
+  --color-lightbox-bg: rgb(20, 15, 10); /* behind full-screen photos */
 
   /* ---- Typography ----
      Display font (headings): a serif with warmth/character.
@@ -91,7 +99,7 @@
   --overlay-from: rgba(92, 31, 25, 0.55);
   /* Darkens the hero photo so its white heading stays readable. */
   --hero-overlay: rgba(59, 22, 18, 0.55);
-  --overlay-to: rgba(46, 69, 49, 0.5);
+  --overlay-to: rgba(60, 0, 8, 0.5); /* deep maroon */
 
   /* ---- Motion ---- */
   --transition-fast: 0.18s ease;

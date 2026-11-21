@@ -16,7 +16,7 @@
   position: relative;
   background-size: cover;
   background-position: center;
-  background-color: var(--color-forest-dark); /* visible briefly before the lazy bg loads */
+  background-color: var(--color-deep); /* visible briefly before the lazy bg loads */
   padding-top: clamp(56px, 9vw, 110px);
 }
 
