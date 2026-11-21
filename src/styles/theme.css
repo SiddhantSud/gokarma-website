@@ -20,6 +20,7 @@
      tints the body text below. */
   --color-maroon: #7a2a22;
   --color-maroon-dark: #5c1f19; /* hover/active state of primary */
+  --color-maroon-tint: rgba(122, 42, 34, 0.1); /* soft maroon wash for tags */
 
   /* Buttons (Siddhant, 2026-11-14): a very deep maroon with
      turmeric-yellow text. Hover lightens slightly. */

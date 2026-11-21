@@ -7,8 +7,8 @@
   display: inline-block;
   font-size: var(--text-small);
   font-weight: 700;
-  color: var(--color-forest);
-  background: rgba(63, 93, 66, 0.12);
+  color: var(--color-maroon);
+  background: var(--color-maroon-tint);
   padding: 3px 12px;
   border-radius: 20px;
   margin-bottom: 10px;
@@ -100,7 +100,7 @@
 }
 
 .cta-banner {
-  background: var(--color-forest);
+  background: var(--color-maroon);
   color: var(--color-white);
   border-radius: var(--radius);
   padding: 32px;
