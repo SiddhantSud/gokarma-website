@@ -9,7 +9,7 @@
   background: var(--color-band);
   color: var(--color-band-text);
   text-align: center;
-  padding: 130px 0 56px; /* top clearance for the fixed header */
+  padding: 104px 0 56px; /* top clearance for the fixed header */
 }
 
 .page-banner .section-eyebrow {

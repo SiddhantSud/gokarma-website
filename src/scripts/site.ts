@@ -1,6 +1,6 @@
 // ============================================================
 // Small behaviors shared by every page: the mobile menu, the
-// glass header on scroll, the footer year, and the scroll-in
+// solid maroon header on scroll, the footer year, and the scroll-in
 // animations / lazy section photos. Loaded once by
 // src/layouts/BaseLayout.astro.
 // ============================================================
@@ -23,9 +23,9 @@ if (menuToggle && mainNav) {
   });
 }
 
-// ---- Glass header ----
+// ---- Header on scroll ----
 // The header starts transparent over the page's first photo,
-// then gets .is-scrolled (blurred "glass" background, dark
+// then gets .is-scrolled (solid deep maroon background, turmeric
 // text) once the page scrolls a little. Checked once on load
 // too, in case the page opens already scrolled.
 const header = document.querySelector('.site-header');

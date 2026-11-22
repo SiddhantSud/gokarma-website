@@ -200,9 +200,12 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
 
 ### Visual system (glass nav, photo sections, marquee)
 
-- **Glass nav**: the header is transparent over the hero and gets
-  `.is-scrolled` after 40px of scroll (`src/scripts/site.ts`). This works on
-  landing.html too, since it uses the same layout.
+- **Nav bar** (Siddhant, 2026-11-22): fully transparent at the top of the
+  page, then solid deep maroon (`--color-band`) with turmeric links and logo
+  after 40px of scroll (`.is-scrolled`, set in `src/scripts/site.ts`). Book
+  Now is always a turmeric button with maroon text. The bar is slim (about
+  56px). **Nothing in the nav is underlined**; hover and the current page
+  turn cream. The phone dropdown is maroon too.
 - **Photo-backed sections**: every content section sits on a real photo with
   a duotone overlay and a large-radius panel lifted over it. Section
   backgrounds are **never plain colors** (explicit owner direction). **The
