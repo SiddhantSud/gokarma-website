@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
+import PageBanner from '../components/PageBanner.astro';
 import { SITE, whatsappLink } from '../config/site';
 
 const { street, locality, region, postalCode } = SITE.address;
@@ -13,12 +14,7 @@ const { street, locality, region, postalCode } = SITE.address;
   page="contact"
   ogImage="property/sign-board"
 >
-  <PhotoSection bg="scenery/verandah">
-    <div class="container text-center">
-      <span class="section-eyebrow">We'd Love to Have You</span>
-      <h1>Contact &amp; Location</h1>
-    </div>
-  </PhotoSection>
+  <PageBanner eyebrow="We'd Love to Have You" title="Contact & Location" />
 
   <PhotoSection bg="property/sign-board" panel="alt">
     <div class="container location-grid">

@@ -36,4 +36,4 @@ Everyone visits Mahabaleshwar Temple — home to the Atmalinga, the sacred Shiva
 
 ## Staying somewhere offbeat is part of it
 
-Where you sleep shapes the trip too. A room on the main tourist strip puts you in the middle of the crowd you came to get away from. Aangan sits on Kudle hilltop, a short walk into a patch of actual forest — the kind of place where a goat wanders up to the gate, a cat naps on the stone path, and the walls of the Vintage Room are hand-painted rather than printed. It's not a detour from the offbeat Gokarna experience; for a lot of guests, it's the best part of it.
+Where you sleep shapes the trip too. A room on the main tourist strip puts you in the middle of the crowd you came to get away from. Aangan sits on Kudle hilltop, a short walk into a patch of actual forest — the kind of place where a cat naps on the stone path, and the walls of the Vintage Room are hand-painted rather than printed. It's not a detour from the offbeat Gokarna experience; for a lot of guests, it's the best part of it.

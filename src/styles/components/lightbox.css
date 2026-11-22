@@ -7,7 +7,7 @@
    src/components/Gallery.astro), which brings its own styles.
    Only its backdrop color is matched to the site here. */
 .pswp {
-  --pswp-bg: rgb(20, 15, 10);
+  --pswp-bg: var(--color-lightbox-bg);
 }
 
 .btn-pop {

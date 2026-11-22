@@ -1,12 +1,13 @@
 /* =========================================================
-   Site header and navigation, including the glass effect on scroll
-   (toggled by src/scripts/site.ts) and the mobile dropdown.
+   Site header and navigation: transparent at the top, solid deep
+   maroon once the page scrolls (.is-scrolled, toggled by
+   src/scripts/site.ts), plus the mobile dropdown.
 ========================================================= */
 
 /* ---- Header / Navigation ----
-   Starts transparent over the photo at the top of every page,
-   then solidifies into a soft blurred "glass" pill once the
-   page scrolls (see .is-scrolled, toggled by src/scripts/site.ts). */
+   Fully transparent over the photo or banner at the top of every
+   page, then solid deep maroon with turmeric links once the page
+   scrolls (Siddhant, 2026-11-22). Nothing in the nav is underlined. */
 .site-header {
   position: fixed;
   top: 0;
@@ -22,10 +23,7 @@
 }
 
 .site-header.is-scrolled {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border-bottom: 1px solid var(--glass-border);
+  background: var(--color-band);
   box-shadow: var(--shadow-header);
 }
 
@@ -33,7 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: 8px 20px; /* a slim bar (about 56px tall) */
 }
 
 /* Landing page: just the logo, centered. */
@@ -45,17 +43,16 @@
   white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: var(--color-white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px var(--color-shadow);
   transition:
     color var(--transition-medium),
     text-shadow var(--transition-medium);
 }
 
-/* The courtyard mark from the logo kit, in front of the name.
-   The cream copy shows over the hero photo; the full-colour copy
-   takes over once the header turns to glass (.is-scrolled). */
+/* The courtyard mark from the logo kit (cream version, for dark
+   backgrounds), in front of the name. */
 .logo {
   display: inline-flex;
   align-items: center;
@@ -68,22 +65,8 @@
 }
 
 .logo-mark img {
-  grid-area: 1 / 1;
-  width: 46px;
-  height: 49px;
-  transition: opacity var(--transition-medium);
-}
-
-.logo-mark-colour {
-  opacity: 0;
-}
-
-.site-header.is-scrolled .logo-mark-light {
-  opacity: 0;
-}
-
-.site-header.is-scrolled .logo-mark-colour {
-  opacity: 1;
+  width: 36px;
+  height: 39px;
 }
 
 /* The word after the logo mark cycles through languages
@@ -118,7 +101,7 @@
 }
 
 .site-header.is-scrolled .logo {
-  color: var(--color-maroon);
+  color: var(--color-band-text);
   text-shadow: none;
 }
 
@@ -131,37 +114,40 @@
 .main-nav a {
   font-weight: 600;
   color: var(--color-white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px var(--color-shadow);
   transition:
     color var(--transition-fast),
     text-shadow var(--transition-medium);
 }
 
 .site-header.is-scrolled .main-nav a {
-  color: var(--color-text);
+  color: var(--color-band-text);
   text-shadow: none;
 }
 
+/* Hover and the current page: a light cream, no underline. */
 .main-nav a:hover,
-.main-nav a.is-active {
-  color: var(--color-pop);
-}
-
+.main-nav a.is-active,
 .site-header.is-scrolled .main-nav a:hover,
 .site-header.is-scrolled .main-nav a.is-active {
-  color: var(--color-maroon);
+  color: var(--color-bg);
 }
 
-.nav-cta {
-  background-color: var(--color-button);
-  color: var(--color-button-text) !important;
-  padding: 8px 18px;
+/* Book Now: turmeric with deep maroon text, at the top and once
+   scrolled. */
+.main-nav .nav-cta,
+.site-header.is-scrolled .main-nav .nav-cta {
+  background-color: var(--color-turmeric);
+  color: var(--color-deep);
+  padding: 7px 18px;
   border-radius: 30px;
-  text-shadow: none !important;
+  text-shadow: none;
 }
 
-.nav-cta:hover {
-  background-color: var(--color-button-hover);
+.main-nav .nav-cta:hover,
+.site-header.is-scrolled .main-nav .nav-cta:hover {
+  background-color: var(--color-turmeric-dark);
+  color: var(--color-deep);
 }
 
 /* Composed with .btn-circle in the markup for the round bordered
@@ -174,12 +160,13 @@
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--color-white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px var(--color-shadow);
   transition: color var(--transition-medium);
 }
 
 .site-header.is-scrolled .menu-toggle {
-  color: var(--color-text);
+  color: var(--color-band-text);
+  border-color: var(--color-band-text);
   text-shadow: none;
 }
 
@@ -196,7 +183,7 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--color-surface);
+    background: var(--color-band);
     flex-direction: column;
     align-items: flex-start;
     padding: 20px;
@@ -209,17 +196,15 @@
     display: flex;
   }
 
-  /* The open mobile dropdown always has a solid light
-     background (regardless of .is-scrolled), so its links need
-     dark text even when the header itself is still transparent
-     over a photo. */
+  /* The open mobile dropdown is always solid maroon (even while
+     the header is still transparent), with turmeric links. */
   .main-nav.open a {
-    color: var(--color-text);
+    color: var(--color-band-text);
     text-shadow: none;
   }
 
   .main-nav.open a:hover,
   .main-nav.open a.is-active {
-    color: var(--color-maroon);
+    color: var(--color-bg);
   }
 }

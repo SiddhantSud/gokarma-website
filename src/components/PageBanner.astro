@@ -1,0 +1,26 @@
+---
+// ============================================================
+// The deep maroon banner at the top of an inner page (Our Story,
+// Gokarna Guide), in the same maroon and turmeric yellow as the
+// buttons and the Home ticker (Siddhant, 2026-11-21). It holds
+// the page's small label, its main heading and an optional line
+// under it.
+//
+//   <PageBanner eyebrow="Our Story" title="Meet Kushal & Geetika" />
+// ============================================================
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { eyebrow, title, subtitle } = Astro.props;
+---
+
+<section class="page-banner">
+  <div class="container">
+    <span class="section-eyebrow">{eyebrow}</span>
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </div>
+</section>
