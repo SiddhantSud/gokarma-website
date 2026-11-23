@@ -30,7 +30,6 @@
      small labels above headings, icons and borders. */
   --color-maroon: #7a2a22;
   --color-maroon-dark: #5c1f19; /* hover/active state */
-  --color-maroon-tint: rgba(122, 42, 34, 0.1); /* soft maroon wash for tags */
 
   /* ---- Where the brand colours are used ----
      Parts of the page point at the palette above, never at a hex

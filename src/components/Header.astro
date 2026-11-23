@@ -6,6 +6,7 @@
 // wired up in src/scripts/site.ts.
 // ============================================================
 import { AANGAN_WORDS, SITE } from '../config/site';
+import { BOOKING } from '../config/booking';
 
 interface Props {
   page?: string;
@@ -63,7 +64,7 @@ const links = [
           {link.label}
         </a>
       ))}
-      <a href="book.html" class="nav-cta">
+      <a href={BOOKING.stayflexiBookingUrl} class="nav-cta">
         Book Now
       </a>
     </nav>

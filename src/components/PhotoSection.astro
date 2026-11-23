@@ -13,7 +13,7 @@
 // color. panelClass adds extra classes to the panel (e.g.
 // "text-center").
 // ============================================================
-import { photoUrl } from '../lib/images';
+import { backdropUrls } from '../lib/images';
 
 interface Props {
   bg: string;
@@ -22,11 +22,11 @@ interface Props {
 }
 
 const { bg, panel = 'plain', panelClass = '' } = Astro.props;
-const bgUrl = await photoUrl(bg);
+const bgUrls = await backdropUrls(bg);
 const classes = ['panel', panel === 'alt' && 'panel-alt', panelClass].filter(Boolean).join(' ');
 ---
 
-<section class="section-photo" data-bg={bgUrl}>
+<section class="section-photo" data-bg={bgUrls.large} data-bg-small={bgUrls.small}>
   <div class={classes}>
     <slot />
   </div>

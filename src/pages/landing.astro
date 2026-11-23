@@ -13,9 +13,9 @@ import BookingWidget from '../components/BookingWidget.astro';
 import RoomCard from '../components/RoomCard.astro';
 import { SITE } from '../config/site';
 import { ROOMS } from '../data/rooms';
-import { photoUrl } from '../lib/images';
+import { backdropUrls } from '../lib/images';
 
-const heroBg = await photoUrl('property/property-4');
+const heroBg = await backdropUrls('property/property-4');
 ---
 
 <BaseLayout
@@ -24,7 +24,10 @@ const heroBg = await photoUrl('property/property-4');
   path="landing.html"
   variant="landing"
 >
-  <section class="hero" style={`background-image: url('${heroBg}');`}>
+  <section
+    class="hero"
+    style={`--hero-small: url('${heroBg.small}'); --hero-large: url('${heroBg.large}');`}
+  >
     <div class="hero-overlay">
       <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
       <h1>Your Nest on Kudle Hilltop</h1>

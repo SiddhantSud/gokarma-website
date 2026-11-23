@@ -57,7 +57,10 @@ const revealObserver = new IntersectionObserver(
       const el = entry.target as HTMLElement;
 
       if (el.dataset.bg) {
-        el.style.backgroundImage = `url('${el.dataset.bg}')`;
+        // Phones get the smaller copy (data-bg-small) when there is one.
+        const useSmall = window.innerWidth <= 800 && el.dataset.bgSmall;
+        const url = useSmall ? el.dataset.bgSmall : el.dataset.bg;
+        el.style.backgroundImage = `url('${url}')`;
       }
 
       el.classList.add('is-visible');

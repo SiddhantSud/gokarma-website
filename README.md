@@ -138,8 +138,10 @@ browser tab icons are `public/favicon.*`, `apple-touch-icon.png` and
 
 ### Online booking (StayFlexi)
 
-The "pick your dates" form on the Home page, `book.html` and `landing.html`
-sends guests to StayFlexi's booking page with their dates filled in. Guests
+The "pick your dates" form on the Home page and `landing.html`
+sends guests to StayFlexi's booking page with their dates filled in. Every
+Book Now button on the site also goes straight to StayFlexi; there is no
+separate booking page any more. Guests
 pick a bed or room, see live rates and pay there, and StayFlexi handles
 confirmation emails and keeps availability in sync with every other booking
 channel. The site itself never handles payments or guest details.

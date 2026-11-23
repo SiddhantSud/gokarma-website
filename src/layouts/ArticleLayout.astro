@@ -13,6 +13,7 @@ import PhotoSection from '../components/PhotoSection.astro';
 import Photo from '../components/Photo.astro';
 import RelatedReads from '../components/RelatedReads.astro';
 import { SITE } from '../config/site';
+import { BOOKING } from '../config/booking';
 import { articleHref, type GuideArticle } from '../lib/guide';
 
 interface Props {
@@ -100,8 +101,8 @@ const jsonLd = {
           <div class="cta-banner">
             <h3>{data.ctaTitle}</h3>
             {data.ctaText && <p>{data.ctaText}</p>}
-            <a href="rooms.html" class="btn btn-primary">
-              See Rooms &amp; Rates
+            <a href={BOOKING.stayflexiBookingUrl} class="btn btn-primary">
+              Book Your Stay
             </a>
           </div>
         )}

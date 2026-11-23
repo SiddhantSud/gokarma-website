@@ -6,6 +6,9 @@
 .hero {
   min-height: 78vh;
   background-color: var(--color-maroon-dark); /* shows briefly while the image loads */
+  /* The page sets --hero-small and --hero-large (see backdropUrls()):
+     phones download the smaller photo. */
+  background-image: var(--hero-small);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -14,6 +17,12 @@
   text-align: center;
   position: relative;
   padding-top: 70px; /* clearance for the fixed header overlaying the top of the photo */
+}
+
+@media (min-width: 801px) {
+  .hero {
+    background-image: var(--hero-large);
+  }
 }
 
 .hero::before {

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoSection from '../components/PhotoSection.astro';
 import PageBanner from '../components/PageBanner.astro';
+import { BOOKING } from '../config/booking';
 import GuideCard from '../components/GuideCard.astro';
 import SubmitStory from '../components/SubmitStory.astro';
 import { getGuideArticles } from '../lib/guide';
@@ -44,8 +45,8 @@ const guideArticles = await getGuideArticles();
       <p class="section-subtitle">
         Aangan is on Kudle hilltop, right along the beach-trek route this guide covers.
       </p>
-      <a href="rooms.html" class="explore-link">
-        Check rooms &amp; rates →
+      <a href={BOOKING.stayflexiBookingUrl} class="btn btn-primary">
+        Book Your Stay
       </a>
     </div>
   </PhotoSection>
