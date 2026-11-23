@@ -185,10 +185,11 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
   (widths above the original are skipped; the plain `src` is capped at 1600).
   `photoUrl(path, width)` gives one JPEG URL (used for Open Graph and
   JSON-LD). Photo backdrops (`PhotoSection`, the hero) use
-  `backdropUrls(path)`: an 800px and a 1600px WebP at quality 55, and phones
+  `backdropUrls(path)`: an 800px and a 1280px WebP at quality 50, and phones
   get the 800px one. They sit under a dark overlay, so the lower quality
-  doesn't show. This cut Home on a phone from about 4.1 MB to 1.2 MB
-  (2026-11-23). `<Photo>` uses quality 70. All photos are in the repo; the
+  doesn't show. The hero photo is preloaded (`heroPhoto` prop on
+  `BaseLayout`). This cut Home from about 4.1 MB to 1.2 MB on a phone and
+  1.8 MB on a laptop (2026-11-23). `<Photo>` uses quality 70. All photos are in the repo; the
   only web links are the Wikimedia credit links their licences require.
 - Built copies are re-encoded by sharp, which **drops all EXIF, including
   GPS**. Originals in `src/assets/` are never published. (The old static site
