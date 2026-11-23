@@ -49,3 +49,24 @@ export async function photoUrl(path: string, width = 1600): Promise<string> {
   const image = await getImage({ src: await photo(path), width, format: 'jpg' });
   return image.src;
 }
+
+// ---- Background photos (section backdrops and the hero) ----
+// Two lightweight WebP copies of one photo: a phone-sized one and a
+// desktop-sized one. These photos always sit under a dark overlay, so
+// a lower quality setting is invisible but makes them several times
+// smaller, which is most of what a page downloads.
+export const BACKDROP_QUALITY = 50;
+
+export async function backdropUrls(path: string): Promise<{ small: string; large: string }> {
+  const src = await photo(path);
+  const make = async (width: number) =>
+    (
+      await getImage({
+        src,
+        width: Math.min(width, src.width),
+        format: 'webp',
+        quality: BACKDROP_QUALITY,
+      })
+    ).src;
+  return { small: await make(800), large: await make(1280) };
+}

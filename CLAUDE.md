@@ -144,7 +144,7 @@ src/config/site.ts           Facts shown on many pages (§2) + whatsappLink()
 src/config/booking.ts        StayFlexi URL, maxGuests
 src/data/*.ts                  Content lists (typed): rooms, gallery, guide, vibe, nearby,
                                amenities, reviews, getting-here
-src/lib/images.ts            photo('rooms/4-bed-dorm-1') / photoUrl() lookups
+src/lib/images.ts            photo('rooms/4-bed-dorm-1') / photoUrl() / backdropUrls() lookups
 src/lib/booking.ts           Date helpers + StayFlexi/WhatsApp URL builders
 src/scripts/site.ts          Mobile menu, glass nav, footer year, reveal + lazy backgrounds
 src/styles/theme.css, base.css   Design tokens; reset, layout, utilities (grid-min-*, text-left, mt-sm)
@@ -164,7 +164,7 @@ content-questionnaire.md       Questions to gather real owner and guest content
   `description`, `path` (its own file name, for the canonical URL), `page`
   (which nav link to highlight) and usually `ogImage` (a photo path).
 - Content sections are `<PhotoSection bg="scenery/cottage-row" panel="alt">`.
-  Hero sections keep their inline `background-image`, built with `photoUrl()`.
+  Hero sections set `--hero-small` / `--hero-large` inline, built with `backdropUrls()`.
 
 ---
 
@@ -183,8 +183,14 @@ page**. Guide article text is written directly in each `guide-*.astro` page.
   A wrong path **fails the build** with a clear error.
 - `<Photo src=... alt=... sizes=...>` outputs WebP + JPEG at 480/900/1600px
   (widths above the original are skipped; the plain `src` is capped at 1600).
-  `photoUrl(path, width)` gives one JPEG URL for CSS backgrounds and
-  Open Graph.
+  `photoUrl(path, width)` gives one JPEG URL (used for Open Graph and
+  JSON-LD). Photo backdrops (`PhotoSection`, the hero) use
+  `backdropUrls(path)`: an 800px and a 1280px WebP at quality 50, and phones
+  get the 800px one. They sit under a dark overlay, so the lower quality
+  doesn't show. The hero photo is preloaded (`heroPhoto` prop on
+  `BaseLayout`). This cut Home from about 4.1 MB to 1.2 MB on a phone and
+  1.8 MB on a laptop (2026-11-23). `<Photo>` uses quality 70. All photos are in the repo; the
+  only web links are the Wikimedia credit links their licences require.
 - Built copies are re-encoded by sharp, which **drops all EXIF, including
   GPS**. Originals in `src/assets/` are never published. (The old static site
   served originals. Their GPS was stripped on 2026-11-02 in PR #4, and the old
@@ -269,7 +275,11 @@ at phone width. Earlier changes landed on Home only and he noticed.
   Its script sets today/tomorrow as defaults **in the guest's browser**
   (the build date would be stale), keeps check-out after check-in, and on
   submit **redirects** to StayFlexi with `checkin`/`checkout` as `YYYY-MM-DD`.
-  It's used on the Home hero, `book.html` and `landing.html` (twice).
+  It's used on Home (Check Availability) and `landing.html` (twice).
+- **No booking page of our own (Siddhant, 2026-11-23).** Every Book Now,
+  Book This Room and Book Your Stay link (nav, Home, Rooms, Guide, articles)
+  goes straight to `BOOKING.stayflexiBookingUrl`. `book.html` is only a
+  noindex redirect to StayFlexi, kept so old links don't break.
 - Things verified by reading StayFlexi's booking-engine JS and testing the real
   property page. **Don't change them without re-verifying:**
   - **Only dates are passed.** Passing `num_guests` (or `widget`) makes
@@ -281,7 +291,7 @@ at phone width. Earlier changes landed on Home only and he noticed.
     used.
 - **Fallback**: if the StayFlexi URL is empty or invalid, the form also shows
   Guests and Room dropdowns and opens WhatsApp with the details prefilled.
-  `book.html?room=<id>` preselects a room in that fallback.
+  (`?room=<id>` preselection only applies in that fallback.)
 - Dates are built from local time by hand (`toDateValue` in
   `src/lib/booking.ts`), **not** `toISOString()`, which would shift to UTC.
 - The StayFlexi handoff was re-tested after the Astro move on 2026-11-04 and
@@ -299,7 +309,7 @@ at phone width. Earlier changes landed on Home only and he noticed.
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Rating, review count, price, phone, address | `src/config/site.ts`                                                                                      |
 | Re-theme colors or fonts                    | `src/styles/theme.css`                                                                                    |
-| Add or edit a room                          | `src/data/rooms.ts` (the `id` is used in `book.html?room=`)                                               |
+| Add or edit a room                          | `src/data/rooms.ts`                                                                                       |
 | Add a gallery photo                         | File into `src/assets/images/<category>/`, then an entry in `src/data/gallery.ts` (first 4 = Home teaser) |
 | Add a guide article                         | Copy a `src/pages/guide-*.astro`, add to `src/data/guide.ts` and `public/sitemap.xml`                     |
 | Change nav or footer                        | `src/components/Header.astro` / `Footer.astro` (landing variant is in `BaseLayout.astro`)                 |
@@ -384,7 +394,7 @@ at phone width. Earlier changes landed on Home only and he noticed.
   4-bed dorm, so there is one "4-Bed Mixed Dorm" card and its photos
   (`6-bed-dorm-*` files) sit under it on the Rooms page. The "from ₹850"
   line is removed from every page (`dormPriceFrom` is unused). The sunset
-  spot is called **Jatayu Teerth** (article URL unchanged). Articles no
+  spot is called **Jatayu Teerth** (article URL unchanged). Guide cards show no topic tags (2026-11-23; the `tag` field stays in the article files for the admin page but isn't displayed). Articles no
   longer show the tag, the line under the title or "Read and watch more";
   gallery photos auto-change. Photo credits for the Wikimedia photos stay,
   because their licences require them. Booking dates display as

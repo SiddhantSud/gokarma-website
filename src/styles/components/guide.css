@@ -3,17 +3,6 @@
 ========================================================= */
 
 /* ---- Guide / Blog ---- */
-.guide-card .tag {
-  display: inline-block;
-  font-size: var(--text-small);
-  font-weight: 700;
-  color: var(--color-maroon);
-  background: var(--color-maroon-tint);
-  padding: 3px 12px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-}
-
 /* A narrow reading column: about 65 characters a line, roomy
    line spacing, and clear gaps above each heading. */
 .article-body {

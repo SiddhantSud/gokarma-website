@@ -3,6 +3,7 @@
 // Rooms come from src/data/rooms.ts.
 import Photo from './Photo.astro';
 import type { Room } from '../data/rooms';
+import { BOOKING } from '../config/booking';
 
 interface Props {
   room: Room;
@@ -23,7 +24,7 @@ const { room } = Astro.props;
     ))}
   </ul>
   <a
-    href={`book.html?room=${room.id}`}
+    href={BOOKING.stayflexiBookingUrl}
     class:list={['btn', room.badge ? 'btn-primary' : 'btn-outline']}
   >
     Book This Room

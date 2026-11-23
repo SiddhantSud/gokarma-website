@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOKING } from '../config/booking';
 import PhotoSection from '../components/PhotoSection.astro';
 import Marquee from '../components/Marquee.astro';
 import BookingWidget from '../components/BookingWidget.astro';
@@ -11,9 +12,10 @@ import Reviews from '../components/Reviews.astro';
 import GettingHere from '../components/GettingHere.astro';
 import { SITE } from '../config/site';
 import { ROOMS } from '../data/rooms';
-import { photoUrl } from '../lib/images';
+import { backdropUrls, photoUrl } from '../lib/images';
 
-const heroBg = await photoUrl('property/property-4');
+const heroBg = await backdropUrls('property/property-4');
+const heroJpg = await photoUrl('property/property-4'); // for search engines
 const ratingLine = `${SITE.rating}★ on Google · ${SITE.reviewCount} Reviews`;
 
 // Business details Google reads (schema.org LodgingBusiness).
@@ -40,7 +42,7 @@ function lodging() {
     alternateName: SITE.brand,
     brand: { '@type': 'Brand', name: SITE.brand },
     url: siteUrl,
-    image: new URL(heroBg, Astro.site).href,
+    image: new URL(heroJpg, Astro.site).href,
     address: {
       '@type': 'PostalAddress',
       streetAddress: SITE.address.street,
@@ -67,6 +69,7 @@ function lodging() {
 ---
 
 <BaseLayout
+  heroPhoto={heroBg}
   title="Aangan by Gokarma Living | Backpacker Hostel & Cafe in Gokarna"
   description="A backpacker hostel & cafe on Kudle hilltop, Gokarna — dorms and private rooms, home-style South Indian food, and the offbeat basecamp for backpacking, solo travel, and exploring Gokarna beyond the beaches."
   path="index.html"
@@ -74,7 +77,11 @@ function lodging() {
   jsonLd={jsonLd}
 >
   <!-- ============ HERO ============ -->
-  <section id="home" class="hero" style={`background-image: url('${heroBg}');`}>
+  <section
+    id="home"
+    class="hero"
+    style={`--hero-small: url('${heroBg.small}'); --hero-large: url('${heroBg.large}');`}
+  >
     <div class="hero-overlay">
       <span class="section-eyebrow">Kudle Hilltop, Gokarna</span>
       <h1>Gokarma Living</h1>
@@ -200,7 +207,7 @@ function lodging() {
       <h2 class="section-title">Ready to Stay?</h2>
       <p class="section-subtitle">Pick your dates and we'll take it from there.</p>
       <div class="hero-actions">
-        <a href="book.html" class="btn btn-primary btn-large">
+        <a href={BOOKING.stayflexiBookingUrl} class="btn btn-primary btn-large">
           Book Your Stay
         </a>
         <a href="gallery.html" class="explore-link">
